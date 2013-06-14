@@ -1,0 +1,426 @@
+/****************** EMBEDING NEEDED FONTS ***********************/
+@font-face {
+    font-family: 'chunkstyle';
+    src: url('../../fonts/chunkstylemodern-webfont.eot');
+    src: url('../../fonts/chunkstylemodern-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../../fonts/chunkstylemodern-webfont.woff') format('woff'),
+         url('../../fonts/chunkstylemodern-webfont.ttf') format('truetype'),
+         url('../../fonts/chunkstylemodern-webfont.svg#chunkstyle') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'severance';
+    src: url('../../fonts/severancethesequel_regular-webfont.eot');
+    src: url('../../fonts/severancethesequel_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../../fonts/severancethesequel_regular-webfont.woff') format('woff'),
+         url('../../fonts/severancethesequel_regular-webfont.ttf') format('truetype'),
+         url('../../fonts/severancethesequel_regular-webfont.svg#severance') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+/****************** Specific styles for competition app ****************/
+#competition{
+    background-color: #FFF;
+    font-family:'severance';
+    font-size:13px;
+    line-height: 18px;
+    color:#000;
+    background:url(/assets/img/facebook/competition/appBgStripe.jpg) 50% 0 repeat-y;
+}
+
+#fb_wrapper.competition {
+    padding-top:120px;
+    background:url(/assets/img/facebook/competition/photo-competition-index.jpg) 0 0 no-repeat;
+}
+
+.competition .header {
+    float: left;
+    padding: 0 123px;
+    width: 514px;
+    height:266px;
+    margin-bottom: 126px;
+    overflow: hidden;
+}
+
+.competition h1{
+    font-size:30px;
+    line-height:34px;
+    color:#42210b;
+    padding-top:24px;
+    padding-bottom:24px;
+    text-align:center;
+    text-transform:capitalize;
+}
+
+.competition h2{
+    font-size:48px;
+    line-height:50px;
+    color:#42210b;
+    font-family: 'chunkstyle';
+    text-align:center;
+    text-transform: uppercase;
+}
+
+.competition h3{
+    font-size:24px;
+    line-height:26px;
+    color:#42210b;
+    font-family: 'chunkstyle';
+    text-transform: capitalize;
+}
+
+.competition h4{
+    font-size:18px;
+    line-height:24px;
+    color:#42210b;
+    font-family: 'chunkstyle';
+    text-transform: capitalize;
+    margin-bottom:8px;
+}
+
+.adImage{
+    float:left;
+    width:250px;
+    height:250px;
+    box-shadow: 1px 1px 3px #888888;
+    display:block;
+}
+
+.competition .sideHeaders{
+    float:right;
+    width:236px;
+    height:266px;
+    overflow: hidden;
+}
+
+.competition .sideHeaders h1{
+    font-size:24px;
+    line-height:28px;
+    padding-top:32px;
+    padding-bottom:10px;
+}
+
+.competition .sideHeaders h2{
+    font-size:36px;
+    line-height:40px;
+}
+
+.cowImage{
+    position: absolute;
+    left:8px;
+    top:192px;
+    width:155px;
+    height:304px;
+    z-index: 99;    
+    background:url(/assets/img/facebook/competition/cow.png) 0 0 no-repeat;
+}
+
+#competition .contentsHolderOuter{
+    margin:0 56px 0 55px;
+    padding:0 0 50px 0;
+    width:649px;
+    background:url(/assets/img/facebook/competition/contentBottomBg.png) 0 100% no-repeat;
+    float:left;
+}
+
+#competition .contentsHolder{
+    margin:0;
+    padding:0;
+    width:649px;
+    background:url(/assets/img/facebook/competition/contentBg.png) 0 0 repeat-y;
+    float:left;
+    min-height: 700px;
+}
+
+#competition #fb_content_copy{
+    background:url(/assets/img/facebook/competition/contentsTopBg.png) 0 0 no-repeat;
+    float:left;
+    width:551px;
+    padding:46px 46px 6px 49px;
+    margin-top:-4px;
+    clear:left;
+}
+
+#competition p{
+    margin-bottom:12px;
+}
+
+#competition a{
+    color:#00b1e1;
+    text-decoration: underline;
+}
+
+#competition a:hover{
+    color:#000;
+    text-decoration: none;
+}
+
+#competition p strong{
+    font-weight:normal;
+    color:#b5082b;
+}
+
+#competition #fbForm strong.required {
+    color:#b5082b;
+}
+
+#competition iframe{
+    left:0;
+    margin:0 0 12px 0;
+    float: left;
+}
+/****************** COMPETITION FORM *******************/
+.startingField{
+    float:left;
+    width:100%;
+}
+
+.fieldsListing{
+    float:left;
+    width:451px;
+    padding:24px 50px;
+}
+
+.reqCopy{
+    text-align: right;
+    font-size: 14px;
+    line-height: 16px;
+    color:#666;
+    margin-bottom: 8px;
+    margin-top: -14px;
+}
+
+#competition p.required{
+    display:none;
+}
+
+#competition label{
+    font-size:16px!important;
+    line-height: 21px;
+    display:block;
+    color:#000;
+}
+
+#competition .startingField span label, #competition .startingField dt label{
+    font-size:18px!important;
+    line-height: 23px;
+    display:block;
+    color:#603813;
+}
+
+#competition .startingField dd{
+    font-size:18px!important;
+    line-height: 23px;
+    display:block;
+    color:#603813;
+    margin-left:50px;
+}
+
+#competition .startingField #fbimage, #competition .startingField textarea {
+    margin-top:8px;
+}
+
+#competition .fieldsListing dt{
+    display:none;
+}
+
+#competition .fieldsListing input[type="text"], #competition input[type="text"] {
+    font-size: 16px;
+    color:#666666;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 5px;
+    float:left;
+    width: 437px;
+    border:2px solid #333333;
+    margin-bottom:18px;
+    font-family: 'severance' !important;
+}
+
+input[type="checkbox"] {
+    margin: 3px!important;
+}
+
+#competition #fbForm p.required, #competition #fbForm p.description {
+    font-family: 'severance' !important;
+    line-height: 22px;
+}
+
+#competition textarea {
+    font-size: 16px;
+    color:#666666;
+    padding: 0 5px;
+    float:left;
+    width: 437px;
+    border:2px solid #333333;
+    margin-bottom:18px;
+    font-family: 'severance' !important;
+}
+
+#competition #fbimage {
+    font-size: 17px !important;
+}
+
+#competition #BrowserVisible {
+    padding-right: 92px;
+}
+
+#competition #FileField{
+    width: 345px;    
+}
+
+#competition #fileBtnSpan {
+    background: url("/assets/img/facebook/competition/browseBtn.jpg") no-repeat scroll 0 0 transparent;
+    width: 92px !important;
+    color:#FFF!important;
+    font-family: 'chunkstyle';
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+.textAreaHolder{
+    float:left;
+    width:100%;
+}
+
+.checkboxHolder{
+    float:left;
+    width:100%;
+    margin-bottom: 6px;
+}
+
+.checkboxHolder span{
+    display:none!important;
+}
+
+.textAreaHolder dt{
+    display:block!important;
+}
+
+.textAreaHolder dt label, #competition span label{
+    color:#603813!important;
+}
+
+.fbTermsConditionsHolder{
+    float: left;
+    width:100%;
+}
+#competition #fb_form {
+    width:551px;
+    padding:0 46px 0 49px;
+    clear:left;
+}
+
+#competition #fbForm dd input[type="submit"]{
+    background: url("/assets/img/facebook/competition/btnBg.jpg") no-repeat scroll 0 0 transparent;
+    border: medium none;
+    color: #FFF !important;
+    display: block;
+    font-family: 'chunkstyle';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: normal;
+    height: 41px;
+    line-height: 37px;
+    margin: 12px 0 0 0;
+    padding: 0;
+    text-align: center;
+    text-decoration: none !important;
+    width: 122px;
+    letter-spacing: 1px;
+}
+
+#competition #fbForm dd input[type="submit"]:hover{
+    color: #ccc !important;
+}
+
+.errorHolder{
+    float: left;
+    padding: 24px 51px 0 56px;
+    width: 451px;
+}
+
+.errorHolder p{
+    color:#ed1c24!important;
+    font-size:16px!important;
+    margin-bottom:6px;
+}
+
+.errorField{
+    border-color:#ed1c24!important;
+    color:#ed1c24!important;
+    background-color: #fcdbdc!important;
+}
+/****************** SOCIAL MEDIA SMO ICONS *************/
+.smoIcons{
+    float:left;
+    width:451px!important;
+    padding:22px 96px 20px 99px;
+    clear:left;    
+}
+
+.smoIcons ul {
+    display: block;
+    float: left;
+    list-style: none outside none;
+    margin:  0;
+    padding: 0;
+    width: 100%;
+}
+
+.smoIcons li {
+    display: block;
+    float: left;
+}
+
+.smoIcons .smoIcon {
+    display: block;
+    float: left;
+    height: 48px;
+    width: 50px;
+    margin-right: 10px;
+}
+
+.smoIcons .fbIcon{
+    background:url(/assets/img/facebook/competition/fbIcon.jpg) 0 0 no-repeat;    
+}
+
+.smoIcons .tweetIcon{
+    background:url(/assets/img/facebook/competition/twitter.jpg) 0 0 no-repeat;    
+}
+
+.smoIcons .gplusIcon{
+    background:url(/assets/img/facebook/competition/gplus.jpg) 0 0 no-repeat;    
+}
+
+.imgRights{
+    margin:10px 56px 20px 56px;
+    width:648px;
+    float:left;
+    clear:left;    
+}
+/****************** THANK YOU PAGE **************/
+#fb_wrapper.competition.submit {
+    padding-top:120px;
+    background:url(/assets/img/facebook/competition/photo-competition-submit.jpg) 0 0 no-repeat;
+}
+
+#fb_wrapper.competition.submit p{
+    color:#42210B;
+}
+
+#fb_wrapper.competition.submit h3{
+    margin-bottom:24px;
+}
+
+#fb_wrapper.competition.submit .smoIcons {
+    clear: left;
+    float: left;
+    padding: 22px 46px 20px;
+    width: 553px !important;
+}

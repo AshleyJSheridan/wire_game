@@ -1,0 +1,72 @@
+<?php echo $this->doctype(); ?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title><?php echo $this->pageTitle ?> </title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <?php
+	// setup stylesheets
+	$this->headLink()->prependStylesheet($this->baseUrl().'/assets/css/views/facebook.css');
+	$this->headLink()->prependStylesheet($this->baseUrl().'/assets/css/views/'.$this->pageStyles);
+	echo $this->headLink();
+    ?>
+</head>
+    
+<body id="<?php echo $this->facebookShare['campaign']?>">
+
+<?php echo $this->layout()->content; ?>
+
+<div id="fb-root"></div>
+
+<?php
+    $this->headScript()->offsetSetFile(-3, $this->baseUrl().'/assets/js/jquery-1.6.2.min.js', 'text/javascript')
+            ->offsetSetFile(-2, $this->baseUrl().'/assets/js/facebook.js', 'text/javascript')
+            ->offsetSetFile(-1, $this->baseUrl().'/assets/js/jquery.form.js', 'text/javascript');
+?>
+
+<?php $this->headScript()->captureStart(); ?>
+    // set up UI
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId: '<?php echo $this->facebookShare['appID']?>',
+            cookie: true,
+            xfbml: true,
+            oauth: true
+        });
+        FB.Canvas.setAutoGrow(true);
+        FB.Canvas.scrollTo(0,0);
+    };
+
+    // create share button
+    $(document).ready(function(){
+        $('#share_button').live('click', function(e){
+            e.preventDefault();
+            FB.ui({
+                method:         'feed',
+                name:           '<?php echo $this->facebookShare['title'] ?>',
+                link:           '<?php echo $this->facebookShare['url'] ?>',
+                picture:        '<?php echo $this->serverUrl().$this->facebookShare['image'] ?>',
+                description:    '<?php echo $this->facebookShare['summary'] ?>',
+                message:        ''
+            });
+	});
+    });
+<?php $this->headScript()->captureEnd(); ?>
+    
+<?php echo $this->headScript(); ?>
+
+<?php if(!empty($this->pageGA)) { ?> 
+<script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<script type="text/javascript">
+    var pageTracker = _gat._getTracker('<?php echo $this->pageGA ?>');
+    pageTracker._initData();
+    pageTracker._trackPageview();
+</script>
+<?php } ?>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<div id="loginInfo">
+    <?php 
+        if(Zend_Auth::getInstance()->hasIdentity())
+        {
+            echo '<p class="userinfo">Welcome '.$this->username.'</p>';
+        }
+    ?>
+    
+    <a href="/admin/logout" title="Logout">Logout</a> 
+</div>
+
+<?php
+    if(!empty($this->errorMessage))
+    {
+        echo '<div id="message" class='.$this->errorClass.'><p>'.$this->errorMessage.'</p></div>';
+    }
+?>
+
+<div class="row">
+    <div id="slider">    
+        <div class="carouselNav">
+            <ul>
+                <li class="navItem navItem0">
+                    <a href="#carouselSlide0" title="Application Settings"><span>Application Settings</span></a>
+                </li>
+                <li class="navItem navItem1">
+                    <a href="#carouselSlide1" title="Application Texts"><span>Application Texts</span></a>
+                </li>
+                <li class="navItem navItem2">
+                    <a href="#carouselSlide2" title="Application Form Fields"><span>Application Form Fields</span></a>
+                </li>
+                <li class="navItem navItem3">
+                    <a href="#carouselSlide3" title="Application Images"><span>Application Images</span></a>
+                </li>
+                <li class="navItem navItem4">
+                    <a href="#carouselSlide4" title="Export Data"><span>Export Data</span></a>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="scroll">
+            <div class="carouselSlides scrollContainer">
+                <div class="slide carouselSlide0">
+                    <h3>Set the Facebook Application settings for the campaign</h3>
+                    <?php echo $this->manageAppSettingsForm; ?>
+                </div>
+                <div class="slide carouselSlide1">
+                    <h3>Set the Facebook Application copy, video and image that is displayed for the campaign (leave empty to hide)</h3>
+                    <?php echo $this->manageAppTextsForm; ?>
+                </div>   
+                <div class="slide carouselSlide2">
+                    <h3>Set the Facebook Application form elements for the campaign</h3>
+                    <?php echo $this->manageAppForm; ?>
+                </div>   
+                <div class="slide carouselSlide3">
+                    <h3>Upload an image for the sponsor advert if needed.</h3>
+                    <?php echo $this->manageImagesForm; ?>
+                    <h3 style="margin-top:30px;">Current images preview:</h3>
+                    <div style="float:left;width:50%;">
+                        <h4>Current ad image:</h4>
+                        <p><img src="/assets/img/facebook/competition/addImage.jpg" alt="Ad Image" /></p>
+                    </div> 
+                    <div style="float:left;width:50%;">
+                        <h4>Current facebook share image:</h4>
+                        <p><img src="/assets/img/facebook/competition/fbShareImage.jpg" alt="Facebook Share Image" /></p>
+                    </div> 
+                </div>   
+                <div class="slide carouselSlide4">
+                    <h3>Select a campaign to export the user submitted data into a CSV file.</h3>
+                    <?php echo $this->exportDataForm; ?>
+                </div>               
+            </div>
+        </div>
+    </div>
+</div>

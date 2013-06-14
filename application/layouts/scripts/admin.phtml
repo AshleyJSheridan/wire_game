@@ -1,0 +1,55 @@
+<?php
+    $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
+    $this->headTitle()->setSeparator(' - ');
+    $this->headTitle("Ben & Jerry's Facebook Campaign Manager");
+
+    echo $this->doctype(); 
+?>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <?php
+        echo $this->headTitle();
+    ?>
+  
+    
+    <link rel="stylesheet" type="text/css" href="/assets/css/views/admin.css" />
+
+    <script type='text/javascript' src='/assets/js/admin/jquery-1.6.2.min.js'></script>
+    <script type='text/javascript' src='/assets/js/admin/ui.core.js'></script>
+    <script type='text/javascript' src='/assets/js/admin/jquery-ui-1.8.18.custom.min.js'></script>
+    <script type='text/javascript' src='/assets/js/admin/jquery.scrollTo-1.4.3.1-min.js'></script>
+    <script type='text/javascript' src='/assets/js/admin/jquery.localscroll-1.2.7-min.js'></script>
+    <script type='text/javascript' src='/assets/js/admin/jquery.serialScroll-1.2.2-min.js'></script>
+    <script type='text/javascript' src='/assets/js/admin/jquery.easing.1.3.js'></script>
+    <script type='text/javascript' src='/assets/js/admin/coda-slider.js'></script>
+    <script type='text/javascript' src='/assets/js/admin/jquery.multiFieldExtender-2.0.min.js'></script>
+    <script type='text/javascript' src='/assets/js/admin/onDOMReady.js'></script>
+
+</head>
+
+<body>
+    <div class="superWrapper">
+        <div class="wrapper">
+            
+            <div id="header" class="row">
+                <a id="logo" href="/admin" title="Ben & Jerry's Facebook Campaign Manager">
+                    <img src="/assets/img/admin/logo_ben_jerrys.png" alt="Ben & Jerry" />
+                </a>
+                <h1>Ben & Jerry's Facebook Campaign Manager</h1>
+            </div>
+
+            <div id="contents" class="row">
+                <?php echo $this->layout()->content; ?>
+            </div>
+
+            <div id="footer" class="row">
+                <p>Copyrights Ben & Jerry's 2012 &copy;.</p>
+            </div>
+            
+        </div>
+    </div>
+    
+
+</body>

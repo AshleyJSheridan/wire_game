@@ -1,0 +1,47 @@
+<div id="fb_wrapper" class="competition submit">
+     <div class="header">
+        <?php
+            if(!empty($this->contents['displayImage'])) {
+                echo '<img class="adImage" src="/assets/img/facebook/competition/addImage.jpg" alt="'.$this->facebookShare['title'].'" />';
+                echo '<div class="sideHeaders">';
+            }
+            if(!empty($this->contents['headerText1'])) {
+                echo '<h1>'.$this->contents['headerText1'].'</h1>';
+            }
+            if(!empty($this->contents['headerText2'])) {
+                echo '<h2>'.$this->contents['headerText2'].'</h2>';
+            }
+            if(!empty($this->contents['displayImage'])) {
+                echo '</div>';
+            }
+        ?>
+    </div>
+    <div class="cowImage"></div>
+    <div class="contentsHolderOuter">
+        <div class="contentsHolder">
+            <div id="fb_content_copy">
+                <h3>Thank you and Good Luck!</h3>
+                <?php 
+                    if(!empty($this->contents['thankText'])) {
+                        echo '<p>'.$this->contents['thankText'].'</p>';
+                    }
+                ?>
+            </div>
+            <div class="smoIcons">
+                <h4>Tell Your Friends</h4>
+                <ul>
+                    <li>
+                        <a target="_blank" title="Share This on Facebook" href="http://www.facebook.com/sharer.php?u=<?php echo urlencode($this->facebookShare['url']); ?>&amp;t=<?php echo urlencode($this->facebookShare['title']); ?>" class="smoIcon fbIcon"></a>
+                    </li>
+                    <li>
+                        <a target="_blank" title="Tweet This" href="http://twitter.com/share?text=<?php echo urlencode($this->facebookShare['title']); ?>&amp;url=<?php echo urlencode($this->facebookShare['url']); ?>" class="smoIcon tweetIcon"></a>
+                    </li>
+                    <li>
+                        <a target="_blank" title="Share This on Google+" href="https://plus.google.com/share?url=<?php echo urlencode($this->facebookShare['url']); ?>" class="smoIcon gplusIcon"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>  
+    </div>
+    <span class="imgRights">@Ben&Jerry's Homemade Inc 2012 <br />Cowes@Woody Jackson 1997</span>
+</div>

@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Zend Framework Default Application</title>
+<?php
+    $this->headLink()->offsetSetStylesheet(10,'/assets/css/views/error.css');
+?>
+<?php
+if ($this->type == 500) {
+    $error_text = "Sorry there has been a <br />problem with your request.";
+} else {
+    $error_text = "the page you're looking <br/>for can't be found.";
+}
+?>
+</head>
+<body class="error">
+    <h1 class="error">Hmm, <br/><?php echo $error_text; ?></h1>
+    <?php if ($this->type == 404) { ?>
+    <h2 class="error">This could have been because of:</h2>
+    <ul class="error">
+        <li>an out-of-date bookmark, favourite or link from another site;</li>
+        <li>a search engine that has an out-of-date listing for us;</li>
+        <li>a mis-typed address;</li>
+    </ul>
+    <?php } else { ?>
+       <br />
+    <?php } ?>
+    
+    <?php 
+    if (ini_get('display_errors')) {
+        echo '<pre><h3>EXCEPTION</h3>';
+        var_dump($this->exception);
+        echo '<br /><h3>TRACE</h3>';
+        var_dump(debug_backtrace());
+        echo '<br /><h3>REQUEST</h3>';
+        var_dump($this->request);
+        echo '</pre>';
+    }
+    ?>
+</body>
+</html>
