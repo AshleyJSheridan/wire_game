@@ -2,12 +2,12 @@
 /**
  * Admin
  * 
- * @package MM FB APP
- * @version 2.0.0
+ * @package TMW WIRE GAME
+ * @version 1.0.0
  */
 class ADMIN_AppFields extends Zend_Db_Table
 {
-    protected $_name = 'mm_facebook_app_form_elements';
+    protected $_name = 'tmw_wire_app_form_elements';
     
     // save the Form Elements data
     public function setData($data, $fieldsCount) {
@@ -36,7 +36,7 @@ class ADMIN_AppFields extends Zend_Db_Table
     // get the Form Elements data
     public function getData() {
        
-        $row = $this->getAdapter()->query("SELECT * FROM mm_facebook_app_form_elements ORDER BY elementOrder;")->fetchAll();
+        $row = $this->getAdapter()->query("SELECT * FROM tmw_wire_app_form_elements ORDER BY elementOrder;")->fetchAll();
         
         if(!$row) {
             throw new Exception('Could not load application fields from database');

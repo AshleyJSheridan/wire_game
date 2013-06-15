@@ -6,7 +6,7 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <?php
 	// setup stylesheets
-	$this->headLink()->prependStylesheet($this->baseUrl().'/assets/css/views/facebook.css');
+	$this->headLink()->prependStylesheet($this->baseUrl().'/assets/css/views/competition.css');
 	$this->headLink()->prependStylesheet($this->baseUrl().'/assets/css/views/'.$this->pageStyles);
 	echo $this->headLink();
     ?>
@@ -19,8 +19,9 @@
 <div id="fb-root"></div>
 
 <?php
-    $this->headScript()->offsetSetFile(-3, $this->baseUrl().'/assets/js/jquery-1.6.2.min.js', 'text/javascript')
-            ->offsetSetFile(-2, $this->baseUrl().'/assets/js/facebook.js', 'text/javascript')
+    $this->headScript()
+            ->offsetSetFile(-3, $this->baseUrl().'/assets/js/jquery-1.6.2.min.js', 'text/javascript')
+            ->offsetSetFile(-2, $this->baseUrl().'/assets/js/competition.js', 'text/javascript')
             ->offsetSetFile(-1, $this->baseUrl().'/assets/js/jquery.form.js', 'text/javascript');
 ?>
 

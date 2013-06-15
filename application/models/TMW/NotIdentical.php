@@ -3,14 +3,14 @@
 /**
  * NotIdentical Validator
  * 
- * @package MM FB APP
- * @version 2.0.0
+ * @package TMW WIRE GAME
+ * @version 1.0.0
  */
 
 /** @see Zend_Validate_Abstract */
 require_once 'Zend/Validate/Abstract.php';
 
-class MM_NotIdentical extends Zend_Validate_Abstract
+class TMW_NotIdentical extends Zend_Validate_Abstract
 {
     /**
      * Error codes

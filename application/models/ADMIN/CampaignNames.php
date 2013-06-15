@@ -2,18 +2,18 @@
 /**
  * Admin
  * 
- * @package MM FB APP
- * @version 2.0.0
+ * @package TMW WIRE GAME
+ * @version 1.0.0
  */
 class ADMIN_CampaignNames extends Zend_Db_Table
 {
-    protected $_name = 'mm_facebook_comp_names';
+    protected $_name = 'tmw_wire_comp_names';
     
     // save the Settings data
     public function insertCampaignName($newName) {
         
         if($newName) { 
-            $row = $this->getAdapter()->query("SELECT COUNT(1) FROM mm_facebook_comp_names WHERE compName = '".$newName."'")->fetch();
+            $row = $this->getAdapter()->query("SELECT COUNT(1) FROM tmw_wire_comp_names WHERE compName = '".$newName."'")->fetch();
             if($row['COUNT(1)']) { 
                 return 0;  
             }
@@ -29,7 +29,7 @@ class ADMIN_CampaignNames extends Zend_Db_Table
     // export campaign data
     public function exportData($campaignName) {
         
-        $data = $this->getAdapter()->query("SELECT c.fbID, c.fbDateTime, c.fbEmail, group_concat( d.fbdData separator '|*|') as `submittedData` , group_concat( d.fbdField separator '|*|') as `submittedDataFields` FROM `mm_facebook_comp` as c join `mm_facebook_comp_details` as d on c.fbID = d.fbID WHERE c.fbComp = '".$campaignName."' GROUP BY c.fbID;")->fetchAll();
+        $data = $this->getAdapter()->query("SELECT c.fbID, c.fbDateTime, c.fbEmail, group_concat( d.fbdData separator '|*|') as `submittedData` , group_concat( d.fbdField separator '|*|') as `submittedDataFields` FROM `tmw_wire_comp` as c join `tmw_wire_comp_details` as d on c.fbID = d.fbID WHERE c.fbComp = '".$campaignName."' GROUP BY c.fbID;")->fetchAll();
 
         foreach($data as &$datarow)
         {
@@ -50,7 +50,7 @@ class ADMIN_CampaignNames extends Zend_Db_Table
     // get all Campaign names
     public function getAllNames() {
        
-        $row = $this->getAdapter()->query("SELECT * FROM mm_facebook_comp_names;")->fetchAll();
+        $row = $this->getAdapter()->query("SELECT * FROM tmw_wire_comp_names;")->fetchAll();
         
         foreach ($row as $key => $campaignNames)
         {

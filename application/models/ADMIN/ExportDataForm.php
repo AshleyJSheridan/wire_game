@@ -7,8 +7,8 @@ class ADMIN_ExportDataForm extends Zend_Form
     {
         if(!empty($this->_campaignNames))
         {
-            $facebookCampaignName = $this->createElement('select', 'facebookCampaignName', array('attribs' => array('message' => 'Please select a Facebook Campaign Name')));
-            $facebookCampaignName->setLabel('Select Facebook Campaign Name:')->setRequired(true)->addMultiOptions($this->_campaignNames);
+            $campaignName = $this->createElement('select', 'campaignName', array('attribs' => array('message' => 'Please select a Facebook Campaign Name')));
+            $campaignName->setLabel('Select Facebook Campaign Name:')->setRequired(true)->addMultiOptions($this->_campaignNames);
 
             $isAjax = $this->createElement('hidden', 'isAjax', array('value' => false));
             $isAjax->removeDecorator('DtDdWrapper')->removeDecorator('HtmlTag')->removeDecorator('Label');
@@ -19,7 +19,7 @@ class ADMIN_ExportDataForm extends Zend_Form
             $submitSettings->setLabel('submit')->setIgnore(true)->removeDecorator('DtDdWrapper')->removeDecorator('HtmlTag')->removeDecorator('Label');
 
             $this->addElements(array(
-                            $facebookCampaignName,
+                            $campaignName,
                             $isAjax,
                             $formName,
                             $submitSettings

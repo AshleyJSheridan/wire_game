@@ -2,12 +2,12 @@
 /**
  * Facebook
  * 
- * @package MM FB APP
- * @version 2.0.0
+ * @package TMW WIRE GAME
+ * @version 1.0.0
  */
-class MM_Facebook extends Zend_Db_Table
+class TMW_Competition extends Zend_Db_Table
 {
-    protected $_name = 'mm_facebook_comp';
+    protected $_name = 'tmw_wire_comp';
     
     // save the mandatory data in seperate table fields
     public function addMandatoryData($data) {
@@ -24,7 +24,7 @@ class MM_Facebook extends Zend_Db_Table
         if($data && is_array($data) && $parent) {
             foreach($data as $fbKey => $fbVal) {
                 $this->getAdapter()->query("
-                    INSERT INTO mm_facebook_comp_details(fbID,fbdField,fbdData) VALUES ('$parent','$fbKey','$fbVal');
+                    INSERT INTO tmw_wire_comp_details(fbID,fbdField,fbdData) VALUES ('$parent','$fbKey','$fbVal');
 		");
             }
             return true;
@@ -35,7 +35,7 @@ class MM_Facebook extends Zend_Db_Table
     
     // load the application settings from tha database
     public function getAppSettings() {
-        $row = $this->getAdapter()->query("SELECT * FROM mm_facebook_app_settings;")->fetch();
+        $row = $this->getAdapter()->query("SELECT * FROM tmw_wire_app_settings;")->fetch();
         if(!$row) {
             throw new Exception('Could not load application settings data from database');
         } else {
@@ -45,7 +45,7 @@ class MM_Facebook extends Zend_Db_Table
     
     // load the application texts from tha database
     public function getAppContents($campaignName) {
-        $row = $this->getAdapter()->query("SELECT * FROM mm_facebook_app_texts WHERE facebookCampaignName = '".$campaignName."';")->fetch();
+        $row = $this->getAdapter()->query("SELECT * FROM tmw_wire_app_texts WHERE campaignName = '".$campaignName."';")->fetch();
         if(!$row) {
             throw new Exception('Could not load application text contents from database');
         } else {
@@ -55,7 +55,7 @@ class MM_Facebook extends Zend_Db_Table
     
     // load the application form elements from tha database
     public function getAppFormElements($campaignName) {
-        $row = $this->getAdapter()->query("SELECT * FROM mm_facebook_app_form_elements WHERE facebookCampaignName = '".$campaignName."' ORDER BY elementOrder;")->fetchAll();
+        $row = $this->getAdapter()->query("SELECT * FROM tmw_wire_app_form_elements WHERE campaignName = '".$campaignName."' ORDER BY elementOrder;")->fetchAll();
         if(!$row) {
             throw new Exception('Could not load application form elements from database');
         } else {

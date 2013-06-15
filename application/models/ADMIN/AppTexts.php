@@ -2,12 +2,12 @@
 /**
  * Admin
  * 
- * @package MM FB APP
- * @version 2.0.0
+ * @package TMW WIRE GAME
+ * @version 1.0.0
  */
 class ADMIN_AppTexts extends Zend_Db_Table
 {
-    protected $_name = 'mm_facebook_app_texts';
+    protected $_name = 'tmw_wire_app_texts';
     
     // save the Texts data
     public function setData($data) {
@@ -27,7 +27,7 @@ class ADMIN_AppTexts extends Zend_Db_Table
     // get the Texts data
     public function getData() {
        
-        $row = $this->getAdapter()->query("SELECT * FROM mm_facebook_app_texts WHERE id = 1;")->fetch();
+        $row = $this->getAdapter()->query("SELECT * FROM tmw_wire_app_texts WHERE id = 1;")->fetch();
         
         if(!$row) {
             throw new Exception('Could not load application texts from database');

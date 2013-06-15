@@ -14,8 +14,8 @@ class ADMIN_ManageAppForm extends Zend_Form
             {
                 $fieldForm[$i] = New Zend_Form();
 
-                $facebookCampaignName = $fieldForm[$i]->createElement('hidden', 'facebookCampaignName', array('isArray' => true));
-                $facebookCampaignName->removeDecorator('DtDdWrapper')->removeDecorator('HtmlTag')->removeDecorator('Label');
+                $campaignName = $fieldForm[$i]->createElement('hidden', 'campaignName', array('isArray' => true));
+                $campaignName->removeDecorator('DtDdWrapper')->removeDecorator('HtmlTag')->removeDecorator('Label');
 
                 $elementDbId = $fieldForm[$i]->createElement('hidden', 'id', array('isArray' => true));
                 $elementDbId->removeDecorator('DtDdWrapper')->removeDecorator('HtmlTag')->removeDecorator('Label');
@@ -57,7 +57,7 @@ class ADMIN_ManageAppForm extends Zend_Form
                 $elementExtras->setLabel('Available Options:');
                 $elementExtras->addDecorator(array('row' => 'HtmlTag'), array('tag' => 'div', 'class' => 'formElementColumn radioOptions'));
 
-                $fieldForm[$i]->addElement($facebookCampaignName)
+                $fieldForm[$i]->addElement($campaignName)
                             ->addElement($elementDbId)
                             ->addElement($elementType)
                             ->addElement($elementName)                        

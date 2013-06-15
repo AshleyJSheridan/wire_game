@@ -200,7 +200,7 @@ abstract class BaseFacebook
   protected $fileUploadSupport = false;
 
   /**
-   * Initialize a Facebook Application.
+   * Initialize a Competition.
    *
    * The configuration:
    * - appId: the application ID

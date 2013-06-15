@@ -17,7 +17,7 @@ class AdminController extends Zend_Controller_Action
             {
                 $auth = Zend_Auth::getInstance();
 
-                $authAdapter = new Zend_Auth_Adapter_DbTable($users->getAdapter(),'mm_facebook_app_users');
+                $authAdapter = new Zend_Auth_Adapter_DbTable($users->getAdapter(),'tmw_wire_app_users');
 
                 $authAdapter->setIdentityColumn('username')
                             ->setCredentialColumn('password');
@@ -63,7 +63,7 @@ class AdminController extends Zend_Controller_Action
         $appSettings->setAttrib('id', 'appSettings');
         $dbConnect = new ADMIN_AppSettings();
         $appSettings->populate($dbConnect->getData());
-        $currentCompName = $appSettings->getElement('facebookCampaignName')->getValue();
+        $currentCompName = $appSettings->getElement('campaignName')->getValue();
         
         $this->view->manageAppSettingsForm = $appSettings;
                 
@@ -71,7 +71,7 @@ class AdminController extends Zend_Controller_Action
         $appTexts->setAttrib('id', 'appTexts');
         $dbConnect = new ADMIN_AppTexts();
         $appTexts->populate($dbConnect->getData());
-        $appTexts->getElement('facebookCampaignName')->setValue($currentCompName);
+        $appTexts->getElement('campaignName')->setValue($currentCompName);
         
         $this->view->manageAppTextsForm = $appTexts;
         
@@ -90,7 +90,7 @@ class AdminController extends Zend_Controller_Action
         for($i = 0; $i < $fieldsCount; $i++)
         {
             $appFields->getSubForm('fieldForm'.$i)->populate($loadedFormElements[$i]);
-            $appFields->getSubForm('fieldForm'.$i)->getElement('facebookCampaignName')->setValue($currentCompName);
+            $appFields->getSubForm('fieldForm'.$i)->getElement('campaignName')->setValue($currentCompName);
         }
         
         $this->view->manageAppForm = $appFields;
@@ -122,11 +122,11 @@ class AdminController extends Zend_Controller_Action
                     case 'appSettings':
                         $appSettings = $this->progressAppSettings($appSettings, $formData, $ajaxResponce);
                         
-                        $currentCompName = $appSettings->getElement('facebookCampaignName')->getValue();
-                        $appTexts->getElement('facebookCampaignName')->setValue($currentCompName);
+                        $currentCompName = $appSettings->getElement('campaignName')->getValue();
+                        $appTexts->getElement('campaignName')->setValue($currentCompName);
                         for($i = 0; $i < $fieldsCount; $i++)
                         {
-                            $appFields->getSubForm('fieldForm'.$i)->getElement('facebookCampaignName')->setValue($currentCompName);
+                            $appFields->getSubForm('fieldForm'.$i)->getElement('campaignName')->setValue($currentCompName);
                         }
                         
                         $dbNamesConnect = new ADMIN_CampaignNames();
@@ -177,7 +177,7 @@ class AdminController extends Zend_Controller_Action
         $dbConnect      = new ADMIN_AppSettings();
         $dbNamesConnect = new ADMIN_CampaignNames();
         
-        $formData['facebookCampaignName']  = preg_replace("/[^a-zA-Z0-9\-]/", "", str_replace(' ', '-', strtolower($formData['facebookCampaignName'])));
+        $formData['campaignName']  = preg_replace("/[^a-zA-Z0-9\-]/", "", str_replace(' ', '-', strtolower($formData['campaignName'])));
         
         if ($form->isValid($formData)) {
            // remove submit from form info, as well as not needed data
@@ -200,7 +200,7 @@ class AdminController extends Zend_Controller_Action
                } else {
                    $form->populate($formData);
                }
-               $this->view->errorMessage    = 'Facebook Application Details saved with success.';
+               $this->view->errorMessage    = 'Competition Details saved with success.';
                $this->view->errorClass      = "green";
             } else {
                 // set up for ajax validation
@@ -222,7 +222,7 @@ class AdminController extends Zend_Controller_Action
                 } else {
                     $form->populate($formData);
 		}
-                $this->view->errorMessage  = 'There where errors. Facebook Application details were not saved.';
+                $this->view->errorMessage  = 'There where errors. Competition details were not saved.';
             }
         }
         return $form;
@@ -275,7 +275,7 @@ class AdminController extends Zend_Controller_Action
                 } else {
                     $form->populate($formData);
 		}
-                $this->view->errorMessage  = 'There where errors. Facebook Application texts were not saved.';
+                $this->view->errorMessage  = 'There where errors. Competition texts were not saved.';
             }
         }
         return $form;
@@ -368,7 +368,7 @@ class AdminController extends Zend_Controller_Action
                         $form->getSubForm('fieldForm'.$i)->populate($parsedData[$i]);
                     }
 		}
-                $this->view->errorMessage  = 'There where errors. Facebook Application Form Fields were not saved.';
+                $this->view->errorMessage  = 'There where errors. Competition Form Fields were not saved.';
             }
         }
         return $form;
@@ -381,9 +381,9 @@ class AdminController extends Zend_Controller_Action
             // The file upload field handling start
             $upload = new Zend_File_Transfer_Adapter_Http();
             $files = array_keys($upload->getFileInfo());
-            $upload->addFilter('Rename', array('target' => realpath(APPLICATION_PATH . '/../public_html/assets/img/facebook/competition/').'/addImage.jpg', 'overwrite' => true), $files[0]);
+            $upload->addFilter('Rename', array('target' => realpath(APPLICATION_PATH . '/../public_html/assets/img/competition/').'/addImage.jpg', 'overwrite' => true), $files[0]);
             $filesUploaded = $upload->receive($files[0]);
-            $upload->addFilter('Rename', array('target' => realpath(APPLICATION_PATH . '/../public_html/assets/img/facebook/competition/').'/fbShareImage.jpg', 'overwrite' => true), $files[1]);
+            $upload->addFilter('Rename', array('target' => realpath(APPLICATION_PATH . '/../public_html/assets/img/competition/').'/fbShareImage.jpg', 'overwrite' => true), $files[1]);
             $filesUploaded = $upload->receive($files[1]);
             // File upload field handling ends           
            
@@ -438,7 +438,7 @@ class AdminController extends Zend_Controller_Action
                 $formData['isAjax']
            );
            
-           $exportedData = $dbConnect->exportData($formData['facebookCampaignName']);
+           $exportedData = $dbConnect->exportData($formData['campaignName']);
            
            if(!empty($exportedData)) {
                if( $ajaxResponce ) {
@@ -449,7 +449,7 @@ class AdminController extends Zend_Controller_Action
                         ->sendResponse();
                    exit;
                } else {
-                   $this->query_to_csv($exportedData, 'fb-competition-data');
+                   $this->query_to_csv($exportedData, 'competition-data');
                }
                $this->view->errorMessage  = 'Data exported with success.';
                $this->view->errorClass = "green";

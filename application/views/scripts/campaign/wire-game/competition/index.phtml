@@ -2,7 +2,7 @@
     <div class="header">
         <?php
             if(!empty($this->contents['displayImage'])) {
-                echo '<img class="adImage" src="/assets/img/facebook/competition/addImage.jpg" alt="'.$this->facebookShare['title'].'" />';
+                echo '<img class="adImage" src="/assets/img/competition/wire-game/addImage.jpg" alt="'.$this->facebookShare['title'].'" />';
                 echo '<div class="sideHeaders">';
             }
             if(!empty($this->contents['headerText1'])) {
@@ -31,7 +31,7 @@
             </div>
             <div id="fb_form">
 
-                <form method="post" action="/facebook/<?php echo $this->facebookShare['campaign']; ?>/index?ajax=true" id="fbForm" enctype="multipart/form-data" accept-charset="utf-8" rel="1">
+                <form method="post" action="/competition/<?php echo $this->facebookShare['campaign']; ?>/index?ajax=true" id="fbForm" enctype="multipart/form-data" accept-charset="utf-8" rel="1">
                     <div class="startingField">
                     <?php
                         $currentElement = 0;
@@ -103,5 +103,4 @@
             </div>
         </div>  
     </div>
-    <span class="imgRights">@Ben&Jerry's Homemade Inc 2012 <br />Cowes@Woody Jackson 1997</span>
 </div>

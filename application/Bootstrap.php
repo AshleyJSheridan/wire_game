@@ -3,8 +3,8 @@
 /**
  * Bootstrap
  * 
- * @package MM FB APP
- * @version 2.0.0
+ * @package TMW WIRE GAME
+ * @version 1.0.0
  */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     

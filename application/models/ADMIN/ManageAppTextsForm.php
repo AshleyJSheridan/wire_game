@@ -3,8 +3,8 @@ class ADMIN_ManageAppTextsForm extends Zend_Form
 {
     public function init()
     {
-        $facebookCampaignName = $this->createElement('hidden', 'facebookCampaignName');
-        $facebookCampaignName->removeDecorator('DtDdWrapper')->removeDecorator('HtmlTag')->removeDecorator('Label');
+        $campaignName = $this->createElement('hidden', 'campaignName');
+        $campaignName->removeDecorator('DtDdWrapper')->removeDecorator('HtmlTag')->removeDecorator('Label');
         
         $headerText1 = $this->createElement('textarea', 'headerText1', array('attribs' => array('message' => 'Please enter copy for the thick header text', 'cols' => 35, 'maxLength' => '255', 'rows' => 5)));
         $headerText1->setLabel('The copy of the thick header text:');
@@ -39,7 +39,7 @@ class ADMIN_ManageAppTextsForm extends Zend_Form
         $submitTexts->setLabel('submit')->setIgnore(true)->removeDecorator('DtDdWrapper')->removeDecorator('HtmlTag')->removeDecorator('Label');
         
         $this->addElements(array(
-                        $facebookCampaignName,
+                        $campaignName,
                         $headerText1,
                         $headerText2,
                         $introText,

@@ -2,8 +2,8 @@
 /**
  * Index Loader
  * 
- * @package MM FB APP
- * @version 2.0.0
+ * @package TMW WIRE GAME
+ * @version 1.0.0
  */
 ini_set('display_errors', 1);
 
@@ -31,7 +31,7 @@ require_once 'Zend/Loader/Autoloader.php';
 
 $loader = Zend_Loader_Autoloader::getInstance();
 
-$loader->registerNamespace('MM_');
+$loader->registerNamespace('TMW_');
 $loader->registerNamespace('ADMIN_');
 
 Zend_Session::start();
