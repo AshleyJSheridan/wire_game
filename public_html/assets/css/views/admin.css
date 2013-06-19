@@ -1,27 +1,5 @@
 /****************** EMBEDING NEEDED FONTS ***********************/
-@font-face {
-    font-family: 'chunkstyle';
-    src: url('../../fonts/chunkstylemodern-webfont.eot');
-    src: url('../../fonts/chunkstylemodern-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../../fonts/chunkstylemodern-webfont.woff') format('woff'),
-         url('../../fonts/chunkstylemodern-webfont.ttf') format('truetype'),
-         url('../../fonts/chunkstylemodern-webfont.svg#chunkstyle') format('svg');
-    font-weight: normal;
-    font-style: normal;
 
-}
-
-@font-face {
-    font-family: 'severance';
-    src: url('../../fonts/severancethesequel_regular-webfont.eot');
-    src: url('../../fonts/severancethesequel_regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../../fonts/severancethesequel_regular-webfont.woff') format('woff'),
-         url('../../fonts/severancethesequel_regular-webfont.ttf') format('truetype'),
-         url('../../fonts/severancethesequel_regular-webfont.svg#severance') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
 /************************************** Generic & Reset Css ***********************************/
 * {
     margin: 0;
@@ -64,7 +42,7 @@ html {
     font-size:12px;
     width:100%;
     height:auto;
-    font-family:Arial;
+    font-family:Georgia,Times New Roman,Serif;
     color:#333;
 }
 
@@ -162,7 +140,6 @@ h1{
     padding:0;
     width:500px;
     line-height:36px;
-    font-family: 'chunkstyle';
 }
 /********************** CONTENTS *******************/
 #message{
@@ -199,7 +176,6 @@ h1{
     font-weight:bold;
     float:left;
     display:block;
-    font-family: 'severance' !important;
 }
 
 #contents h3{
@@ -209,7 +185,6 @@ h1{
     line-height:16px;
     float:left;
     width:100%;
-    font-family: 'severance' !important;
 }
 
 #contents h4{
@@ -219,7 +194,6 @@ h1{
     text-decoration:underline;
     float:left;
     width:100%;
-    font-family: 'severance' !important;
 }
 
 #contents p {
@@ -280,7 +254,6 @@ h1{
     font-size:14px;
     margin:0 0 20px 0;
     clear:both;
-    font-family: 'severance' !important;
 }
 
 #loginInfo p{
@@ -371,7 +344,6 @@ input[type="submit"] {
     border:1px solid #666;
     padding-bottom:3px;
     margin:10px 0;
-    font-family: 'severance' !important;
     float:left;
     clear:left;
 }
@@ -450,7 +422,6 @@ input[type="submit"]:hover {
     padding: 0 10px;
     transition: background-position 300ms ease-in 0s;
     white-space: nowrap;
-    font-family: 'severance' !important;
 }
 
 .carouselNav li .active {

@@ -16,7 +16,6 @@
             }
         ?>
     </div>
-    <div class="cowImage"></div>
     <div class="contentsHolderOuter">
         <div class="contentsHolder">
             <div id="fb_content_copy">
@@ -47,7 +46,7 @@
                                 }
                                 else if($formElement['elementType'] == 'Email')
                                 {
-                                    echo $this->form->getElement('fbEmail')->render();
+                                    echo $this->form->getElement('playerEmail')->render();
                                 }
                                 else if($formElement['elementType'] == 'Textarea')
                                 {

@@ -34,7 +34,7 @@ class TMW_Competitionform extends Zend_Form
                 }
                 else if($formElement['elementType'] == 'Email')
                 {
-                    $tmwFormArray[] = new Zend_Form_Element_Text('fbEmail', array(
+                    $tmwFormArray[] = new Zend_Form_Element_Text('playerEmail', array(
                                         'required'          => true,
                                         'label'             => $formElement['elementLabel'],
                                         'value'             => $formElement['elementValue'],

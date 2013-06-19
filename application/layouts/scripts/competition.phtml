@@ -25,34 +25,36 @@
             ->offsetSetFile(-1, $this->baseUrl().'/assets/js/jquery.form.js', 'text/javascript');
 ?>
 
-<?php $this->headScript()->captureStart(); ?>
-    // set up UI
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId: '<?php echo $this->facebookShare['appID']?>',
-            cookie: true,
-            xfbml: true,
-            oauth: true
-        });
-        FB.Canvas.setAutoGrow(true);
-        FB.Canvas.scrollTo(0,0);
-    };
+<?php if(!is_null($this->facebookShare['appID'])) { ?> 
+    <?php $this->headScript()->captureStart(); ?>
+        // set up UI
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId: '<?php echo $this->facebookShare['appID']?>',
+                cookie: true,
+                xfbml: true,
+                oauth: true
+            });
+            FB.Canvas.setAutoGrow(true);
+            FB.Canvas.scrollTo(0,0);
+        };
 
-    // create share button
-    $(document).ready(function(){
-        $('.fbIcon').live('click', function(e){
-            e.preventDefault();
-            FB.ui({
-                method:         'feed',
-                name:           '<?php echo $this->facebookShare['title'] ?>',
-                link:           '<?php echo $this->facebookShare['url'] ?>',
-                picture:        '<?php echo $this->serverUrl().$this->facebookShare['image'] ?>',
-                description:    '<?php echo $this->facebookShare['summary'] ?>',
-                message:        ''
+        // create share button
+        $(document).ready(function(){
+            $('.fbIcon').live('click', function(e){
+                e.preventDefault();
+                FB.ui({
+                    method:         'feed',
+                    name:           '<?php echo $this->facebookShare['title'] ?>',
+                    link:           '<?php echo $this->facebookShare['url'] ?>',
+                    picture:        '<?php echo $this->serverUrl().$this->facebookShare['image'] ?>',
+                    description:    '<?php echo $this->facebookShare['summary'] ?>',
+                    message:        ''
+                });
             });
         });
-    });
-<?php $this->headScript()->captureEnd(); ?>
+    <?php $this->headScript()->captureEnd(); ?>
+<?php } ?>
     
 <?php echo $this->headScript(); ?>
 

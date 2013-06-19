@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 15, 2013 at 12:12 AM
+-- Generation Time: Jun 19, 2013 at 10:42 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -47,9 +47,9 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_app_form_elements` (
 --
 
 INSERT INTO `tmw_wire_app_form_elements` (`id`, `campaignName`, `elementName`, `elementType`, `elementLabel`, `elementValue`, `elementError`, `elementVisibility`, `elementOrder`, `elementRequired`, `elementExtras`) VALUES
-(1, 'wire-game', 'question', 'Radio', 'Praesent vehicula, sem nec euismod posuere, lectus tortor varius tellus, ut congue nunc est sit amet enim.', '', 'Please answer the question', 0, 2, '1', 'Turpis a fermentum|*|Lectus auctor non|*|rgg jjgj jdgj dgh d hsdff gf|*|ffgfs gsfg  ffs gs fsf|*|sdfssdgs ssss2222|*|sfgsgsfg gsffsgsfg sf sfg'),
+(1, 'wire-game', 'question', 'Radio', 'Praesent vehicula, sem nec euismod posuere, lectus tortor varius tellus, ut congue nunc est sit amet enim.', '', 'Please answer the question', 1, 2, '1', 'Turpis a fermentum|*|Lectus auctor non|*|rgg jjgj jdgj dgh d hsdff gf|*|ffgfs gsfg  ffs gs fsf|*|sdfssdgs ssss2222|*|sfgsgsfg gsffsgsfg sf sfg'),
 (2, 'wire-game', 'email', 'Email', 'Email', 'e-mail*', 'Please type a valid email', 1, 3, '1', ''),
-(3, 'wire-game', 'photo', 'File', 'Send your photos after the competition', '', 'Please upload a file', 1, 0, '1', ''),
+(3, 'wire-game', 'photo', 'File', 'Send your photos after the competition', '', 'Please upload a file', 0, 0, '0', ''),
 (4, 'wire-game', 'firstname', 'Text', 'First Name', 'First Name', 'Please type your first name', 0, 4, '1', ''),
 (5, 'wire-game', 'newsletter', 'Checkbox', 'You want newsletter?', 'yes', 'you want one?', 1, 14, '1', ''),
 (6, 'wire-game', 'textquestion', 'Textarea', 'Praesent vehicula, sem nec euismod posuere, lectus tortor varius tellus, ut congue nunc est sit amet enim.', '', 'Please type your answer', 0, 2, '1', ''),
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_app_settings` (
 --
 
 INSERT INTO `tmw_wire_app_settings` (`id`, `campaignName`, `title`, `facebookAppUrl`, `gaId`, `appId`, `secret`, `summary`) VALUES
-(1, 'wire-game', 'FB Competition Title', 'http://www.facebook.com/pagename', '', '1111111111111111111', '1a1a1a1a1a1a1a1a1a1a11a11a11a', 'Please share this great app');
+(1, 'wire-game', 'Wire Game Competition', 'http://www.facebook.com/pagename', '', NULL, '1a1a1a1a1a1a1a1a1a1a11a11a11a', 'Please share this great app');
 
 -- --------------------------------------------------------
 
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_app_texts` (
 --
 
 INSERT INTO `tmw_wire_app_texts` (`id`, `campaignName`, `headerText1`, `headerText2`, `displayImage`, `introText`, `introVideo`, `thankText`, `tncText`, `policyText`) VALUES
-(1, 'wire-game', 'Answer A Simple Question & You Could Win', 'A CELEBRITY ICE CREAM SCOOP!', 1, 'Nulla eu arcu est, in porttitor est. Vivamus sagittis mi ut lectus auctor non aliquet elit euismod. Mauris sit amet elit nec enim accumsan dapibus. Quisque ut iaculis risus. Quisque arcu odio, accumsan nec malesuada sed, tempor in tortor. Nunc viverra, turpis a fermentum commodo, orci elit pellentesque lacus, et convallis orci magna nec enim. ', 'hOpM35vHpfA', 'bbbb advv gh fh sf fgsgs adfa adfa f fda f', 'http://www.benjerry.co.uk/', 'http://www.benjerry.co.uk/');
+(1, 'wire-game', 'Fill in your details and get invitation for', 'TMW WIRE GAME', 1, 'Nulla eu arcu est, in porttitor est. Vivamus sagittis mi ut lectus auctor non aliquet elit euismod. Mauris sit amet elit nec enim accumsan dapibus. Quisque ut iaculis risus. Quisque arcu odio, accumsan nec malesuada sed, tempor in tortor. Nunc viverra, turpis a fermentum commodo, orci elit pellentesque lacus, et convallis orci magna nec enim. ', '', 'bbbb advv gh fh sf fgsgs adfa adfa f fda f', 'http://www.tmw.co.uk/', 'http://www.tmw.co.uk/');
 
 -- --------------------------------------------------------
 
@@ -148,12 +148,12 @@ INSERT INTO `tmw_wire_app_users` (`id`, `username`, `password`, `email`) VALUES
 
 DROP TABLE IF EXISTS `tmw_wire_comp`;
 CREATE TABLE IF NOT EXISTS `tmw_wire_comp` (
-  `fbID` int(11) NOT NULL AUTO_INCREMENT,
-  `fbEmail` varchar(255) NOT NULL,
-  `fbComp` varchar(64) NOT NULL,
-  `fbDateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`fbID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+  `playerId` int(11) NOT NULL AUTO_INCREMENT,
+  `playerEmail` varchar(255) NOT NULL,
+  `campaign` varchar(64) NOT NULL,
+  `registeredOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`playerId`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 -- --------------------------------------------------------
 
@@ -163,12 +163,12 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_comp` (
 
 DROP TABLE IF EXISTS `tmw_wire_comp_details`;
 CREATE TABLE IF NOT EXISTS `tmw_wire_comp_details` (
-  `fbdID` int(11) NOT NULL AUTO_INCREMENT,
-  `fbID` int(11) NOT NULL,
-  `fbdField` text NOT NULL,
-  `fbdData` text NOT NULL,
-  PRIMARY KEY (`fbdID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=167 ;
+  `playerDetailsId` int(11) NOT NULL AUTO_INCREMENT,
+  `playerId` int(11) NOT NULL,
+  `detailsField` text NOT NULL,
+  `detailsData` text NOT NULL,
+  PRIMARY KEY (`playerDetailsId`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=176 ;
 
 -- --------------------------------------------------------
 

@@ -65,35 +65,38 @@ class CompetitionController extends Zend_Controller_Action {
         $this->view->formElements                       = $this->_appFormElements;
 
         // set layout
-        $this->_helper->layout->setLayout('competition');
-
-        // load facebook SDK
-        require_once APPLICATION_PATH . '/../library/facebook/facebook.php';
-
-        $facebook = new Facebook(array(
-                'appId'     => $this->_appSettings['appId'],
-                'secret'    => $this->_appSettings['secret'],
-                'cookie'    => true
-            ));
-
-        // request from facebook
-        $this->_facebookData = $signed_request = $facebook->getSignedRequest();
-
-        // define sessions for is liked, etc
-        $pageStatus = new Zend_Session_Namespace('pageStatus');
-
-        if(isset($signed_request['page'])) {
-                // define liked
-                $pageStatus->liked = $signed_request['page']['liked'];
-        }
+        $this->_helper->layout->setLayout('competition');        
 
         // reference the right views folder location
         $this->view->addScriptPath(APPLICATION_PATH . '/views/scripts/campaign/' . $this->_tmwCampaign);
+        
+        // If it has FB app id load the facebook sdk        
+        if(!is_null($this->_appSettings['appId'])){// load facebook SDK
+            require_once APPLICATION_PATH . '/../library/facebook/facebook.php';
 
-        // if the user has not liked the page, we redirect to the like gate. uncomment after development is done so the likegate works properly
-        /*if($this->_competitionPage != 'like' && $this->_competitionPage != 'submit' && !$pageStatus->liked && !$this->_ajaxParam) {
-                $this->_redirect('/competition/' . $this->_tmwCampaign . '/like/');
-        }*/
+            $facebook = new Facebook(array(
+                    'appId'     => $this->_appSettings['appId'],
+                    'secret'    => $this->_appSettings['secret'],
+                    'cookie'    => true
+                ));
+
+            // request from facebook
+            $this->_facebookData = $signed_request = $facebook->getSignedRequest();
+
+            // define sessions for is liked, etc
+            $pageStatus = new Zend_Session_Namespace('pageStatus');
+
+            if(isset($signed_request['page'])) {
+                    // define liked
+                    $pageStatus->liked = $signed_request['page']['liked'];
+            }
+
+            // if the user has not liked the page, we redirect to the like gate. uncomment after development is done so the likegate works properly
+            /*if($this->_competitionPage != 'like' && $this->_competitionPage != 'submit' && !$pageStatus->liked && !$this->_ajaxParam) {
+                    $this->_redirect('/competition/' . $this->_tmwCampaign . '/like/');
+            }*/
+            
+        }
     }
 
     /**
@@ -119,7 +122,7 @@ class CompetitionController extends Zend_Controller_Action {
         if ($this->_request->isPost()) {
             $formData = $this->_request->getPost();
             
-            if(isset($formData['fbEmail'])) {
+            if(isset($formData['playerEmail'])) {
                 
                 if ($form->isValid($formData)) {
                     
@@ -128,10 +131,10 @@ class CompetitionController extends Zend_Controller_Action {
                         // The file upload field handling start
                         $upload = new Zend_File_Transfer();
                         $files = array_keys($upload->getFileInfo());
-                        $upload->addFilter('Rename', realpath(APPLICATION_PATH . '/../public_html/uploads/'.$this->_tmwCampaign.'/').'/'.$formData['fbEmail'].'-'.time().'.jpg', $files[0]);
+                        $upload->addFilter('Rename', realpath(APPLICATION_PATH . '/../public_html/uploads/'.$this->_tmwCampaign.'/').'/'.$formData['playerEmail'].'-'.time().'.jpg', $files[0]);
                         $upload->receive($files[0]);
 
-                        $formData['fbimage'] = $formData['fbEmail'].'-'.time().'.jpg';
+                        $formData['fbimage'] = $formData['playerEmail'].'-'.time().'.jpg';
                         unset(
                             $formData['MAX_FILE_SIZE']
                         );
@@ -140,13 +143,13 @@ class CompetitionController extends Zend_Controller_Action {
                     
                     // split mandatory data into separate array
                     $mandatoryData = array(
-                        'fbEmail'   => $formData['fbEmail'],
-                        'fbComp'    => $formData['campaignName']
+                        'playerEmail'   => $formData['playerEmail'],
+                        'campaign'    => $formData['campaignName']
                     );
 
                     // remove submit from form info, as well as mandatory data
                     unset(
-                        $formData['fbEmail'],
+                        $formData['playerEmail'],
                         $formData['submitBtn'],
                         $formData['campaign'],
                         $formData['campaignName']
@@ -201,7 +204,7 @@ class CompetitionController extends Zend_Controller_Action {
     }
 
     /**
-     * Ragister page Action
+     * Register page Action
      */
     public function registerAction() {
         
@@ -223,7 +226,7 @@ class CompetitionController extends Zend_Controller_Action {
         if ($this->_request->isPost()) {
             $formData = $this->_request->getPost();
             
-            if(isset($formData['fbEmail'])) {
+            if(isset($formData['playerEmail'])) {
                 
                 if ($form->isValid($formData)) {
                     
@@ -232,10 +235,10 @@ class CompetitionController extends Zend_Controller_Action {
                         // The file upload field handling start
                         $upload = new Zend_File_Transfer();
                         $files = array_keys($upload->getFileInfo());
-                        $upload->addFilter('Rename', realpath(APPLICATION_PATH . '/../public_html/uploads/'.$this->_tmwCampaign.'/').'/'.$formData['fbEmail'].'-'.time().'.jpg', $files[0]);
+                        $upload->addFilter('Rename', realpath(APPLICATION_PATH . '/../public_html/uploads/'.$this->_tmwCampaign.'/').'/'.$formData['playerEmail'].'-'.time().'.jpg', $files[0]);
                         $upload->receive($files[0]);
 
-                        $formData['fbimage'] = $formData['fbEmail'].'-'.time().'.jpg';
+                        $formData['fbimage'] = $formData['playerEmail'].'-'.time().'.jpg';
                         unset(
                             $formData['MAX_FILE_SIZE']
                         );
@@ -244,8 +247,111 @@ class CompetitionController extends Zend_Controller_Action {
                     
                     // split mandatory data into separate array
                     $mandatoryData = array(
-                        'fbEmail'   => $formData['fbEmail'],
-                        'fbComp'    => $formData['campaignName']
+                        'playerEmail'   => $formData['playerEmail'],
+                        'campaign'    => $formData['campaignName']
+                    );
+
+                    // remove submit from form info, as well as mandatory data
+                    unset(
+                        $formData['fbEmail'],
+                        $formData['submitBtn'],
+                        $formData['campaign'],
+                        $formData['campaignName']
+                    );
+                    // add into DB
+                    $tmwDBConnect = new TMW_Competition();
+                    $insertID = $tmwDBConnect->addMandatoryData($mandatoryData);
+                    $insertEX = $tmwDBConnect->addDetailData($formData,$insertID);
+                    if($insertID && $insertEX) {
+                        if( $this->_ajaxParam ) {
+                            $jsonData = utf8_encode(Zend_Json::encode('submit'));
+                            $this->getResponse()
+                                ->setHeader('Content-Type', 'text/html')
+                                ->setBody($jsonData)
+                                ->sendResponse();
+                            exit;
+                        } else {
+                            $this->_redirect('/competition/' . $this->_tmwCampaign . '/submit/');
+                        }
+                    }                                
+            } else {
+                    // set up for ajax validation
+                    if( $this->_ajaxParam ) {
+                        $errorReturned = $form->getMessages();
+                        foreach($errorReturned as $field => $errors) {
+                                        $element = $form->getElement($field);
+                                        $message = $element->getAttribs();
+                                        $errorMessages[$field] = $message['message'];
+                        }
+                        if (empty($errorReturned))
+                        {
+                            if($formData['fbimage'] == '' && $formHasImageField)
+                            {
+                                $emptyImageError = $form->getElement('fbimage')->getAttribs();
+                                $errorMessages['fbimage'] = $emptyImageError['message'];
+                            }
+                        }
+                        $jsonData = utf8_encode(Zend_Json::encode($errorMessages));
+                        $this->getResponse()
+                            ->setHeader('Content-Type', 'text/html')
+                            ->setBody($jsonData)
+                            ->sendResponse();
+                        exit;
+                    } else {
+                        $form->populate($formData);
+                    }
+                }
+            }
+        }
+        $this->view->form = $form;
+    }
+    
+    /**
+     * RSVP page Action
+     */
+    public function rsvpAction() {
+        
+        // create form
+        $form               = new TMW_Competitionform($this->_appFormElements);
+        $formHasImageField  = false;
+        
+        foreach($this->_appFormElements as $formElement)
+        {
+            if($formElement['elementType'] == 'File' && $formElement['elementVisibility'] == true )
+            {
+                $formHasImageField = true;
+            }
+        }
+        
+        $form->setAttrib('enctype', 'multipart/form-data');
+
+        // posting
+        if ($this->_request->isPost()) {
+            $formData = $this->_request->getPost();
+            
+            if(isset($formData['playerEmail'])) {
+                
+                if ($form->isValid($formData)) {
+                    
+                    if ($formHasImageField)
+                    {
+                        // The file upload field handling start
+                        $upload = new Zend_File_Transfer();
+                        $files = array_keys($upload->getFileInfo());
+                        $upload->addFilter('Rename', realpath(APPLICATION_PATH . '/../public_html/uploads/'.$this->_tmwCampaign.'/').'/'.$formData['playerEmail'].'-'.time().'.jpg', $files[0]);
+                        $upload->receive($files[0]);
+
+                        $formData['fbimage'] = $formData['playerEmail'].'-'.time().'.jpg';
+                        unset(
+                            $formData['MAX_FILE_SIZE']
+                        );
+                        // File upload field handling ends
+                    }
+                    
+                    // split mandatory data into separate array
+                    $mandatoryData = array(
+                        'playerEmail'   => $formData['playerEmail'],
+                        'campaign'    => $formData['campaignName']
                     );
 
                     // remove submit from form info, as well as mandatory data

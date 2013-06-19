@@ -1,7 +1,5 @@
 <?php
-/**
- * Facebook
- * 
+/** 
  * @package TMW WIRE GAME
  * @version 1.0.0
  */
@@ -24,7 +22,7 @@ class TMW_Competition extends Zend_Db_Table
         if($data && is_array($data) && $parent) {
             foreach($data as $fbKey => $fbVal) {
                 $this->getAdapter()->query("
-                    INSERT INTO tmw_wire_comp_details(fbID,fbdField,fbdData) VALUES ('$parent','$fbKey','$fbVal');
+                    INSERT INTO tmw_wire_comp_details(playerId,detailsField,detailsData) VALUES ('$parent','$fbKey','$fbVal');
 		");
             }
             return true;

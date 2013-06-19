@@ -24,7 +24,7 @@
             ->offsetSetFile(-2, $this->baseUrl().'/assets/js/competition.js', 'text/javascript')
             ->offsetSetFile(-1, $this->baseUrl().'/assets/js/jquery.form.js', 'text/javascript');
 ?>
-
+<?php if(!is_null($this->facebookShare['appID'])) { ?> 
 <?php $this->headScript()->captureStart(); ?>
     // set up UI
     window.fbAsyncInit = function() {
@@ -53,6 +53,7 @@
 	});
     });
 <?php $this->headScript()->captureEnd(); ?>
+<?php } ?>
     
 <?php echo $this->headScript(); ?>
 

@@ -33,7 +33,7 @@
 }
 
 #fb_wrapper.competition {
-    padding-top:120px;
+    padding-top:220px;
     background:url(/assets/img/competition/photo-competition-index.jpg) 0 0 no-repeat;
 }
 
@@ -107,16 +107,6 @@
 .competition .sideHeaders h2{
     font-size:36px;
     line-height:40px;
-}
-
-.cowImage{
-    position: absolute;
-    left:8px;
-    top:192px;
-    width:155px;
-    height:304px;
-    z-index: 99;    
-    background:url(/assets/img/competition/cow.png) 0 0 no-repeat;
 }
 
 #wire-game .contentsHolderOuter{
@@ -406,7 +396,7 @@ input[type="checkbox"] {
 }
 /****************** THANK YOU PAGE **************/
 #fb_wrapper.competition.submit {
-    padding-top:120px;
+    padding-top:220px;
     background:url(/assets/img/competition/photo-competition-submit.jpg) 0 0 no-repeat;
 }
 

@@ -29,7 +29,7 @@ class ADMIN_CampaignNames extends Zend_Db_Table
     // export campaign data
     public function exportData($campaignName) {
         
-        $data = $this->getAdapter()->query("SELECT c.fbID, c.fbDateTime, c.fbEmail, group_concat( d.fbdData separator '|*|') as `submittedData` , group_concat( d.fbdField separator '|*|') as `submittedDataFields` FROM `tmw_wire_comp` as c join `tmw_wire_comp_details` as d on c.fbID = d.fbID WHERE c.fbComp = '".$campaignName."' GROUP BY c.fbID;")->fetchAll();
+        $data = $this->getAdapter()->query("SELECT c.playerId, c.registeredOn, c.playerEmail, group_concat( d.detailsData separator '|*|') as `submittedData` , group_concat( d.detailsField separator '|*|') as `submittedDataFields` FROM `tmw_wire_comp` as c join `tmw_wire_comp_details` as d on c.playerId = d.playerId WHERE c.campaign = '".$campaignName."' GROUP BY c.playerId;")->fetchAll();
 
         foreach($data as &$datarow)
         {
