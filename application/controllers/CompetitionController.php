@@ -134,7 +134,7 @@ class CompetitionController extends Zend_Controller_Action {
                         $upload->addFilter('Rename', realpath(APPLICATION_PATH . '/../public_html/uploads/'.$this->_tmwCampaign.'/').'/'.$formData['playerEmail'].'-'.time().'.jpg', $files[0]);
                         $upload->receive($files[0]);
 
-                        $formData['fbimage'] = $formData['playerEmail'].'-'.time().'.jpg';
+                        $formData['playerImage'] = $formData['playerEmail'].'-'.time().'.jpg';
                         unset(
                             $formData['MAX_FILE_SIZE']
                         );
@@ -152,6 +152,7 @@ class CompetitionController extends Zend_Controller_Action {
                         $formData['playerEmail'],
                         $formData['submitBtn'],
                         $formData['campaign'],
+                        $formData['fbTermsConditions'],
                         $formData['campaignName']
                     );
                     
@@ -182,10 +183,10 @@ class CompetitionController extends Zend_Controller_Action {
                         }
                         if (empty($errorReturned))
                         {
-                            if($formData['fbimage'] == '' && $formHasImageField)
+                            if($formData['playerImage'] == '' && $formHasImageField)
                             {
-                                $emptyImageError = $form->getElement('fbimage')->getAttribs();
-                                $errorMessages['fbimage'] = $emptyImageError['message'];
+                                $emptyImageError = $form->getElement('playerImage')->getAttribs();
+                                $errorMessages['playerImage'] = $emptyImageError['message'];
                             }
                         }
                         $jsonData = utf8_encode(Zend_Json::encode($errorMessages));
@@ -238,7 +239,7 @@ class CompetitionController extends Zend_Controller_Action {
                         $upload->addFilter('Rename', realpath(APPLICATION_PATH . '/../public_html/uploads/'.$this->_tmwCampaign.'/').'/'.$formData['playerEmail'].'-'.time().'.jpg', $files[0]);
                         $upload->receive($files[0]);
 
-                        $formData['fbimage'] = $formData['playerEmail'].'-'.time().'.jpg';
+                        $formData['playerImage'] = $formData['playerEmail'].'-'.time().'.jpg';
                         unset(
                             $formData['MAX_FILE_SIZE']
                         );
@@ -247,17 +248,23 @@ class CompetitionController extends Zend_Controller_Action {
                     
                     // split mandatory data into separate array
                     $mandatoryData = array(
-                        'playerEmail'   => $formData['playerEmail'],
+                        'playerEmail' => $formData['playerEmail'],
                         'campaign'    => $formData['campaignName']
                     );
 
                     // remove submit from form info, as well as mandatory data
                     unset(
-                        $formData['fbEmail'],
+                        $formData['playerEmail'],
                         $formData['submitBtn'],
                         $formData['campaign'],
+                        $formData['fbTermsConditions'],
                         $formData['campaignName']
                     );
+                    
+                    // Add the score and the progress percentance for the user to be used in the game
+                    $formData['playerScore']    = 0;
+                    $formData['playerProgress'] = 0;
+                    
                     // add into DB
                     $tmwDBConnect = new TMW_Competition();
                     $insertID = $tmwDBConnect->addMandatoryData($mandatoryData);
@@ -285,10 +292,10 @@ class CompetitionController extends Zend_Controller_Action {
                         }
                         if (empty($errorReturned))
                         {
-                            if($formData['fbimage'] == '' && $formHasImageField)
+                            if($formData['playerImage'] == '' && $formHasImageField)
                             {
-                                $emptyImageError = $form->getElement('fbimage')->getAttribs();
-                                $errorMessages['fbimage'] = $emptyImageError['message'];
+                                $emptyImageError = $form->getElement('playerImage')->getAttribs();
+                                $errorMessages['playerImage'] = $emptyImageError['message'];
                             }
                         }
                         $jsonData = utf8_encode(Zend_Json::encode($errorMessages));
@@ -341,7 +348,7 @@ class CompetitionController extends Zend_Controller_Action {
                         $upload->addFilter('Rename', realpath(APPLICATION_PATH . '/../public_html/uploads/'.$this->_tmwCampaign.'/').'/'.$formData['playerEmail'].'-'.time().'.jpg', $files[0]);
                         $upload->receive($files[0]);
 
-                        $formData['fbimage'] = $formData['playerEmail'].'-'.time().'.jpg';
+                        $formData['playerImage'] = $formData['playerEmail'].'-'.time().'.jpg';
                         unset(
                             $formData['MAX_FILE_SIZE']
                         );
@@ -350,17 +357,23 @@ class CompetitionController extends Zend_Controller_Action {
                     
                     // split mandatory data into separate array
                     $mandatoryData = array(
-                        'playerEmail'   => $formData['playerEmail'],
+                        'playerEmail' => $formData['playerEmail'],
                         'campaign'    => $formData['campaignName']
                     );
 
                     // remove submit from form info, as well as mandatory data
                     unset(
-                        $formData['fbEmail'],
+                        $formData['playerEmail'],
                         $formData['submitBtn'],
                         $formData['campaign'],
+                        $formData['fbTermsConditions'],
                         $formData['campaignName']
                     );
+                    
+                    // Add the score and the progress percentance for the user to be used in the game
+                    $formData['playerScore']    = 0;
+                    $formData['playerProgress'] = 0;
+                    
                     // add into DB
                     $tmwDBConnect = new TMW_Competition();
                     $insertID = $tmwDBConnect->addMandatoryData($mandatoryData);
@@ -388,10 +401,10 @@ class CompetitionController extends Zend_Controller_Action {
                         }
                         if (empty($errorReturned))
                         {
-                            if($formData['fbimage'] == '' && $formHasImageField)
+                            if($formData['playerImage'] == '' && $formHasImageField)
                             {
-                                $emptyImageError = $form->getElement('fbimage')->getAttribs();
-                                $errorMessages['fbimage'] = $emptyImageError['message'];
+                                $emptyImageError = $form->getElement('playerImage')->getAttribs();
+                                $errorMessages['playerImage'] = $emptyImageError['message'];
                             }
                         }
                         $jsonData = utf8_encode(Zend_Json::encode($errorMessages));

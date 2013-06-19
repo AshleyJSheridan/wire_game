@@ -75,13 +75,13 @@ class TMW_Competitionform extends Zend_Form
                 }
                 else if($formElement['elementType'] == 'File' && $formElement['elementVisibility'])
                 {
-                    $fileDecoratorArray[] = 'fbimage';
+                    $fileDecoratorArray[] = 'playerImage';
                     
-                    $tmwFormArray[] = new Zend_Form_Element_File('fbimage', array(
+                    $tmwFormArray[] = new Zend_Form_Element_File('playerImage', array(
                                         'required'          => $formElement['elementRequired'],
                                         'setAllowEmpty'     => false,
                                         'size'              => '44',
-                                        'onchange'          => 'getElementById("FileField").value = getElementById("fbimage").value;',
+                                        'onchange'          => 'getElementById("FileField").value = getElementById("playerImage").value;',
                                         'maxFileSize'       => '3120000',
                                         'label'             => $formElement['elementLabel'],
                                         'description'       => ($formElement['elementRequired']) ? "": "",

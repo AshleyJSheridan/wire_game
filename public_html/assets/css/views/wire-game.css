@@ -210,7 +210,7 @@
     margin-left:50px;
 }
 
-#wire-game .startingField #fbimage, #wire-game .startingField textarea {
+#wire-game .startingField #playerImage, #wire-game .startingField textarea {
     margin-top:8px;
 }
 
@@ -251,7 +251,7 @@ input[type="checkbox"] {
     font-family: 'severance' !important;
 }
 
-#wire-game #fbimage {
+#wire-game #playerImage {
     font-size: 17px !important;
 }
 

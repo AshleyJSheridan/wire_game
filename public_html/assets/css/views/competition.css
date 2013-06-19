@@ -256,7 +256,7 @@ form#fbForm dd input[type=submit]:hover, div#fb_buttons input[type=button]:hover
     z-index: 96!important;
 }
 
-#fbimage {
+#playerImage {
     -moz-opacity:0 ;
     filter:alpha(opacity: 0);
     opacity: 0;

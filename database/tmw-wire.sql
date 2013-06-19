@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 19, 2013 at 10:42 PM
+-- Generation Time: Jun 19, 2013 at 11:07 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -47,22 +47,22 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_app_form_elements` (
 --
 
 INSERT INTO `tmw_wire_app_form_elements` (`id`, `campaignName`, `elementName`, `elementType`, `elementLabel`, `elementValue`, `elementError`, `elementVisibility`, `elementOrder`, `elementRequired`, `elementExtras`) VALUES
-(1, 'wire-game', 'question', 'Radio', 'Praesent vehicula, sem nec euismod posuere, lectus tortor varius tellus, ut congue nunc est sit amet enim.', '', 'Please answer the question', 1, 2, '1', 'Turpis a fermentum|*|Lectus auctor non|*|rgg jjgj jdgj dgh d hsdff gf|*|ffgfs gsfg  ffs gs fsf|*|sdfssdgs ssss2222|*|sfgsgsfg gsffsgsfg sf sfg'),
-(2, 'wire-game', 'email', 'Email', 'Email', 'e-mail*', 'Please type a valid email', 1, 3, '1', ''),
+(1, 'wire-game', 'question', 'Radio', 'What do ya digg ma?', '', 'Please select the sex you preffer', 1, 1, '1', 'Male|*|Female|*|All'),
+(2, 'wire-game', 'email', 'Email', 'Email', 'e-mail*', 'Please type a valid email', 1, 2, '1', ''),
 (3, 'wire-game', 'photo', 'File', 'Send your photos after the competition', '', 'Please upload a file', 0, 0, '0', ''),
-(4, 'wire-game', 'firstname', 'Text', 'First Name', 'First Name', 'Please type your first name', 0, 4, '1', ''),
-(5, 'wire-game', 'newsletter', 'Checkbox', 'You want newsletter?', 'yes', 'you want one?', 1, 14, '1', ''),
-(6, 'wire-game', 'textquestion', 'Textarea', 'Praesent vehicula, sem nec euismod posuere, lectus tortor varius tellus, ut congue nunc est sit amet enim.', '', 'Please type your answer', 0, 2, '1', ''),
-(7, 'wire-game', 'lastname', 'Text', 'Last Name', 'Last Name', 'Please type your lastname', 0, 5, '1', ''),
-(8, 'wire-game', 'address1', 'Text', 'Street Line 1', 'Street Line 1', 'Please type your address 1', 0, 6, '1', ''),
-(9, 'wire-game', 'address2', 'Text', 'Street Line 2', 'Street Line 2', 'Please type your address 2', 0, 7, '1', ''),
-(10, 'wire-game', 'city', 'Text', 'City', 'City', 'Please type your city', 0, 8, '1', ''),
-(11, 'wire-game', 'postalcode', 'Text', 'Postal Code', 'Postal Code', 'Please give your Postal Code', 1, 9, '1', ''),
-(12, 'wire-game', 'country', 'Text', 'Country', 'Country', 'Please type your Country', 1, 10, '1', ''),
-(13, 'wire-game', 'mobile', 'Text', 'Mobile Phone', 'Mobile Phone', 'Please give your Mobile Phone', 1, 11, '1', ''),
-(14, 'wire-game', 'landline', 'Text', 'Landline Phone', 'Landline Phone', 'Please type your Landline Phone', 1, 12, '1', ''),
-(15, 'wire-game', 'birthday', 'Text', 'Date of Birth', 'Date of Birth', 'Please give your Date of Birth', 1, 13, '1', ''),
-(16, 'wire-game', 'optin', 'Checkbox', 'Optional Opt-in', '0', 'Accept optional Opt in status', 1, 15, '1', '');
+(4, 'wire-game', 'firstname', 'Text', 'First Name', 'First Name', 'Please type your first name', 1, 3, '1', ''),
+(5, 'wire-game', 'newsletter', 'Checkbox', 'You want newsletter?', 'yes', 'you want one?', 0, 14, '0', ''),
+(6, 'wire-game', 'textquestion', 'Textarea', 'Praesent vehicula, sem nec euismod posuere, lectus tortor varius tellus, ut congue nunc est sit amet enim.', '', 'Please type your answer', 0, 5, '0', ''),
+(7, 'wire-game', 'lastname', 'Text', 'Last Name', 'Last Name', 'Please type your last name', 1, 4, '1', ''),
+(8, 'wire-game', 'tweeter', 'Text', 'Tweeter Username', 'username', 'Please type your Tweeter Username', 1, 6, '0', ''),
+(9, 'wire-game', 'address2', 'Text', 'Street Line 2', 'Street Line 2', 'Please type your address 2', 0, 7, '0', ''),
+(10, 'wire-game', 'city', 'Text', 'City', 'City', 'Please type your city', 0, 8, '0', ''),
+(11, 'wire-game', 'postalcode', 'Text', 'Postal Code', 'Postal Code', 'Please give your Postal Code', 0, 9, '0', ''),
+(12, 'wire-game', 'country', 'Text', 'Country', 'Country', 'Please type your Country', 0, 10, '0', ''),
+(13, 'wire-game', 'mobile', 'Text', 'Mobile Phone', 'Mobile Phone', 'Please give your Mobile Phone', 0, 11, '0', ''),
+(14, 'wire-game', 'landline', 'Text', 'Landline Phone', 'Landline Phone', 'Please type your Landline Phone', 0, 12, '0', ''),
+(15, 'wire-game', 'birthday', 'Text', 'Date of Birth', 'Date of Birth', 'Please give your Date of Birth', 0, 13, '0', ''),
+(16, 'wire-game', 'optin', 'Checkbox', 'Optional Opt-in', '0', 'Accept optional Opt in status', 0, 15, '0', '');
 
 -- --------------------------------------------------------
 
@@ -153,7 +153,14 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_comp` (
   `campaign` varchar(64) NOT NULL,
   `registeredOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`playerId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
+
+--
+-- Dumping data for table `tmw_wire_comp`
+--
+
+INSERT INTO `tmw_wire_comp` (`playerId`, `playerEmail`, `campaign`, `registeredOn`) VALUES
+(30, 'gbardis@tmw.co.uk', 'wire-game', '2013-06-19 23:06:47');
 
 -- --------------------------------------------------------
 
@@ -168,7 +175,19 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_comp_details` (
   `detailsField` text NOT NULL,
   `detailsData` text NOT NULL,
   PRIMARY KEY (`playerDetailsId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=176 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=200 ;
+
+--
+-- Dumping data for table `tmw_wire_comp_details`
+--
+
+INSERT INTO `tmw_wire_comp_details` (`playerDetailsId`, `playerId`, `detailsField`, `detailsData`) VALUES
+(199, 30, 'playerProgress', '0'),
+(198, 30, 'playerScore', '0'),
+(197, 30, 'tweeter', 'bardius'),
+(196, 30, 'lastname', 'Bardis'),
+(195, 30, 'firstname', 'George'),
+(194, 30, 'question', 'male');
 
 -- --------------------------------------------------------
 
