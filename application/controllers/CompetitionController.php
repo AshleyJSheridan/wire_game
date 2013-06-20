@@ -17,11 +17,10 @@ class CompetitionController extends Zend_Controller_Action {
     protected $_appFormElements;
         
     public function init() {
-        $tmwDBConnect                   = new TMW_Competition();
-        $this->_appSettings             = $tmwDBConnect->getAppSettings();
-        $this->_appContents             = $tmwDBConnect->getAppContents($this->_appSettings['campaignName']);
-        $this->_appFormElements         = $tmwDBConnect->getAppFormElements($this->_appSettings['campaignName']);
-        //var_dump($this->_appFormElements);
+        $this->_tmwDBConnect            = new TMW_Competition();
+        $this->_appSettings             = $this->_tmwDBConnect->getAppSettings();
+        $this->_appContents             = $this->_tmwDBConnect->getAppContents($this->_appSettings['campaignName']);
+        $this->_appFormElements         = $this->_tmwDBConnect->getAppFormElements($this->_appSettings['campaignName']);
         
         // define app page we are currently on
         $this->_tmwCampaign             = $this->getRequest()->getParam('campaign');
@@ -104,104 +103,8 @@ class CompetitionController extends Zend_Controller_Action {
      */
     public function indexAction() {
         
-        // create form
-        $form               = new TMW_Competitionform($this->_appFormElements);
-        $formHasImageField  = false;
-        
-        foreach($this->_appFormElements as $formElement)
-        {
-            if($formElement['elementType'] == 'File' && $formElement['elementVisibility'] == true )
-            {
-                $formHasImageField = true;
-            }
-        }
-        
-        $form->setAttrib('enctype', 'multipart/form-data');
-
-        // posting
-        if ($this->_request->isPost()) {
-            $formData = $this->_request->getPost();
-            
-            if(isset($formData['playerEmail'])) {
-                
-                if ($form->isValid($formData)) {
-                    
-                    if ($formHasImageField)
-                    {
-                        // The file upload field handling start
-                        $upload = new Zend_File_Transfer();
-                        $files = array_keys($upload->getFileInfo());
-                        $upload->addFilter('Rename', realpath(APPLICATION_PATH . '/../public_html/uploads/'.$this->_tmwCampaign.'/').'/'.$formData['playerEmail'].'-'.time().'.jpg', $files[0]);
-                        $upload->receive($files[0]);
-
-                        $formData['playerImage'] = $formData['playerEmail'].'-'.time().'.jpg';
-                        unset(
-                            $formData['MAX_FILE_SIZE']
-                        );
-                        // File upload field handling ends
-                    }
-                    
-                    // split mandatory data into separate array
-                    $mandatoryData = array(
-                        'playerEmail'   => $formData['playerEmail'],
-                        'campaign'    => $formData['campaignName']
-                    );
-
-                    // remove submit from form info, as well as mandatory data
-                    unset(
-                        $formData['playerEmail'],
-                        $formData['submitBtn'],
-                        $formData['campaign'],
-                        $formData['fbTermsConditions'],
-                        $formData['campaignName']
-                    );
-                    
-                    // add into DB
-                    $tmwDBConnect = new TMW_Competition();
-                    $insertID = $tmwDBConnect->addMandatoryData($mandatoryData);
-                    $insertEX = $tmwDBConnect->addDetailData($formData,$insertID);
-                    if($insertID && $insertEX) {
-                        if( $this->_ajaxParam ) {
-                            $jsonData = utf8_encode(Zend_Json::encode('submit'));
-                            $this->getResponse()
-                                ->setHeader('Content-Type', 'text/html')
-                                ->setBody($jsonData)
-                                ->sendResponse();
-                            exit;
-                        } else {
-                            $this->_redirect('/competition/' . $this->_tmwCampaign . '/submit/');
-                        }
-                    }                                
-            } else {
-                    // set up for ajax validation
-                    if( $this->_ajaxParam ) {
-                        $errorReturned = $form->getMessages();
-                        foreach($errorReturned as $field => $errors) {
-                                        $element = $form->getElement($field);
-                                        $message = $element->getAttribs();
-                                        $errorMessages[$field] = $message['message'];
-                        }
-                        if (empty($errorReturned))
-                        {
-                            if($formData['playerImage'] == '' && $formHasImageField)
-                            {
-                                $emptyImageError = $form->getElement('playerImage')->getAttribs();
-                                $errorMessages['playerImage'] = $emptyImageError['message'];
-                            }
-                        }
-                        $jsonData = utf8_encode(Zend_Json::encode($errorMessages));
-                        $this->getResponse()
-                            ->setHeader('Content-Type', 'text/html')
-                            ->setBody($jsonData)
-                            ->sendResponse();
-                        exit;
-                    } else {
-                        $form->populate($formData);
-                    }
-                }
-            }
-        }
-        $this->view->form = $form;
+        //$campaignPlayerList     = $this->_tmwDBConnect->getUserList($this->_tmwCampaign);
+        $this->view->scoreList  = $this->_tmwDBConnect->getScoreList($this->_tmwCampaign);
     }
 
     /**
@@ -264,11 +167,11 @@ class CompetitionController extends Zend_Controller_Action {
                     // Add the score and the progress percentance for the user to be used in the game
                     $formData['playerScore']    = 0;
                     $formData['playerProgress'] = 0;
+                    $formData['playerTime']     = 0;
                     
                     // add into DB
-                    $tmwDBConnect = new TMW_Competition();
-                    $insertID = $tmwDBConnect->addMandatoryData($mandatoryData);
-                    $insertEX = $tmwDBConnect->addDetailData($formData,$insertID);
+                    $insertID = $this->_tmwDBConnect->addMandatoryData($mandatoryData);
+                    $insertEX = $this->_tmwDBConnect->addDetailData($formData,$insertID);
                     if($insertID && $insertEX) {
                         if( $this->_ajaxParam ) {
                             $jsonData = utf8_encode(Zend_Json::encode('submit'));
@@ -373,11 +276,11 @@ class CompetitionController extends Zend_Controller_Action {
                     // Add the score and the progress percentance for the user to be used in the game
                     $formData['playerScore']    = 0;
                     $formData['playerProgress'] = 0;
+                    $formData['playerTime']     = 0;
                     
                     // add into DB
-                    $tmwDBConnect = new TMW_Competition();
-                    $insertID = $tmwDBConnect->addMandatoryData($mandatoryData);
-                    $insertEX = $tmwDBConnect->addDetailData($formData,$insertID);
+                    $insertID = $this->_tmwDBConnect->addMandatoryData($mandatoryData);
+                    $insertEX = $this->_tmwDBConnect->addDetailData($formData,$insertID);
                     if($insertID && $insertEX) {
                         if( $this->_ajaxParam ) {
                             $jsonData = utf8_encode(Zend_Json::encode('submit'));

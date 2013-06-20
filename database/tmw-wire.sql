@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 19, 2013 at 11:07 PM
+-- Generation Time: Jun 20, 2013 at 12:47 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -153,14 +153,15 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_comp` (
   `campaign` varchar(64) NOT NULL,
   `registeredOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`playerId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
 -- Dumping data for table `tmw_wire_comp`
 --
 
 INSERT INTO `tmw_wire_comp` (`playerId`, `playerEmail`, `campaign`, `registeredOn`) VALUES
-(30, 'gbardis@tmw.co.uk', 'wire-game', '2013-06-19 23:06:47');
+(30, 'gbardis@tmw.co.uk', 'wire-game', '2013-06-19 23:06:47'),
+(31, 'tmw@tmw.co.uk', 'wire-game', '2013-06-20 00:44:55');
 
 -- --------------------------------------------------------
 
@@ -175,19 +176,27 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_comp_details` (
   `detailsField` text NOT NULL,
   `detailsData` text NOT NULL,
   PRIMARY KEY (`playerDetailsId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=200 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=208 ;
 
 --
 -- Dumping data for table `tmw_wire_comp_details`
 --
 
 INSERT INTO `tmw_wire_comp_details` (`playerDetailsId`, `playerId`, `detailsField`, `detailsData`) VALUES
+(200, 31, 'question', 'all'),
 (199, 30, 'playerProgress', '0'),
 (198, 30, 'playerScore', '0'),
 (197, 30, 'tweeter', 'bardius'),
 (196, 30, 'lastname', 'Bardis'),
 (195, 30, 'firstname', 'George'),
-(194, 30, 'question', 'male');
+(194, 30, 'question', 'male'),
+(201, 31, 'firstname', 'Tmw'),
+(202, 31, 'lastname', 'Agency'),
+(203, 31, 'tweeter', 'tmw'),
+(204, 31, 'playerScore', '98'),
+(205, 31, 'playerProgress', '0'),
+(206, 31, 'playerTime', '8'),
+(207, 30, 'playerTime', '10');
 
 -- --------------------------------------------------------
 

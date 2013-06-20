@@ -21,9 +21,7 @@ class TMW_Competition extends Zend_Db_Table
     public function addDetailData($data,$parent) {
         if($data && is_array($data) && $parent) {
             foreach($data as $fbKey => $fbVal) {
-                $this->getAdapter()->query("
-                    INSERT INTO tmw_wire_comp_details(playerId,detailsField,detailsData) VALUES ('$parent','$fbKey','$fbVal');
-		");
+                $this->getAdapter()->query("INSERT INTO tmw_wire_comp_details(playerId,detailsField,detailsData) VALUES ('$parent','$fbKey','$fbVal');");
             }
             return true;
         } else {
@@ -38,6 +36,52 @@ class TMW_Competition extends Zend_Db_Table
             throw new Exception('Could not load application settings data from database');
         } else {
             return $row;
+        }	
+    }
+    
+    // load the score list from tha database
+    public function getScoreList($campaignName){        
+        $data = $this->getAdapter()->query("SELECT c.playerId, group_concat( d.detailsData separator '|*|') as `playerData` , group_concat( d.detailsField separator '|*|') as `playerDataKeys` FROM `tmw_wire_comp` as c join `tmw_wire_comp_details` as d on c.playerId = d.playerId WHERE c.campaign = '".$campaignName."' GROUP BY c.playerId;")->fetchAll();
+
+        if(!$data) {
+            throw new Exception('Could not load score details from database');
+        } else {
+            
+            $scoreList                  = array();
+            $normalizedPlayerDetails    = array();
+            
+            foreach($data as $playerDetails) {
+                
+                $playerDataKeysArray            = explode('|*|', $playerDetails['playerDataKeys']);
+                $playerDataArray                = explode('|*|', $playerDetails['playerData']);
+                $normalizedPlayerDetails        = array_combine($playerDataKeysArray, $playerDataArray);                
+                $normalizedPlayerDetails['id']  = $playerDetails['playerId'];
+                
+                $scoreList[]                    = $normalizedPlayerDetails;
+            }
+            
+            // Obtain a list of user scores
+            foreach ($scoreList as $key => $row) {
+                $scores[$key]  = $row['playerScore'];
+            }
+
+            // Sort the data with volume descending, edition ascending
+            // Add $data as the last parameter, to sort by the common key
+            array_multisort($scores, SORT_DESC, $scoreList);
+            
+            return $scoreList;
+        }
+        
+    }
+    
+    // load the user list from the database
+    public function getUserList($campaignName) {
+        $data = $this->getAdapter()->query("SELECT c.playerId FROM `tmw_wire_comp` as c WHERE c.campaign = '".$campaignName."';")->fetchAll();
+        
+        if(!$data) {
+            throw new Exception('Could not load user list from database');
+        } else {
+            return $data;
         }	
     }
     
