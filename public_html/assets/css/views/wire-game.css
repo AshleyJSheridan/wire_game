@@ -32,6 +32,24 @@
     background:url(/assets/img/competition/appBgStripe.jpg) 50% 0 repeat-y;
 }
 
+.videoContainer, .scoreList, .userDetails{
+    float: left;
+    width:100%;
+    clear: both;
+    margin:10px 0;
+}
+
+video {
+    border: 1px solid black;
+    padding: 0; margin: 0;
+    width: 427px;
+    height: 240px;
+    background-color: black;
+    margin: auto; 
+    display: block;
+    float: left;
+} 
+
 #fb_wrapper.competition {
     padding-top:220px;
     background:url(/assets/img/competition/photo-competition-index.jpg) 0 0 no-repeat;

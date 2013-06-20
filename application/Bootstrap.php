@@ -36,5 +36,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
             Zend_Registry::set('lgr', $logger);
         }
     }
+    
+    protected function _initDocType()
+    {
+        $this->bootstrap('View');
+        $view = $this->getResource('View');
+        $view->doctype('HTML5');
+    }
 
 }

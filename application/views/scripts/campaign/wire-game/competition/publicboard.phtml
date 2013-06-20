@@ -23,11 +23,13 @@
                     if(!empty($this->contents['introText'])) {
                         echo '<p>'.$this->contents['introText'].'</p>';
                     }
+                    if(!empty($this->contents['introVideo'])) {
+                        echo '<iframe width="551" height="311" frameborder="0" allowfullscreen="" src="http://www.youtube.com/embed/'.$this->contents['introVideo'].'?rel=0&wmode=transparent"></iframe>';
+                    }
                 ?>
             </div> 
             
             <div class="videoContainer">
-                <h3>Controllable by js video</h3>
                 <video poster="http://media.w3.org/2010/05/sintel/poster.png" preload="none" controls="" id="video">
                   <source type="video/mp4" src="http://media.w3.org/2010/05/sintel/trailer.mp4" id="mp4"></source>
                   <source type="video/webm" src="http://media.w3.org/2010/05/sintel/trailer.webm" id="webm"></source>
@@ -41,15 +43,21 @@
                   <button onclick="document._video.currentTime+=10">currentTime+=10</button>
                   <button onclick="document._video.currentTime-=10">currentTime-=10</button>
                   <button onclick="document._video.currentTime=50">currentTime=50</button><br>
+                  <button onclick="document._video.playbackRate++">playbackRate++</button>
+                  <button onclick="document._video.playbackRate--">playbackRate--</button>
+                  <button onclick="document._video.playbackRate+=0.1">playbackRate+=0.1</button>
+                  <button onclick="document._video.playbackRate-=0.1">playbackRate-=0.1</button><br>
+                  <button onclick="document._video.volume+=0.1">volume+=0.1</button>
+                  <button onclick="document._video.volume-=0.1">volume-=0.1</button>
+                  <button onclick="document._video.muted=true">muted=true</button>
+                  <button onclick="document._video.muted=false">muted=false</button><br>
                   <button onclick="switchVideo(0);">Sintel teaser</button>
                   <button onclick="switchVideo(1);">Bunny trailer</button>
+                  <button onclick="switchVideo(2);">Bunny movie</button>
+                  <button onclick="switchVideo(3);">Test movie</button>
                 </div>
             </div>
-            <div class="userDetails">
-                <h3>Loaded by the database user details</h3>
-            </div>
             <div class="scoreList">
-                <h3>Loaded by the database user scores</h3>
                 <ul>
                     <?php 
                         foreach($this->scoreList as $playerScore){

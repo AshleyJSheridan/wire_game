@@ -20,9 +20,10 @@
 
 <?php
     $this->headScript()
-            ->offsetSetFile(-3, $this->baseUrl().'/assets/js/jquery-1.6.2.min.js', 'text/javascript')
-            ->offsetSetFile(-2, $this->baseUrl().'/assets/js/competition.js', 'text/javascript')
-            ->offsetSetFile(-1, $this->baseUrl().'/assets/js/jquery.form.js', 'text/javascript');
+            ->offsetSetFile(-1, $this->baseUrl().'/assets/js/jquery-1.6.2.min.js', 'text/javascript')
+            ->offsetSetFile(0, $this->baseUrl().'/assets/js/competition.js', 'text/javascript')
+            ->offsetSetFile(1, $this->baseUrl().'/assets/js/jquery.form.js', 'text/javascript')
+            ->offsetSetFile(0, $this->baseUrl().'/assets/js/video.js', 'text/javascript');
 ?>
 
 <?php if(!is_null($this->facebookShare['appID'])) { ?> 

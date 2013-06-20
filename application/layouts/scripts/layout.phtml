@@ -1,9 +1,15 @@
 <?php echo $this->doctype(); ?>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title><?php echo $this->pageTitle ?> </title>
+    <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" href="/favicon.ico" />
+    
     <?php
 	// setup stylesheets
 	$this->headLink()->prependStylesheet($this->baseUrl().'/assets/css/views/competition.css');
@@ -24,6 +30,7 @@
             ->offsetSetFile(-2, $this->baseUrl().'/assets/js/competition.js', 'text/javascript')
             ->offsetSetFile(-1, $this->baseUrl().'/assets/js/jquery.form.js', 'text/javascript');
 ?>
+
 <?php if(!is_null($this->facebookShare['appID'])) { ?> 
 <?php $this->headScript()->captureStart(); ?>
     // set up UI
