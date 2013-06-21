@@ -1,13 +1,3 @@
-// Load the SDK Asynchronously
-(function(d){
-    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement('script'); js.id = id; js.async = true;
-    js.src = "//connect.facebook.net/en_US/all.js";
-    ref.parentNode.insertBefore(js, ref);
-}(document)); 
-
-
 function pre(formData, jqForm, options) {
     //console.log(formData);
     //console.log(jqForm);
@@ -44,10 +34,10 @@ function post(data, statusText, xhr, $form)  {
     }
 } 
 
-// validation and toggler
+// validation
 $(document).ready(function() {
     
-    $('#fbForm input').each(function() {
+    /*$('#fbForm input').each(function() {
         var default_value = this.value;
         
         $(this).focus(function(){
@@ -61,7 +51,7 @@ $(document).ready(function() {
                 this.value = default_value;
             }
         });
-    });    
+    }); */   
     
     formopts = { beforeSubmit: pre, success: post };
     $('#fbForm').ajaxForm(formopts);

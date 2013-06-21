@@ -1,8 +1,15 @@
 <?php echo $this->doctype(); ?>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title><?php echo $this->pageTitle ?> </title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title><?php echo $this->pageTitle ?></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="shortcut icon" href="/favicon.ico" />
     <?php
 	// setup stylesheets
@@ -10,6 +17,8 @@
 	$this->headLink()->prependStylesheet($this->baseUrl().'/assets/css/views/'.$this->pageStyles);
 	echo $this->headLink();
     ?>
+    
+    <script src="/js/libs/modernizr.min.js"></script>
 </head>
     
 <body id="<?php echo $this->facebookShare['campaign']?>">
@@ -20,42 +29,9 @@
 
 <?php
     $this->headScript()
-            ->offsetSetFile(-1, $this->baseUrl().'/assets/js/jquery-1.6.2.min.js', 'text/javascript')
-            ->offsetSetFile(0, $this->baseUrl().'/assets/js/competition.js', 'text/javascript')
-            ->offsetSetFile(1, $this->baseUrl().'/assets/js/jquery.form.js', 'text/javascript')
-            ->offsetSetFile(0, $this->baseUrl().'/assets/js/video.js', 'text/javascript');
+            ->offsetSetFile(-1, $this->baseUrl().'/assets/js/jquery-1.10.1.min.js', 'text/javascript')
+            ->offsetSetFile(0, $this->baseUrl().'/assets/js/script.js', 'text/javascript');
 ?>
-
-<?php if(!is_null($this->facebookShare['appID'])) { ?> 
-    <?php $this->headScript()->captureStart(); ?>
-        // set up UI
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId: '<?php echo $this->facebookShare['appID']?>',
-                cookie: true,
-                xfbml: true,
-                oauth: true
-            });
-            FB.Canvas.setAutoGrow(true);
-            FB.Canvas.scrollTo(0,0);
-        };
-
-        // create share button
-        $(document).ready(function(){
-            $('.fbIcon').live('click', function(e){
-                e.preventDefault();
-                FB.ui({
-                    method:         'feed',
-                    name:           '<?php echo $this->facebookShare['title'] ?>',
-                    link:           '<?php echo $this->facebookShare['url'] ?>',
-                    picture:        '<?php echo $this->serverUrl().$this->facebookShare['image'] ?>',
-                    description:    '<?php echo $this->facebookShare['summary'] ?>',
-                    message:        ''
-                });
-            });
-        });
-    <?php $this->headScript()->captureEnd(); ?>
-<?php } ?>
     
 <?php echo $this->headScript(); ?>
 
