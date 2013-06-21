@@ -25,7 +25,7 @@ p {
 .inv {
     position:absolute;
     font-size:9px;
-    left:-9999px;
+    left:-9999px; 
 }
 
 .hidden{
@@ -426,16 +426,16 @@ input[type="submit"]:hover {
 
 .carouselNav li .active {
     background-position: 50% 0 !important;
-    color: #ffc512!important;
+    color: #E67207!important;
 }
 
 .carouselNav li .active span {
     background-position: 50% 100% !important;
-    color: #ffc512!important;
+    color: #E67207!important;
 }
 
 .carouselNav li a:hover {
-    color: #ffc512!important;
+    color: #E67207!important;
     cursor: pointer;
 }
 

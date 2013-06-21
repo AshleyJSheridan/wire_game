@@ -28,22 +28,7 @@
             
             <div class="videoContainer">
                 <h3>Controllable by js video</h3>
-                <video poster="http://media.w3.org/2010/05/sintel/poster.png" preload="none" controls="" id="video">
-                  <source type="video/mp4" src="http://media.w3.org/2010/05/sintel/trailer.mp4" id="mp4"></source>
-                  <source type="video/webm" src="http://media.w3.org/2010/05/sintel/trailer.webm" id="webm"></source>
-                  <source type="video/ogg" src="http://media.w3.org/2010/05/sintel/trailer.ogv" id="ogv"></source>
-                  <p>Your user agent does not support the HTML5 Video element.</p>
-                </video>
-                <div id="buttons">
-                  <button onclick="document._video.load()">load()</button>
-                  <button onclick="document._video.play()">play()</button>
-                  <button onclick="document._video.pause()">pause()</button>
-                  <button onclick="document._video.currentTime+=0.5">currentTime+=0.5</button>
-                  <button onclick="document._video.currentTime-=0.5">currentTime-=0.5</button>
-                  <button onclick="document._video.currentTime=50">currentTime=50</button><br>
-                  <button onclick="switchVideo(0);">Sintel teaser</button>
-                  <button onclick="switchVideo(1);">Bunny trailer</button>
-                </div>
+               
             </div>
             <div class="userDetails">
                 <h3>Loaded by the database user details</h3>
@@ -53,23 +38,9 @@
                 <ul>
                     <?php 
                         foreach($this->scoreList as $playerScore){
-                            echo '<li><a href="https://twitter.com/' . $playerScore['tweeter'] . '" title="' . $playerScore['firstname'] . ' ' . $playerScore['lastname'] . ' Tweeter" target="_blank">' . $playerScore['firstname'] . ' ' . $playerScore['lastname'] . '</a> scored ' . $playerScore['playerScore'] . ' (' . $playerScore['playerProgress'] . '%)</li>';
+                            echo '<li><a href="https://twitter.com/' . $playerScore['twitterhandle'] . '" title="' . $playerScore['firstname'] . ' ' . $playerScore['lastname'] . ' Tweeter" target="_blank">' . $playerScore['firstname'] . ' ' . $playerScore['lastname'] . '</a> scored ' . $playerScore['playerScore'] . ' (' . $playerScore['playerProgress'] . '%)</li>';
                         }
                     ?>
-                </ul>
-            </div>
-            <div class="smoIcons">
-                <h4>Tell Your Friends</h4>
-                <ul>
-                    <li>
-                        <a target="_blank" title="Share This on Facebook" href="http://www.facebook.com/sharer.php?u=<?php echo urlencode($this->facebookShare['url']); ?>&amp;t=<?php echo urlencode($this->facebookShare['title']); ?>" class="smoIcon fbIcon"></a>
-                    </li>
-                    <li>
-                        <a target="_blank" title="Tweet This" href="http://twitter.com/share?text=<?php echo urlencode($this->facebookShare['title']); ?>&amp;url=<?php echo urlencode($this->facebookShare['url']); ?>" class="smoIcon tweetIcon"></a>
-                    </li>
-                    <li>
-                        <a target="_blank" title="Share This on Google+" href="https://plus.google.com/share?url=<?php echo urlencode($this->facebookShare['url']); ?>" class="smoIcon gplusIcon"></a>
-                    </li>
                 </ul>
             </div>
         </div>  

@@ -1,187 +1,12 @@
-/****************** EMBEDING NEEDED FONTS ***********************/
-@font-face {
-    font-family: 'chunkstyle';
-    src: url('../../fonts/chunkstylemodern-webfont.eot');
-    src: url('../../fonts/chunkstylemodern-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../../fonts/chunkstylemodern-webfont.woff') format('woff'),
-         url('../../fonts/chunkstylemodern-webfont.ttf') format('truetype'),
-         url('../../fonts/chunkstylemodern-webfont.svg#chunkstyle') format('svg');
-    font-weight: normal;
-    font-style: normal;
 
-}
+/************* FORM STYLES *******************************/
 
-@font-face {
-    font-family: 'severance';
-    src: url('../../fonts/severancethesequel_regular-webfont.eot');
-    src: url('../../fonts/severancethesequel_regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../../fonts/severancethesequel_regular-webfont.woff') format('woff'),
-         url('../../fonts/severancethesequel_regular-webfont.ttf') format('truetype'),
-         url('../../fonts/severancethesequel_regular-webfont.svg#severance') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
-/****************** Specific styles for competition app ****************/
-#wire-game{
-    background-color: #FFF;
-    font-family:'severance';
-    font-size:13px;
-    line-height: 18px;
-    color:#000;
-    background:url(/assets/img/competition/appBgStripe.jpg) 50% 0 repeat-y;
-}
-
-.videoContainer, .scoreList, .userDetails{
+#fb_form {
+    clear: both;	
     float: left;
-    width:100%;
-    clear: both;
-    margin:10px 0;
+    width: 100%;
 }
 
-video {
-    border: 1px solid black;
-    padding: 0; margin: 0;
-    width: 427px;
-    height: 240px;
-    background-color: black;
-    margin: auto; 
-    display: block;
-    float: left;
-} 
-
-#fb_wrapper.competition {
-    padding-top:220px;
-    background:url(/assets/img/competition/photo-competition-index.jpg) 0 0 no-repeat;
-}
-
-.competition .header {
-    float: left;
-    padding: 0 123px;
-    width: 514px;
-    height:266px;
-    margin-bottom: 126px;
-    overflow: hidden;
-}
-
-.competition h1{
-    font-size:30px;
-    line-height:34px;
-    color:#42210b;
-    padding-top:24px;
-    padding-bottom:24px;
-    text-align:center;
-    text-transform:capitalize;
-}
-
-.competition h2{
-    font-size:48px;
-    line-height:50px;
-    color:#42210b;
-    font-family: 'chunkstyle';
-    text-align:center;
-    text-transform: uppercase;
-}
-
-.competition h3{
-    font-size:24px;
-    line-height:26px;
-    color:#42210b;
-    font-family: 'chunkstyle';
-    text-transform: capitalize;
-}
-
-.competition h4{
-    font-size:18px;
-    line-height:24px;
-    color:#42210b;
-    font-family: 'chunkstyle';
-    text-transform: capitalize;
-    margin-bottom:8px;
-}
-
-.adImage{
-    float:left;
-    width:250px;
-    height:250px;
-    box-shadow: 1px 1px 3px #888888;
-    display:block;
-}
-
-.competition .sideHeaders{
-    float:right;
-    width:236px;
-    height:266px;
-    overflow: hidden;
-}
-
-.competition .sideHeaders h1{
-    font-size:24px;
-    line-height:28px;
-    padding-top:32px;
-    padding-bottom:10px;
-}
-
-.competition .sideHeaders h2{
-    font-size:36px;
-    line-height:40px;
-}
-
-#wire-game .contentsHolderOuter{
-    margin:0 56px 0 55px;
-    padding:0 0 50px 0;
-    width:649px;
-    background:url(/assets/img/competition/contentBottomBg.png) 0 100% no-repeat;
-    float:left;
-}
-
-#wire-game .contentsHolder{
-    margin:0;
-    padding:0;
-    width:649px;
-    background:url(/assets/img/competition/contentBg.png) 0 0 repeat-y;
-    float:left;
-    min-height: 700px;
-}
-
-#wire-game #fb_content_copy{
-    background:url(/assets/img/competition/contentsTopBg.png) 0 0 no-repeat;
-    float:left;
-    width:551px;
-    padding:46px 46px 6px 49px;
-    margin-top:-4px;
-    clear:left;
-}
-
-#wire-game p{
-    margin-bottom:12px;
-}
-
-#wire-game a{
-    color:#00b1e1;
-    text-decoration: underline;
-}
-
-#wire-game a:hover{
-    color:#000;
-    text-decoration: none;
-}
-
-#wire-game p strong{
-    font-weight:normal;
-    color:#b5082b;
-}
-
-#wire-game #fbForm strong.required {
-    color:#b5082b;
-}
-
-#wire-game iframe{
-    left:0;
-    margin:0 0 12px 0;
-    float: left;
-}
-/****************** COMPETITION FORM *******************/
 .startingField{
     float:left;
     width:100%;
@@ -189,111 +14,133 @@ video {
 
 .fieldsListing{
     float:left;
-    width:451px;
-    padding:24px 50px;
+    width:410px;
+    padding:0 180px 0 30px;
 }
 
-.reqCopy{
-    text-align: right;
-    font-size: 14px;
-    line-height: 16px;
-    color:#666;
-    margin-bottom: 8px;
-    margin-top: -14px;
-}
-
-#wire-game p.required{
+p.required{
     display:none;
 }
 
-#wire-game label{
-    font-size:16px!important;
-    line-height: 21px;
-    display:block;
-    color:#000;
-}
-
-#wire-game .startingField span label, #wire-game .startingField dt label{
-    font-size:18px!important;
-    line-height: 23px;
-    display:block;
-    color:#603813;
-}
-
-#wire-game .startingField dd{
-    font-size:18px!important;
-    line-height: 23px;
-    display:block;
-    color:#603813;
-    margin-left:50px;
-}
-
-#wire-game .startingField #playerImage, #wire-game .startingField textarea {
-    margin-top:8px;
-}
-
-#wire-game .fieldsListing dt{
-    display:none;
-}
-
-#wire-game .fieldsListing input[type="text"], #wire-game input[type="text"] {
-    font-size: 16px;
-    color:#666666;
-    height: 28px;
-    line-height: 28px;
-    padding: 0 5px;
-    float:left;
-    width: 437px;
-    border:2px solid #333333;
-    margin-bottom:18px;
-    font-family: 'severance' !important;
-}
-
-input[type="checkbox"] {
-    margin: 3px!important;
-}
-
-#wire-game #fbForm p.required, #wire-game #fbForm p.description {
-    font-family: 'severance' !important;
+#fbForm p.required, #fbForm p.description {
     line-height: 22px;
-}
-
-#wire-game textarea {
-    font-size: 16px;
-    color:#666666;
-    padding: 0 5px;
-    float:left;
-    width: 437px;
-    border:2px solid #333333;
-    margin-bottom:18px;
-    font-family: 'severance' !important;
-}
-
-#wire-game #playerImage {
-    font-size: 17px !important;
-}
-
-#wire-game #BrowserVisible {
-    padding-right: 92px;
-}
-
-#wire-game #FileField{
-    width: 345px;    
-}
-
-#wire-game #fileBtnSpan {
-    background: url("/assets/img/competition/browseBtn.jpg") no-repeat scroll 0 0 transparent;
-    width: 92px !important;
-    color:#FFF!important;
-    font-family: 'chunkstyle';
-    font-style: normal;
-    font-weight: normal;
-    letter-spacing: 1px;
 }
 
 .textAreaHolder{
     float:left;
     width:100%;
+}
+
+.textAreaHolder dt{
+    display:block!important;
+}
+
+#fbForm dl{
+    float: left;
+    width:100%;
+}
+
+#fbForm dd{
+    float: left;
+    margin: 0;	
+    position: relative;
+    z-index: 97;
+}
+
+#fbForm dt {
+    float: left;
+    clear: both;
+    position: relative;
+    margin: 4px 0 2px 0;
+    width:160px;
+}
+
+#fbForm p {
+    clear: both;
+    display: block;	
+    float: left;
+}
+
+#fbForm span {
+    width: 100%;
+    position: relative;	
+    display: block;
+    float: left;
+    clear: both;
+}
+
+#fbForm .submitWrapper{
+    margin:10px 0;
+    clear:both;
+    width:100%;
+}
+
+/************* FORM ELEMENTS *******************************/
+
+textarea {
+    font-size: 14px;
+    line-height: 18px;
+    color:#fff;
+    padding: 0 5px;
+    float:left;
+    width: 236px;
+    border: 1px solid #E67207;
+    background-color:#E67207;
+    margin-bottom:10px;
+}
+
+#fbForm label{
+    font-size:14px;
+    line-height: 21px;
+}
+
+#fbForm input {
+    float: left;	
+}
+
+#fbForm input[type="text"] {
+    font-size:14px;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 5px;
+    position: relative;
+    width: 236px;
+    z-index: 97;
+    border: 1px solid #E67207;
+    background-color:#E67207;
+    color:#FFF;
+    float:left;
+    margin-bottom:10px;
+}
+
+#BrowserVisible{
+    padding-right:92px;
+    margin-top:-27px!important;
+    position: relative;
+    z-index: 96!important;
+}
+
+#FileField{
+    width: 345px;    
+}
+
+#fileBtnSpan{
+    background: url(/assets/img/competition/browseBtn.jpg) 0 0 no-repeat;
+    width:92px!important;
+    float:none!important;
+    position:absolute!important;
+    top:0!important;
+    right:0!important;
+    margin: 0!important;
+    padding: 0!important;
+    height: 32px!important; 
+    color:#FFF!important;  
+}
+
+#fileBtnSpan:hover{
+    background-position:0 0;
+    cursor: pointer;
+    color: #333;
 }
 
 .checkboxHolder{
@@ -302,60 +149,145 @@ input[type="checkbox"] {
     margin-bottom: 6px;
 }
 
+input[type="radio"], input[type="checkbox"] {
+   border: none!important;
+   box-shadow:0 0 0 0 #FFF!important;
+   margin:3px 10px 3px 0;
+}
+
+#fbForm input[type="checkbox"] {
+    margin: 3px!important;
+}
+
 .checkboxHolder span{
     display:none!important;
-}
-
-.textAreaHolder dt{
-    display:block!important;
-}
-
-.textAreaHolder dt label, #wire-game span label{
-    color:#603813!important;
 }
 
 .fbTermsConditionsHolder{
     float: left;
     width:100%;
 }
-#wire-game #fb_form {
-    width:551px;
-    padding:0 46px 0 49px;
-    clear:left;
-}
 
-#wire-game #fbForm dd input[type="submit"]{
-    background: url("/assets/img/competition/btnBg.jpg") no-repeat scroll 0 0 transparent;
-    border: medium none;
-    color: #FFF !important;
+#fbForm input[type="submit"], #fbForm input[type="button"], .button{
+    margin:6px 0;
+    background-color:#E67207;
+    padding: 0 22px 4px 22px;
+    height: 36px;
+    line-height: 32px;
+    color: #FFF;
+    font-size: 16px;
+    border: none;
     display: block;
-    font-family: 'chunkstyle';
-    font-size: 20px;
-    font-style: normal;
-    font-weight: normal;
-    height: 41px;
-    line-height: 37px;
-    margin: 12px 0 0 0;
-    padding: 0;
     text-align: center;
-    text-decoration: none !important;
-    width: 122px;
-    letter-spacing: 1px;
+    font-weight: bold;
+    font-size:14px;
+    text-decoration: none!important;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    -o-border-radius:10px;
+    border-radius:10px;
 }
 
-#wire-game #fbForm dd input[type="submit"]:hover{
-    color: #ccc !important;
+a.button{
+    height: 32px; 
+    padding: 0;
 }
+
+#fbForm input[type="submit"]:hover, #fbForm input[type="button"]:hover, .button{
+    color: #FFF !important;
+    cursor:pointer;
+}
+
+#fbNewsOffers-label{
+    display:none;
+}
+
+#playerImage {
+    -moz-opacity:0 ;
+    filter:alpha(opacity: 0);
+    opacity: 0;
+    z-index: 99!important;
+    cursor: pointer;
+    position: relative;
+    font-size: 15px!important;
+    width:418px!important;
+    height:27px!important;
+    font-size: 17px !important;
+}
+
+#fbForm dd label {
+    margin: 8px 0;	
+    display: block;
+}
+
+#fbForm dd label input[type="radio"] {
+    margin-right: 8px;	
+}
+
+#fbForm p.required, #fbForm p.description {
+    float: left;
+    clear: none;
+    margin: 0 3px!important;
+    position: relative;
+    z-index: 97;
+    letter-spacing: 0;
+}
+	
+#fbForm p.required, #fbForm strong.required {
+    color:#b5082b;
+}
+
+#fbForm p.description {
+    font-weight: normal;	
+}
+
+#fbForm small {
+    display: block;
+    float: left;
+    clear: both;
+    margin: 0 0 15px 0;	
+    font-size: 12px;
+}
+
+#fbTermsConditions-label{
+    margin-top:-17px;
+}
+
+#fbForm p.errors {
+    color: #FFF;
+    background-color: #B5082B;
+    padding: 0 10px 0 0;
+    clear: none;
+    display: block;
+    width: auto;
+    position: absolute;
+    right: 0px;
+    margin: 0;
+    left: 0;
+    z-index: 10;
+    text-align: right;
+    height: 32px;
+    line-height: 32px;
+    font-size:9px;
+    letter-spacing: 0;
+}
+
+#fbForm p.errors.checkbox {
+    top: 15px;	
+}
+
+/************************ ERRORS **********************/
 
 .errorHolder{
-    float: left;
-    padding: 24px 51px 0 56px;
-    width: 451px;
+    float:left;
+    width:410px;
+    clear:both;
+    padding:24px 180px 24px 30px;
 }
 
 .errorHolder p{
     color:#ed1c24!important;
-    font-size:16px!important;
+    font-size:14px!important;
     margin-bottom:6px;
 }
 
@@ -364,71 +296,14 @@ input[type="checkbox"] {
     color:#ed1c24!important;
     background-color: #fcdbdc!important;
 }
-/****************** SOCIAL MEDIA SMO ICONS *************/
-.smoIcons{
-    float:left;
-    width:451px!important;
-    padding:22px 96px 20px 99px;
-    clear:left;    
-}
 
-.smoIcons ul {
-    display: block;
-    float: left;
-    list-style: none outside none;
-    margin:  0;
-    padding: 0;
-    width: 100%;
-}
-
-.smoIcons li {
-    display: block;
-    float: left;
-}
-
-.smoIcons .smoIcon {
-    display: block;
-    float: left;
-    height: 48px;
-    width: 50px;
-    margin-right: 10px;
-}
-
-.smoIcons .fbIcon{
-    background:url(/assets/img/competition/fbIcon.jpg) 0 0 no-repeat;    
-}
-
-.smoIcons .tweetIcon{
-    background:url(/assets/img/competition/twitter.jpg) 0 0 no-repeat;    
-}
-
-.smoIcons .gplusIcon{
-    background:url(/assets/img/competition/gplus.jpg) 0 0 no-repeat;    
-}
-
-.imgRights{
-    margin:10px 56px 20px 56px;
-    width:648px;
-    float:left;
-    clear:left;    
-}
 /****************** THANK YOU PAGE **************/
-#fb_wrapper.competition.submit {
-    padding-top:220px;
-    background:url(/assets/img/competition/photo-competition-submit.jpg) 0 0 no-repeat;
+
+#fb_wrapper.submit {
 }
 
-#fb_wrapper.competition.submit p{
-    color:#42210B;
+#fb_wrapper.submit p{
 }
 
-#fb_wrapper.competition.submit h3{
-    margin-bottom:24px;
-}
-
-#fb_wrapper.competition.submit .smoIcons {
-    clear: left;
-    float: left;
-    padding: 22px 46px 20px;
-    width: 553px !important;
+#fb_wrapper.submit h3{
 }

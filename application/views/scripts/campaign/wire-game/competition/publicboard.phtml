@@ -36,27 +36,6 @@
                   <source type="video/ogg" src="http://media.w3.org/2010/05/sintel/trailer.ogv" id="ogv"></source>
                   <p>Your user agent does not support the HTML5 Video element.</p>
                 </video>
-                <div id="buttons">
-                  <button onclick="document._video.load()">load()</button>
-                  <button onclick="document._video.play()">play()</button>
-                  <button onclick="document._video.pause()">pause()</button>
-                  <button onclick="document._video.currentTime+=10">currentTime+=10</button>
-                  <button onclick="document._video.currentTime-=10">currentTime-=10</button>
-                  <button onclick="document._video.currentTime=50">currentTime=50</button><br>
-                  <button onclick="document._video.playbackRate++">playbackRate++</button>
-                  <button onclick="document._video.playbackRate--">playbackRate--</button>
-                  <button onclick="document._video.playbackRate+=0.1">playbackRate+=0.1</button>
-                  <button onclick="document._video.playbackRate-=0.1">playbackRate-=0.1</button><br>
-                  <button onclick="document._video.volume+=0.1">volume+=0.1</button>
-                  <button onclick="document._video.volume-=0.1">volume-=0.1</button>
-                  <button onclick="document._video.muted=true">muted=true</button>
-                  <button onclick="document._video.muted=false">muted=false</button><br>
-                  <button onclick="switchVideo(0);">Sintel teaser</button>
-                  <button onclick="switchVideo(1);">Bunny trailer</button>
-                  <button onclick="switchVideo(2);">Bunny movie</button>
-                  <button onclick="switchVideo(3);">Test movie</button>
-                </div>
-            </div>
             <div class="scoreList">
                 <ul>
                     <?php 
@@ -65,21 +44,7 @@
                         }
                     ?>
                 </ul>
-            </div>
-            <div class="smoIcons">
-                <h4>Tell Your Friends</h4>
-                <ul>
-                    <li>
-                        <a target="_blank" title="Share This on Facebook" href="http://www.facebook.com/sharer.php?u=<?php echo urlencode($this->facebookShare['url']); ?>&amp;t=<?php echo urlencode($this->facebookShare['title']); ?>" class="smoIcon fbIcon"></a>
-                    </li>
-                    <li>
-                        <a target="_blank" title="Tweet This" href="http://twitter.com/share?text=<?php echo urlencode($this->facebookShare['title']); ?>&amp;url=<?php echo urlencode($this->facebookShare['url']); ?>" class="smoIcon tweetIcon"></a>
-                    </li>
-                    <li>
-                        <a target="_blank" title="Share This on Google+" href="https://plus.google.com/share?url=<?php echo urlencode($this->facebookShare['url']); ?>" class="smoIcon gplusIcon"></a>
-                    </li>
-                </ul>
-            </div>
+            </div>           
         </div>  
     </div>
 </div>

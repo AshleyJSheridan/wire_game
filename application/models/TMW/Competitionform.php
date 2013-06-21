@@ -27,7 +27,7 @@ class TMW_Competitionform extends Zend_Form
                                         'value'             => $formElement['elementValue'],
                                         'description'       => ($formElement['elementRequired']) ? "": "",
                                         'validators'        => ($formElement['elementRequired']) ? array('NotEmpty', $NotIdentical): array(),
-                                        'attribs'           => array('message' => $formElement['elementError'])
+                                        'attribs'           => array('data-message' => $formElement['elementError'])
                                         ));
                     
                     //$email->addValidator('UniqueEmail',false, array(new Model_User()));
@@ -40,7 +40,7 @@ class TMW_Competitionform extends Zend_Form
                                         'value'             => $formElement['elementValue'],
                                         'description'       => "",
                                         'validators'        => array('EmailAddress'),
-                                        'attribs'           => array('message' => $formElement['elementError'])
+                                        'attribs'           => array('data-message' => $formElement['elementError'])
                                         ));
                 }
                 else if($formElement['elementType'] == 'Textarea' && $formElement['elementVisibility'])
@@ -56,7 +56,7 @@ class TMW_Competitionform extends Zend_Form
                                                                                         'cols'      => 35,
                                                                                         'maxLength' => '140',
                                                                                         'rows'      => 5,
-                                                                                        'message'   => $formElement['elementError']
+                                                                                        'data-message'   => $formElement['elementError']
                                                                                     )
                                         ));
                 }
@@ -70,7 +70,7 @@ class TMW_Competitionform extends Zend_Form
                                         'value'             => $formElement['elementValue'],
                                         'uncheckedValue'    => '',
                                         'validators'        => ($formElement['elementRequired']) ? array('NotEmpty'): array(),
-                                        'attribs'           => array('message' => $formElement['elementError'])
+                                        'attribs'           => array('data-message' => $formElement['elementError'])
                                         ));
                 }
                 else if($formElement['elementType'] == 'File' && $formElement['elementVisibility'])
@@ -90,7 +90,7 @@ class TMW_Competitionform extends Zend_Form
                                                                     array('Size', true, 3120000),                           // limit to 3 mb
                                                                     array('Extension', true, array( 'jpg,jpeg,png,gif' ))   // only JPEG, PNG, and GIFs
                                                                ),   
-                                        'attribs'           => array('message' => $formElement['elementError'])
+                                        'attribs'           => array('data-message' => $formElement['elementError'])
                                         ));
                 }
                 else if($formElement['elementType'] == 'Radio' && $formElement['elementVisibility'])
@@ -114,17 +114,17 @@ class TMW_Competitionform extends Zend_Form
                                         'multiOptions'      => $parsedRadioOptions,
                                         'description'       => ($formElement['elementRequired']) ? "": "",
                                         'separator'         => '',
-                                        'attribs'           => array('message' => $formElement['elementError']),                        
+                                        'attribs'           => array('data-message' => $formElement['elementError']),                        
                                         'value'             => $defaultRadioValue[0],
                                         ));
                 }
             }
             
-            $tmwFormArray[] =    new Zend_Form_Element_Checkbox('fbTermsConditions',array(
+            /*$tmwFormArray[] =    new Zend_Form_Element_Checkbox('fbTermsConditions',array(
 					'required'          => true,
 					'uncheckedValue'    => '',
-					'attribs'           => array('message' => 'Please read and agree with the Terms & Conditions')
-				));
+					'attribs'           => array('data-message' => 'Please read and agree with the Terms & Conditions')
+				));*/
             
             $tmwFormArray[] =    new Zend_Form_Element_Submit('submitBtn', array(
 					'label'         => 'Enter Now',
@@ -135,35 +135,37 @@ class TMW_Competitionform extends Zend_Form
             $this->addElements($tmwFormArray);
 
             $this->setElementDecorators(array(
-			'ViewHelper',
-			array('Errors'),
-			array('HtmlTag', array('tag' => 'dd')),
-			array('Label', array('tag' => 'dt')),
-			array('Description', array('class' => 'required'))
-            ));
+                    'ViewHelper',
+                    array('Errors'),
+                    array('HtmlTag', array('tag' => 'dd')),
+                    array('Label', array('tag' => 'dt')),
+                    array('Description', array('class' => 'required'))
+                )
+            );
                
             $this->setElementDecorators(array(
-                        'ViewHelper',
-			array('Errors'),
-			array('HtmlTag', array('tag' => 'dd')),
-			array('Label', array('tag' => 'span')),
-			array('Description', array('class' => 'description'))
-                    ),
-                    $radioCheckBoxDecoratorArray
+                    'ViewHelper',
+                    array('Errors'),
+                    array('HtmlTag', array('tag' => 'dd')),
+                    array('Label', array('tag' => 'span')),
+                    array('Description', array('class' => 'description'))
+                ),
+                $radioCheckBoxDecoratorArray
             );
                 
             $this->setElementDecorators(array(
-                        'File',
-                        'Errors',
-                        array('HtmlTag', array('tag' => 'dd')),
-                        array('Label', array('tag' => 'dt')),
-                        array('Description', array('class' => 'required'))
-                    ),
-                    $fileDecoratorArray
+                    'File',
+                    'Errors',
+                    array('HtmlTag', array('tag' => 'dd')),
+                    array('Label', array('tag' => 'dt')),
+                    array('Description', array('class' => 'required'))
+                ),
+                $fileDecoratorArray
             );
 
             // take off button label
             $button = $this->getElement('submitBtn');
             $button->removeDecorator('Label');
+            $button->removeDecorator('HtmlTag');
 	}
 }

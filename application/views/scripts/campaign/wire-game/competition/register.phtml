@@ -6,80 +6,95 @@
 ?>
 
 <div id="fb_wrapper" class="competition registerPage">
-    <div class="header">
+    <div class="header">        
+        <a href="/competition/<?php echo $this->facebookShare['campaign']; ?>/register" title="">
+            <img src="/assets/img/competition/logo.jpg" alt="TMW" />
+        </a>
+    </div>
+    <div class="contentsHolderOuter">
+        <div class="contentsHolder">    
         <?php
             if(!empty($this->contents['displayImage'])) {
                 echo '<div class="sideHeaders">';
             }
+            
             if(!empty($this->contents['headerText1'])) {
                 echo '<h1>'.$this->contents['headerText1'].'</h1>';
             }
+            
             if(!empty($this->contents['headerText2'])) {
                 echo '<h2>'.$this->contents['headerText2'].'</h2>';
             }
-            if(!empty($this->contents['introText'])) {
-                echo '<p>'.$this->contents['introText'].'</p>';
-            }
+            
             if(!empty($this->contents['displayImage'])) {
                 echo '</div>';
                 echo '<img class="adImage" src="/assets/img/competition/wire-game/addImage.jpg" alt="'.$this->facebookShare['title'].'" />';
             }
         ?>
-    </div>
-    <div class="contentsHolderOuter">
-        <div class="contentsHolder">
+        <?php if(!empty($this->contents['introVideo']) || !empty($this->contents['introText'])){ ?>
             <div id="fb_content_copy">
                 <?php                   
                     if(!empty($this->contents['introVideo'])) {
                         echo '<iframe width="551" height="311" frameborder="0" allowfullscreen="" src="http://www.youtube.com/embed/'.$this->contents['introVideo'].'?rel=0&wmode=transparent"></iframe>';
+                    }                    
+                    if(!empty($this->contents['introText'])) {
+                        echo '<p>'.$this->contents['introText'].'</p>';
                     }
                 ?>
             </div>
+         <?php } ?>
             <div id="fb_form">
-                <?php echo '<div class="startingField"><h3>Your Details</h3><span class="reqCopy">(*Required)</span></div><div class="fieldsListing">'; ?>
-                <form method="post" action="/competition/<?php echo $this->facebookShare['campaign']; ?>/register?ajax=true" id="fbForm" enctype="multipart/form-data" accept-charset="utf-8" rel="1">
-                    
-                    <?php   
-                    
-                        $currentElement = 0;
-                        
-                        foreach($this->formElements as $formElement)
-                        {
-                            if($formElement['elementVisibility'])
-                            {   
-                                if($formElement['elementType'] == 'File')
-                                {
-                                    echo $this->form->getElement('playerImage')->render();
-                                    echo '<dd id="BrowserVisible"><input type="text" id="FileField" /><span id="fileBtnSpan" class="button">Browse</span></dd>';
+                <div class="startingField">
+                    <h3>Your Details</h3>
+                </div>
+                <div class="fieldsListing">                
+                    <form method="post" action="/competition/<?php echo $this->facebookShare['campaign']; ?>/register?ajax=true" id="fbForm" enctype="multipart/form-data" accept-charset="utf-8">
+                        <dl>
+                        <?php   
+                            $currentElement = 0;
+
+                            foreach($this->formElements as $formElement)
+                            {
+                                if($formElement['elementVisibility'])
+                                {   
+                                    if($formElement['elementType'] == 'File')
+                                    {
+                                        echo $this->form->getElement('playerImage')->render();
+                                        echo '<dd id="BrowserVisible"><input type="text" id="FileField" /><span id="fileBtnSpan" class="button">Browse</span></dd>';
+                                    }
+                                    else if($formElement['elementType'] == 'Email')
+                                    {
+                                        echo $this->form->getElement('playerEmail')->render();
+                                    }
+                                    else if($formElement['elementType'] == 'Textarea')
+                                    {
+                                        echo  '<div class="textAreaHolder">';
+                                        echo $this->form->getElement($formElement['elementName'])->render();
+                                        echo  '</div>';
+                                    }
+                                    else if($formElement['elementType'] == 'Checkbox')
+                                    {
+                                        echo  '<div class="checkboxHolder">';
+                                        echo $this->form->getElement($formElement['elementName'])->render();
+                                        echo  '</div>';
+                                    }
+                                    else
+                                    {
+                                        echo $this->form->getElement($formElement['elementName'])->render();
+                                    }
+
+                                    $currentElement++;
                                 }
-                                else if($formElement['elementType'] == 'Email')
-                                {
-                                    echo $this->form->getElement('playerEmail')->render();
-                                }
-                                else if($formElement['elementType'] == 'Textarea')
-                                {
-                                    echo  '<div class="textAreaHolder">';
-                                    echo $this->form->getElement($formElement['elementName'])->render();
-                                    echo  '</div>';
-                                }
-                                else if($formElement['elementType'] == 'Checkbox')
-                                {
-                                    echo  '<div class="checkboxHolder">';
-                                    echo $this->form->getElement($formElement['elementName'])->render();
-                                    echo  '</div>';
-                                }
-                                else
-                                {
-                                    echo $this->form->getElement($formElement['elementName'])->render();
-                                }
-                                
-                                $currentElement++;
                             }
-                        }
-                    ?>
-                    <?php echo $this->form->getElement('submitBtn')->setLabel('Submit')->render(); ?>
-                    </div> 
-                </form>
+                        ?>
+                            <dd class="submitWrapper">
+                                <input type="hidden" name="campaignName" id="campaignName" value="<?php echo $this->facebookShare['campaignName']?>" />
+                                <input type="hidden" name="campaign" id="campaign" value="<?php echo $this->facebookShare['campaign']?>" />
+                                <?php echo $this->form->getElement('submitBtn')->setLabel('Submit')->render(); ?>
+                            <dd>
+                        </dl>
+                    </form>
+                </div>
             </div>
         </div>  
     </div>
