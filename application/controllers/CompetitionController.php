@@ -102,8 +102,11 @@ class CompetitionController extends Zend_Controller_Action {
      * Root / Index page Action
      */
     public function indexAction() {
+        //require_once APPLICATION_PATH . '/../library/WebSocket/WebSocket.php';
         
-        //$campaignPlayerList     = $this->_tmwDBConnect->getUserList($this->_tmwCampaign);
+        //$this->_tmwWebsocket    = new WebSocket_WebSocket('ws://' . $this->getRequest()->getHttpHost() .':80/competition/' . $this->_tmwCampaign);
+        //var_dump($this->_tmwWebsocket);
+        
         $this->view->scoreList  = $this->_tmwDBConnect->getScoreList($this->_tmwCampaign);
     }
 
