@@ -85,6 +85,27 @@ class TMW_Competition extends Zend_Db_Table
         }	
     }
     
+    // load the player details from the database
+    public function getPlayerDetails($playerId, $campaignName) {
+        $data = $this->getAdapter()->query("SELECT c.playerId, group_concat( d.detailsData separator '|*|') as `playerData` , group_concat( d.detailsField separator '|*|') as `playerDataKeys` FROM `tmw_wire_comp` as c join `tmw_wire_comp_details` as d on c.playerId = d.playerId WHERE c.campaign = '".$campaignName."' AND c.playerId = '".$playerId."' GROUP BY c.playerId;")->fetchAll();
+        
+        if(!$data) {
+            throw new Exception('Could not load user details from database');
+        } else {
+            $normalizedPlayerDetails    = array();
+            
+            foreach($data as $playerDetails) {
+                
+                $playerDataKeysArray            = explode('|*|', $playerDetails['playerDataKeys']);
+                $playerDataArray                = explode('|*|', $playerDetails['playerData']);
+                $normalizedPlayerDetails        = array_combine($playerDataKeysArray, $playerDataArray);                
+                $normalizedPlayerDetails['id']  = $playerDetails['playerId'];
+            }
+            
+            return $normalizedPlayerDetails;
+        }	
+    }
+    
     // load the application texts from tha database
     public function getAppContents($campaignName) {
         $row = $this->getAdapter()->query("SELECT * FROM tmw_wire_app_texts WHERE campaignName = '".$campaignName."';")->fetch();

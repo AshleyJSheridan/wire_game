@@ -107,6 +107,17 @@ class CompetitionController extends Zend_Controller_Action {
         //$this->_tmwWebsocket    = new WebSocket_WebSocket('ws://' . $this->getRequest()->getHttpHost() .':80/competition/' . $this->_tmwCampaign);
         //var_dump($this->_tmwWebsocket);
         
+        $playerId = 30;
+        
+        if(isset($playerId)){
+            $playerDetails = $this->_tmwDBConnect->getPlayerDetails($playerId, $this->_tmwCampaign);
+        }
+        
+        $playerTwitterImg = $this->gettwitterdetailsAction($playerDetails['twitterhandle']);
+        $playerDetails['playerTwitterImg'] = $playerTwitterImg;
+        
+        $this->view->playerDetails = $playerDetails;
+        
         $this->view->scoreList  = $this->_tmwDBConnect->getScoreList($this->_tmwCampaign);
     }
 
@@ -117,9 +128,8 @@ class CompetitionController extends Zend_Controller_Action {
         
         // create form
         $form               = new TMW_Competitionform($this->_appFormElements);        
+        $formHasImageField  = false;        
         $form->setAttrib('enctype', 'multipart/form-data');
-        
-        $formHasImageField  = false;
         
         foreach($this->_appFormElements as $formElement)
         {
@@ -240,5 +250,65 @@ class CompetitionController extends Zend_Controller_Action {
     public function likeAction() {
     	// view only
     }
-    
+
+    /**
+     * Get the player details json
+     */
+    public function getplayerAction() {
+        
+        $playerId           = $this->getRequest()->getParam('id');        
+        $playerDetails      = $this->_tmwDBConnect->getPlayerDetails($playerId, $this->_tmwCampaign);        
+        $playerTwitterImg   = $this->gettwitterdetailsAction($playerDetails['twitterhandle']);
+        
+        $playerDetails['playerTwitterImg']  = $playerTwitterImg;        
+        $this->view->playerDetails          = $playerDetails;
+        
+        $jsonData = utf8_encode(Zend_Json::encode($playerDetails));
+        $this->getResponse()
+                ->setHeader('Content-Type', 'text/html')
+                ->setBody($jsonData)
+                ->sendResponse();
+        exit;
+    }
+
+    /**
+     * Get the scoreboard details json
+     */
+    public function getscoresAction() {
+        $scores  = $this->_tmwDBConnect->getScoreList($this->_tmwCampaign);
+        
+        $jsonData = utf8_encode(Zend_Json::encode($scores));
+        $this->getResponse()
+                ->setHeader('Content-Type', 'text/html')
+                ->setBody($jsonData)
+                ->sendResponse();
+        exit;
+    }
+
+    /**
+     * Load the twitter user details
+     */
+    private function gettwitterdetailsAction($twitterUsername) {
+        require_once APPLICATION_PATH . '/../library/TwitterAPIExchange.php';
+        
+        // Set up your settings with the keys you get from the dev site
+        $settings = array(
+            'oauth_access_token'        => "91971683-8eDcHVseTeiXyyKATcITuG4Mxh3c6VzudAXSasrM",
+            'oauth_access_token_secret' => "axqS0xwSUZgKlbGdVF4pn8pM5OKQhGfOi1GCsiMXW4",
+            'consumer_key'              => "4XUvM9jsTwfLehkY6NQ",
+            'consumer_secret'           => "LYxRZcO1Oao5fSDefhvkrZd41OcrML8we0AOkvCUDS0"
+        );
+        
+        $url                = 'https://api.twitter.com/1.1/users/show.json';        
+        $queryfields        = '?screen_name=' . $twitterUsername . '&skip_status=1';
+        $requestMethod      = 'GET';
+        
+        $twitter            = new TwitterAPIExchange($settings);
+        $twitterUserDetails = $twitter->setGetfield($queryfields)->buildOauth($url, $requestMethod)->performRequest();
+        $twitterUserDetails = Zend_Json::decode($twitterUserDetails);
+        
+        $largeImageUrl      = str_replace("normal", "bigger", $twitterUserDetails['profile_image_url']);
+        
+        return $largeImageUrl;
+    }
 }

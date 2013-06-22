@@ -9,7 +9,7 @@ function post(data, statusText, xhr, $form)  {
     
     if(data == '"submit"') {
         var redir = $('#campaign').val();
-        window.location = '/competition/'+redir+'/submit/';
+        window.location = '/'+redir+'/submit/';
     } else {    
         data = $.parseJSON(data)
         // remove  error msg first
@@ -37,7 +37,7 @@ function post(data, statusText, xhr, $form)  {
 // validation
 $(document).ready(function() {
     
-    /*$('#fbForm input').each(function() {
+    $('#fbForm input[type=text]').each(function() {
         var default_value = this.value;
         
         $(this).focus(function(){
@@ -51,7 +51,7 @@ $(document).ready(function() {
                 this.value = default_value;
             }
         });
-    }); */   
+    });  
     
     formopts = { beforeSubmit: pre, success: post };
     $('#fbForm').ajaxForm(formopts);

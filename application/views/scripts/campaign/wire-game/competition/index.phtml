@@ -30,8 +30,11 @@
                 <h3>Controllable by js video</h3>
                
             </div>
-            <div class="userDetails">
+            <div class="playerDetails">
                 <h3>Loaded by the database user details</h3>
+                <?php
+                    echo '<p><a href="https://twitter.com/' . $this->playerDetails['twitterhandle'] . '" title="' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'] . ' Tweeter" target="_blank">' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'] . '<img src="' . $this->playerDetails['playerTwitterImg'] . '" alt="' . $this->playerDetails['twitterhandle'] . '" /></a></p>';
+                ?>       
             </div>
             <div class="scoreList">
                 <h3>Loaded by the database user scores</h3>
