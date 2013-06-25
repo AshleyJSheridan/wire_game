@@ -23,19 +23,27 @@
                     if(!empty($this->contents['introText'])) {
                         echo '<p>'.$this->contents['introText'].'</p>';
                     }
-                    if(!empty($this->contents['introVideo'])) {
-                        echo '<iframe width="551" height="311" frameborder="0" allowfullscreen="" src="http://www.youtube.com/embed/'.$this->contents['introVideo'].'?rel=0&wmode=transparent"></iframe>';
-                    }
                 ?>
+            </div> 
+            <div class="playerDetails">
+                <h3>Loaded by the database user details</h3>
+                <?php
+                    echo '<p><a href="https://twitter.com/' . $this->playerDetails['twitterhandle'] . '" title="' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'] . ' Tweeter" target="_blank">' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'] . '<img src="' . $this->playerDetails['playerTwitterImg'] . '" alt="' . $this->playerDetails['twitterhandle'] . '" /></a></p>';
+                ?>       
             </div>
             <div class="scoreList">
+                <h3>Loaded by the database user scores</h3>
                 <ul>
                     <?php 
                         foreach($this->scoreList as $playerScore){
-                            echo '<li><a href="https://twitter.com/' . $playerScore['tweeter'] . '" title="' . $playerScore['firstname'] . ' ' . $playerScore['lastname'] . ' Tweeter" target="_blank">' . $playerScore['firstname'] . ' ' . $playerScore['lastname'] . '</a> scored ' . $playerScore['playerScore'] . ' (' . $playerScore['playerProgress'] . '%)</li>';
+                            echo '<li><a href="https://twitter.com/' . $playerScore['twitterhandle'] . '" title="' . $playerScore['firstname'] . ' ' . $playerScore['lastname'] . ' Tweeter" target="_blank">' . $playerScore['firstname'] . ' ' . $playerScore['lastname'] . '</a> scored ' . $playerScore['playerScore'] . ' (' . $playerScore['playerProgress'] . '%)</li>';
                         }
                     ?>
                 </ul>
-            </div>    
+            </div>
+            <div class="gameGallery">
+                <h3>Photogallery</h3>     
+            </div>
+        </div>  
     </div>
 </div>

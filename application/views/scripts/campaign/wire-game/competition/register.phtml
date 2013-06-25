@@ -7,7 +7,7 @@
 
 <div id="fb_wrapper" class="competition registerPage">
     <div class="header">        
-        <a href="/<?php echo $this->facebookShare['campaign']; ?>/register" title="">
+        <a href="/competition/<?php echo $this->facebookShare['campaign']; ?>/rsvp" title="">
             <img src="/assets/img/competition/logo.jpg" alt="TMW" />
         </a>
     </div>
@@ -19,7 +19,7 @@
             }
             
             if(!empty($this->contents['headerText1'])) {
-                echo '<h1>'.$this->contents['headerText1'].'</h1>';
+                echo '<h1>'.$this->contents['headerText1'].' - Sign Up</h1>';
             }
             
             if(!empty($this->contents['headerText2'])) {
@@ -48,7 +48,7 @@
                     <h3>Your Details</h3>
                 </div>
                 <div class="fieldsListing">                
-                    <form method="post" action="/<?php echo $this->facebookShare['campaign']; ?>/register?ajax=true" id="fbForm" enctype="multipart/form-data" accept-charset="utf-8">
+                    <form method="post" action="/competition/<?php echo $this->facebookShare['campaign']; ?>/register?ajax=true" id="fbForm" enctype="multipart/form-data" accept-charset="utf-8">
                         <dl>
                         <?php   
                             $currentElement = 0;
@@ -78,6 +78,12 @@
                                         echo $this->form->getElement($formElement['elementName'])->render();
                                         echo  '</div>';
                                     }
+                                    else if($formElement['elementName'] == 'twitterhandle')
+                                    {
+                                        echo '<dd class="fullWidth">To fully experience the digital installation we’ve created for the evening we’d love you to give us your Twitter handle. Don’t worry, it’s for nothing embarrassing. And there’s a chance you could win a bottle of bubbly too.</dd>';
+                                        echo $this->form->getElement($formElement['elementName'])->render();  
+                                        echo '<dd class="fullWidth">Don’t have a Twitter account? <a href="https://twitter.com/signup" title="Sign up" target="_blank">Sign up</a> now and be part of the nation’s pulse.</dd>';
+                                    }
                                     else
                                     {
                                         echo $this->form->getElement($formElement['elementName'])->render();
@@ -96,6 +102,10 @@
                     </form>
                 </div>
             </div>
-        </div>  
+            <p id="fb_content_copy">If you’re coming. Yay! See you on the night. <br />
+                If you’re not. Boo hoo! Follow us on Twitter and watch the fun unfold. 
+                <a href="https://twitter.com/tmwagency" title="@tmwagency" target="_blank">[@tmwagency]</a>
+            </p>  
+        </div>                
     </div>
 </div>

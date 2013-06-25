@@ -238,6 +238,13 @@ class CompetitionController extends Zend_Controller_Action {
     }
 
     /**
+     * Game Feed page
+     */
+    public function gamefeedAction() {
+        $this->indexAction();
+    }
+
+    /**
      * Submit page
      */
     public function submitAction() {
