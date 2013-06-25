@@ -43,7 +43,7 @@ class CompetitionController extends Zend_Controller_Action {
         $this->view->facebookShare                  = array();
         $this->view->facebookShare['title']         = $this->_appSettings['title'];
         $this->view->facebookShare['url']           = $this->_facebookAppUrl . '/app_' . $this->_appSettings['appId'];
-        $this->view->facebookShare['summary']     	= $this->_appSettings['summary'];
+        $this->view->facebookShare['summary']       = $this->_appSettings['summary'];
         $this->view->facebookShare['image']         = '/assets/img/competition/fbShareImage.jpg';
         $this->view->facebookShare['appID']         = $this->_appSettings['appId'];
         $this->view->facebookShare['campaign']      = $this->_tmwCampaign;
@@ -113,11 +113,19 @@ class CompetitionController extends Zend_Controller_Action {
             $playerDetails = $this->_tmwDBConnect->getPlayerDetails($playerId, $this->_tmwCampaign);
         }
         
-        $playerTwitterImg = $this->gettwitterdetailsAction($playerDetails['twitterhandle']);
+        if(isset($playerDetails['twitterhandle']) && !empty($playerDetails['twitterhandle'])){
+            $playerTwitterImg = $this->gettwitterdetailsAction($playerDetails['twitterhandle']);            
+        }
+        else
+        {
+            $playerTwitterImg = '/assets/img/admin/logo.jpg';              
+        }
+        
         $playerDetails['playerTwitterImg'] = $playerTwitterImg;
         
         $this->view->playerDetails = $playerDetails;
         
+        // Uncomment to and remove from view the printing of those tweets as it is only for testing purposes         
         $this->view->twitterFeed = Zend_Json::decode($this->gettwitterfeedAction());
         
         $this->view->scoreList  = $this->_tmwDBConnect->getScoreList($this->_tmwCampaign);
@@ -275,10 +283,10 @@ class CompetitionController extends Zend_Controller_Action {
         
         // Set up your settings with the keys you get from the dev site
         $settings = array(
-            'oauth_access_token'        => "91971683-ybrsDIEGYHSjtl7akrMKV7ScKcznlVJIeiUkHyrvi",
-            'oauth_access_token_secret' => "YUIVnfJZZYdM6DGmxb9IhVTTS13vY87vfAU46r3rE",
-            'consumer_key'              => "4XUvM9jsTwfLehkY6NQ",
-            'consumer_secret'           => "LYxRZcO1Oao5fSDefhvkrZd41OcrML8we0AOkvCUDS0"
+            'oauth_access_token'        => $this->_appSettings['oauth_access_token'],
+            'oauth_access_token_secret' => $this->_appSettings['oauth_access_token_secret'],
+            'consumer_key'              => $this->_appSettings['consumer_key'],
+            'consumer_secret'           => $this->_appSettings['consumer_secret']
         );
         
         $url                = 'https://api.twitter.com/1.1/users/show.json';        
@@ -307,19 +315,20 @@ class CompetitionController extends Zend_Controller_Action {
         
         // Set up your settings with the keys you get from the dev site
         $settings = array(
-            'oauth_access_token'        => "91971683-ybrsDIEGYHSjtl7akrMKV7ScKcznlVJIeiUkHyrvi",
-            'oauth_access_token_secret' => "YUIVnfJZZYdM6DGmxb9IhVTTS13vY87vfAU46r3rE",
-            'consumer_key'              => "4XUvM9jsTwfLehkY6NQ",
-            'consumer_secret'           => "LYxRZcO1Oao5fSDefhvkrZd41OcrML8we0AOkvCUDS0"
+            'oauth_access_token'        => $this->_appSettings['oauth_access_token'],
+            'oauth_access_token_secret' => $this->_appSettings['oauth_access_token_secret'],
+            'consumer_key'              => $this->_appSettings['consumer_key'],
+            'consumer_secret'           => $this->_appSettings['consumer_secret']
         );
         
         $url                = 'https://api.twitter.com/1.1/statuses/user_timeline.json';        
-        $queryfields        = '?screen_name=bardius';
+        $queryfields        = '?screen_name=' . $this->_appSettings['twitter_user'] . '&count=5';
         $requestMethod      = 'GET';
         
         $twitter            = new TwitterAPIExchange($settings);
         $twitterFeed        = $twitter->setGetfield($queryfields)->buildOauth($url, $requestMethod)->performRequest();
         
+        // Uncomment for the actual ajax responce so json will be available 
         return $twitterFeed;
         
         $this->getResponse()
@@ -371,13 +380,13 @@ class CompetitionController extends Zend_Controller_Action {
         
         // Set up your settings with the keys you get from the dev site
         $settings = array(
-            'oauth_access_token'        => "91971683-ybrsDIEGYHSjtl7akrMKV7ScKcznlVJIeiUkHyrvi",
-            'oauth_access_token_secret' => "YUIVnfJZZYdM6DGmxb9IhVTTS13vY87vfAU46r3rE",
-            'consumer_key'              => "4XUvM9jsTwfLehkY6NQ",
-            'consumer_secret'           => "LYxRZcO1Oao5fSDefhvkrZd41OcrML8we0AOkvCUDS0"
+            'oauth_access_token'        => $this->_appSettings['oauth_access_token'],
+            'oauth_access_token_secret' => $this->_appSettings['oauth_access_token_secret'],
+            'consumer_key'              => $this->_appSettings['consumer_key'],
+            'consumer_secret'           => $this->_appSettings['consumer_secret']
         );
         
-        $twitterMsg = urlencode('Test Msg');
+        $twitterMsg = $this->_appContents['twitter_post'];
         $twitterImg = APPLICATION_PATH . '/../public_html/assets/img/competition/logo.jpg';
                 
         $url                = 'https://api.twitter.com/1.1/statuses/update_with_media.json';
@@ -393,6 +402,40 @@ class CompetitionController extends Zend_Controller_Action {
         $this->getResponse()
                 ->setHeader('Content-Type', 'text/html')
                 ->setBody($twitterPostStatus)
+                ->sendResponse();
+        exit;
+    }
+
+    /**
+     * The contents of the fail modal
+     */
+    public function failAction() {
+        
+        $modalContents['text'] = 'Fail';
+        $modalContents['img'] = 'Fail image path';
+        
+    	$jsonData = utf8_encode(Zend_Json::encode($modalContents));
+        
+        $this->getResponse()
+                ->setHeader('Content-Type', 'text/html')
+                ->setBody($jsonData)
+                ->sendResponse();
+        exit;
+    }
+
+    /**
+     * The contents of the winner modal
+     */
+    public function winnerAction() {
+        
+        $modalContents['text'] = 'winner';
+        $modalContents['img'] = 'winner image path';
+        
+    	$jsonData = utf8_encode(Zend_Json::encode($modalContents));
+        
+        $this->getResponse()
+                ->setHeader('Content-Type', 'text/html')
+                ->setBody($jsonData)
                 ->sendResponse();
         exit;
     }

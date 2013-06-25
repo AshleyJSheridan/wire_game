@@ -15,6 +15,9 @@ class ADMIN_ManageAppTextsForm extends Zend_Form
         $introText = $this->createElement('textarea', 'introText', array('attribs' => array('message' => 'Please enter copy for the intro text paragraph', 'cols' => 35, 'rows' => 5)));
         $introText->setLabel('The copy of the intro text paragraph:');
         
+        $twitter_post = $this->createElement('textarea', 'twitter_post', array('attribs' => array('message' => 'Please enter copy for the twitter post text', 'cols' => 35, 'rows' => 5)));
+        $twitter_post->setLabel('The copy of the Twitter post:');
+        
         $introVideo = $this->createElement('text', 'introVideo', array('attribs' => array('message' => 'Please enter YouTube Video ID')));
         $introVideo->setLabel('The YouTube Video ID:');
         
@@ -44,6 +47,7 @@ class ADMIN_ManageAppTextsForm extends Zend_Form
                         $headerText2,
                         $introText,
                         $thankText,
+                        $twitter_post,
                         $tncText,
                         $policyText,
                         $displayImage,

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 25, 2013 at 01:31 PM
+-- Generation Time: Jun 25, 2013 at 05:09 PM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -54,7 +54,7 @@ INSERT INTO `tmw_wire_app_form_elements` (`id`, `campaignName`, `elementName`, `
 (5, 'wire-game', 'newsletter', 'Checkbox', 'You want newsletter?', 'yes', 'you want one?', 0, 14, '0', ''),
 (6, 'wire-game', 'textquestion', 'Textarea', 'Praesent vehicula, sem nec euismod posuere, lectus tortor varius tellus, ut congue nunc est sit amet enim.', '', 'Please type your answer', 0, 5, '0', ''),
 (7, 'wire-game', 'lastname', 'Text', 'Last Name', 'Last Name', 'Please type your Last Name', 1, 3, '1', ''),
-(8, 'wire-game', 'twitterhandle', 'Text', 'My Twitter handle is ', 'Twitter Handle', 'Please type your Twitter Handle', 1, 5, '0', ''),
+(8, 'wire-game', 'twitterhandle', 'Text', 'My Twitter handle is ', '', 'Please type your Twitter Handle', 1, 5, '0', ''),
 (9, 'wire-game', 'address2', 'Text', 'Street Line 2', 'Street Line 2', 'Please type your address 2', 0, 7, '0', ''),
 (10, 'wire-game', 'city', 'Text', 'City', 'City', 'Please type your city', 0, 8, '0', ''),
 (11, 'wire-game', 'postalcode', 'Text', 'Postal Code', 'Postal Code', 'Please give your Postal Code', 0, 9, '0', ''),
@@ -80,6 +80,11 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_app_settings` (
   `appId` varchar(255) DEFAULT NULL COMMENT 'facebook app id',
   `secret` varchar(255) DEFAULT NULL COMMENT 'facebook app secret',
   `summary` varchar(1024) NOT NULL DEFAULT 'Share this great Application' COMMENT 'competition description that will be shown in the share functionality',
+  `oauth_access_token` varchar(255) DEFAULT NULL,
+  `oauth_access_token_secret` varchar(255) DEFAULT NULL,
+  `consumer_key` varchar(255) DEFAULT NULL,
+  `consumer_secret` varchar(255) DEFAULT NULL,
+  `twitter_user` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
@@ -87,8 +92,8 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_app_settings` (
 -- Dumping data for table `tmw_wire_app_settings`
 --
 
-INSERT INTO `tmw_wire_app_settings` (`id`, `campaignName`, `title`, `facebookAppUrl`, `gaId`, `appId`, `secret`, `summary`) VALUES
-(1, 'wire-game', 'Wire Game Competition', 'http://www.facebook.com/pagename', '', NULL, '1a1a1a1a1a1a1a1a1a1a11a11a11a', 'Please share this great app');
+INSERT INTO `tmw_wire_app_settings` (`id`, `campaignName`, `title`, `facebookAppUrl`, `gaId`, `appId`, `secret`, `summary`, `oauth_access_token`, `oauth_access_token_secret`, `consumer_key`, `consumer_secret`, `twitter_user`) VALUES
+(1, 'wire-game', 'Wire Game Competition', 'http://www.facebook.com/pagename', '', '', '', '', '91971683-ybrsDIEGYHSjtl7akrMKV7ScKcznlVJIeiUkHyrvi', 'YUIVnfJZZYdM6DGmxb9IhVTTS13vY87vfAU46r3rE', '4XUvM9jsTwfLehkY6NQ', 'LYxRZcO1Oao5fSDefhvkrZd41OcrML8we0AOkvCUDS0', 'bardius');
 
 -- --------------------------------------------------------
 
@@ -108,6 +113,7 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_app_texts` (
   `thankText` text COMMENT 'the text for the successful submition page',
   `tncText` varchar(255) DEFAULT NULL COMMENT 'the link for the t&c text',
   `policyText` varchar(255) DEFAULT NULL COMMENT 'the link for the policy text',
+  `twitter_post` varchar(255) NOT NULL DEFAULT 'Twitted: ',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
@@ -115,8 +121,8 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_app_texts` (
 -- Dumping data for table `tmw_wire_app_texts`
 --
 
-INSERT INTO `tmw_wire_app_texts` (`id`, `campaignName`, `headerText1`, `headerText2`, `displayImage`, `introText`, `introVideo`, `thankText`, `tncText`, `policyText`) VALUES
-(1, 'wire-game', 'Party on the Roof', 'Our roof top bar is fabulously spacious, but to give us an idea of how many canapÃ©s to serve up and how many cocktails to shake out, weâ€™d love it if you could let us know if we can expect you on the 17th July.', 1, '', '', 'Nulla eu arcu est, in porttitor est. Vivamus sagittis mi ut lectus auctor non aliquet elit euismod. Mauris sit amet elit nec enim accumsan dapibus. Quisque ut iaculis risus. Quisque arcu odio, accumsan nec malesuada sed, tempor in tortor. Nunc viverra, turpis a fermentum commodo, orci elit pellentesque lacus, et convallis orci magna nec enim. ', 'http://www.tmw.co.uk/', 'http://www.tmw.co.uk/');
+INSERT INTO `tmw_wire_app_texts` (`id`, `campaignName`, `headerText1`, `headerText2`, `displayImage`, `introText`, `introVideo`, `thankText`, `tncText`, `policyText`, `twitter_post`) VALUES
+(1, 'wire-game', 'Party on the Roof', 'Our roof top bar is fabulously spacious, but to give us an idea of how many canapÃ©s to serve up and how many cocktails to shake out, weâ€™d love it if you could let us know if we can expect you on the 17th July.', 1, '', '', '<strong>Your name is down. Youâ€™re on the list!</strong><br/><br/>\r\nWe look forward to welcoming you to our new home of Intelligent Influence on 17th July from 6.30', 'http://www.tmw.co.uk/', 'http://www.tmw.co.uk/', 'The party goes on: ');
 
 -- --------------------------------------------------------
 
@@ -155,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_comp` (
   `RFHandleId` int(11) DEFAULT NULL,
   PRIMARY KEY (`playerId`),
   UNIQUE KEY `RFHandleId` (`RFHandleId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
 
 --
 -- Dumping data for table `tmw_wire_comp`
@@ -168,7 +174,8 @@ INSERT INTO `tmw_wire_comp` (`playerId`, `playerEmail`, `campaign`, `registeredO
 (33, 'tests@test.com', 'wire-game', '2013-06-21 21:12:46', NULL),
 (34, 'g@b.com', 'wire-game', '2013-06-22 18:41:10', NULL),
 (35, 'a@a.fr', 'wire-game', '2013-06-22 18:45:48', NULL),
-(36, 'aaa@aaa.gr', 'wire-game', '2013-06-25 12:32:19', NULL);
+(36, 'aaa@aaa.gr', 'wire-game', '2013-06-25 12:32:19', NULL),
+(37, 'testdsd@gg.com', 'wire-game', '2013-06-25 16:17:21', NULL);
 
 -- --------------------------------------------------------
 
@@ -183,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_comp_details` (
   `detailsField` text NOT NULL,
   `detailsData` text NOT NULL,
   PRIMARY KEY (`playerDetailsId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=243 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=250 ;
 
 --
 -- Dumping data for table `tmw_wire_comp_details`
@@ -238,7 +245,14 @@ INSERT INTO `tmw_wire_comp_details` (`playerDetailsId`, `playerId`, `detailsFiel
 (239, 36, 'twitterhandle', ' '),
 (240, 36, 'playerScore', '0'),
 (241, 36, 'playerProgress', '0'),
-(242, 36, 'playerTime', '0');
+(242, 36, 'playerTime', '0'),
+(243, 37, 'question', 'absolutely__wild_horses_wouldn___t_stop_me.'),
+(244, 37, 'firstname', 'noTwet'),
+(245, 37, 'lastname', 'tester'),
+(246, 37, 'twitterhandle', ''),
+(247, 37, 'playerScore', '0'),
+(248, 37, 'playerProgress', '0'),
+(249, 37, 'playerTime', '0');
 
 -- --------------------------------------------------------
 

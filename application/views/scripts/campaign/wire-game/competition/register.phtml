@@ -7,7 +7,7 @@
 
 <div id="fb_wrapper" class="competition registerPage">
     <div class="header">        
-        <a href="/competition/<?php echo $this->facebookShare['campaign']; ?>/rsvp" title="">
+        <a href="/competition/<?php echo $this->facebookShare['campaign']; ?>/register" title="">
             <img src="/assets/img/competition/logo.jpg" alt="TMW" />
         </a>
     </div>
@@ -44,9 +44,6 @@
             </div>
          <?php } ?>
             <div id="fb_form">
-                <div class="startingField">
-                    <h3>Your Details</h3>
-                </div>
                 <div class="fieldsListing">                
                     <form method="post" action="/competition/<?php echo $this->facebookShare['campaign']; ?>/register?ajax=true" id="fbForm" enctype="multipart/form-data" accept-charset="utf-8">
                         <dl>
@@ -78,6 +75,12 @@
                                         echo $this->form->getElement($formElement['elementName'])->render();
                                         echo  '</div>';
                                     }
+                                    else if($formElement['elementName'] == 'question')
+                                    {
+                                        echo  '<div class="selectionList">';
+                                        echo $this->form->getElement($formElement['elementName'])->render();
+                                        echo  '</div>';                                        
+                                    }
                                     else if($formElement['elementName'] == 'twitterhandle')
                                     {
                                         echo '<dd class="fullWidth">To fully experience the digital installation we’ve created for the evening we’d love you to give us your Twitter handle. Don’t worry, it’s for nothing embarrassing. And there’s a chance you could win a bottle of bubbly too.</dd>';
@@ -102,7 +105,7 @@
                     </form>
                 </div>
             </div>
-            <p id="fb_content_copy">If you’re coming. Yay! See you on the night. <br />
+            <p id="formFooter">If you’re coming. Yay! See you on the night. <br />
                 If you’re not. Boo hoo! Follow us on Twitter and watch the fun unfold. 
                 <a href="https://twitter.com/tmwagency" title="@tmwagency" target="_blank">[@tmwagency]</a>
             </p>  

@@ -28,7 +28,12 @@
             <div class="playerDetails">
                 <h3>Loaded by the database user details</h3>
                 <?php
-                    echo '<p><a href="https://twitter.com/' . $this->playerDetails['twitterhandle'] . '" title="' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'] . ' Tweeter" target="_blank">' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'] . '<img src="' . $this->playerDetails['playerTwitterImg'] . '" alt="' . $this->playerDetails['twitterhandle'] . '" /></a></p>';
+                    if(isset($this->playerDetails['twitterhandle']) && !empty($this->playerDetails['twitterhandle'])){
+                        echo '<p><a href="https://twitter.com/' . $this->playerDetails['twitterhandle'] . '" title="' . $this->playerDetails['twitterhandle'] . '" target="_blank">' . $this->playerDetails['twitterhandle'] . '<img src="' . $this->playerDetails['playerTwitterImg'] . '" alt="' . $this->playerDetails['twitterhandle'] . '" /></a></p>';               
+                    }
+                    else{
+                        echo '<p><a href="https://twitter.com/tmwagency" title="' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '" target="_blank">' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '<img src="' . $this->playerDetails['playerTwitterImg'] . '" alt="' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '" /></a></p>';   
+                    }
                 ?>       
             </div>
             <div class="scoreList">
@@ -36,13 +41,28 @@
                 <ul>
                     <?php 
                         foreach($this->scoreList as $playerScore){
-                            echo '<li><a href="https://twitter.com/' . $playerScore['twitterhandle'] . '" title="' . $playerScore['firstname'] . ' ' . $playerScore['lastname'] . ' Tweeter" target="_blank">' . $playerScore['firstname'] . ' ' . $playerScore['lastname'] . '</a> scored ' . $playerScore['playerScore'] . ' (' . $playerScore['playerProgress'] . '%)</li>';
+                            if(isset($playerScore['twitterhandle']) && !empty($playerScore['twitterhandle'])){
+                                echo '<li><a href="https://twitter.com/' . $playerScore['twitterhandle'] . '" title="' . $playerScore['twitterhandle'] . '" target="_blank">' . $playerScore['twitterhandle'] . '</a> scored ' . $playerScore['playerScore'] . ' (' . $playerScore['playerProgress'] . '%)</li>';
+                            }
+                            else{
+                                echo '<li><a href="https://twitter.com/tmwagency" title="' . $playerScore['firstname'] . ' ' . $playerScore['lastname'][0] . '" target="_blank">' . $playerScore['firstname'] . ' ' . $playerScore['lastname'][0] . '</a> scored ' . $playerScore['playerScore'] . ' (' . $playerScore['playerProgress'] . '%)</li>';   
+                            }
                         }
                     ?>
                 </ul>
             </div>
             <div class="gameGallery">
                 <h3>Photogallery</h3>     
+            </div>
+            <div class="twiterFeed">
+                <h3>Loaded the tweets from the user timeline</h3>
+                <ul>
+                    <?php
+                        foreach ($this->twitterFeed as $tweet) {
+                            echo '<li>' . $tweet['text']. '</li>';
+                        }
+                    ?>                      
+                </ul>     
             </div>
         </div>  
     </div>
