@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 20, 2013 at 12:47 AM
+-- Generation Time: Jun 25, 2013 at 10:22 AM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -26,7 +26,6 @@ SET time_zone = "+00:00";
 -- Table structure for table `tmw_wire_app_form_elements`
 --
 
-DROP TABLE IF EXISTS `tmw_wire_app_form_elements`;
 CREATE TABLE IF NOT EXISTS `tmw_wire_app_form_elements` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `campaignName` varchar(255) NOT NULL DEFAULT 'tmw-app' COMMENT 'the name of the facebook competition this field belongs to',
@@ -47,14 +46,14 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_app_form_elements` (
 --
 
 INSERT INTO `tmw_wire_app_form_elements` (`id`, `campaignName`, `elementName`, `elementType`, `elementLabel`, `elementValue`, `elementError`, `elementVisibility`, `elementOrder`, `elementRequired`, `elementExtras`) VALUES
-(1, 'wire-game', 'question', 'Radio', 'What do ya digg ma?', '', 'Please select the sex you preffer', 1, 1, '1', 'Male|*|Female|*|All'),
+(1, 'wire-game', 'question', 'Radio', 'What do ya digg ma?', '', 'Please select answer', 1, 4, '1', 'Male|*|Female|*|All'),
 (2, 'wire-game', 'email', 'Email', 'Email', 'e-mail*', 'Please type a valid email', 1, 2, '1', ''),
 (3, 'wire-game', 'photo', 'File', 'Send your photos after the competition', '', 'Please upload a file', 0, 0, '0', ''),
-(4, 'wire-game', 'firstname', 'Text', 'First Name', 'First Name', 'Please type your first name', 1, 3, '1', ''),
+(4, 'wire-game', 'firstname', 'Text', 'First Name', 'First Name', 'Please type your First Name', 1, 0, '1', ''),
 (5, 'wire-game', 'newsletter', 'Checkbox', 'You want newsletter?', 'yes', 'you want one?', 0, 14, '0', ''),
 (6, 'wire-game', 'textquestion', 'Textarea', 'Praesent vehicula, sem nec euismod posuere, lectus tortor varius tellus, ut congue nunc est sit amet enim.', '', 'Please type your answer', 0, 5, '0', ''),
-(7, 'wire-game', 'lastname', 'Text', 'Last Name', 'Last Name', 'Please type your last name', 1, 4, '1', ''),
-(8, 'wire-game', 'tweeter', 'Text', 'Tweeter Username', 'username', 'Please type your Tweeter Username', 1, 6, '0', ''),
+(7, 'wire-game', 'lastname', 'Text', 'Last Name', 'Last Name', 'Please type your Last Name', 1, 1, '1', ''),
+(8, 'wire-game', 'twitterhandle', 'Text', 'Twitter Handle', 'Twitter Handle', 'Please type your Twitter Handle', 1, 3, '1', ''),
 (9, 'wire-game', 'address2', 'Text', 'Street Line 2', 'Street Line 2', 'Please type your address 2', 0, 7, '0', ''),
 (10, 'wire-game', 'city', 'Text', 'City', 'City', 'Please type your city', 0, 8, '0', ''),
 (11, 'wire-game', 'postalcode', 'Text', 'Postal Code', 'Postal Code', 'Please give your Postal Code', 0, 9, '0', ''),
@@ -70,7 +69,6 @@ INSERT INTO `tmw_wire_app_form_elements` (`id`, `campaignName`, `elementName`, `
 -- Table structure for table `tmw_wire_app_settings`
 --
 
-DROP TABLE IF EXISTS `tmw_wire_app_settings`;
 CREATE TABLE IF NOT EXISTS `tmw_wire_app_settings` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `campaignName` varchar(25) NOT NULL DEFAULT 'tmw-app' COMMENT 'the competition name to distinguish saved user data',
@@ -96,7 +94,6 @@ INSERT INTO `tmw_wire_app_settings` (`id`, `campaignName`, `title`, `facebookApp
 -- Table structure for table `tmw_wire_app_texts`
 --
 
-DROP TABLE IF EXISTS `tmw_wire_app_texts`;
 CREATE TABLE IF NOT EXISTS `tmw_wire_app_texts` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `campaignName` varchar(255) NOT NULL DEFAULT 'tmw-app' COMMENT 'the name of the currentfacebook competition',
@@ -116,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_app_texts` (
 --
 
 INSERT INTO `tmw_wire_app_texts` (`id`, `campaignName`, `headerText1`, `headerText2`, `displayImage`, `introText`, `introVideo`, `thankText`, `tncText`, `policyText`) VALUES
-(1, 'wire-game', 'Fill in your details and get invitation for', 'TMW WIRE GAME', 1, 'Nulla eu arcu est, in porttitor est. Vivamus sagittis mi ut lectus auctor non aliquet elit euismod. Mauris sit amet elit nec enim accumsan dapibus. Quisque ut iaculis risus. Quisque arcu odio, accumsan nec malesuada sed, tempor in tortor. Nunc viverra, turpis a fermentum commodo, orci elit pellentesque lacus, et convallis orci magna nec enim. ', '', 'bbbb advv gh fh sf fgsgs adfa adfa f fda f', 'http://www.tmw.co.uk/', 'http://www.tmw.co.uk/');
+(1, 'wire-game', 'Sign up', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor ', 1, '', '', 'Nulla eu arcu est, in porttitor est. Vivamus sagittis mi ut lectus auctor non aliquet elit euismod. Mauris sit amet elit nec enim accumsan dapibus. Quisque ut iaculis risus. Quisque arcu odio, accumsan nec malesuada sed, tempor in tortor. Nunc viverra, turpis a fermentum commodo, orci elit pellentesque lacus, et convallis orci magna nec enim. ', 'http://www.tmw.co.uk/', 'http://www.tmw.co.uk/');
 
 -- --------------------------------------------------------
 
@@ -124,7 +121,6 @@ INSERT INTO `tmw_wire_app_texts` (`id`, `campaignName`, `headerText1`, `headerTe
 -- Table structure for table `tmw_wire_app_users`
 --
 
-DROP TABLE IF EXISTS `tmw_wire_app_users`;
 CREATE TABLE IF NOT EXISTS `tmw_wire_app_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
@@ -146,22 +142,27 @@ INSERT INTO `tmw_wire_app_users` (`id`, `username`, `password`, `email`) VALUES
 -- Table structure for table `tmw_wire_comp`
 --
 
-DROP TABLE IF EXISTS `tmw_wire_comp`;
 CREATE TABLE IF NOT EXISTS `tmw_wire_comp` (
   `playerId` int(11) NOT NULL AUTO_INCREMENT,
   `playerEmail` varchar(255) NOT NULL,
   `campaign` varchar(64) NOT NULL,
   `registeredOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`playerId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+  `RFHandleId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`playerId`),
+  UNIQUE KEY `RFHandleId` (`RFHandleId`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
 
 --
 -- Dumping data for table `tmw_wire_comp`
 --
 
-INSERT INTO `tmw_wire_comp` (`playerId`, `playerEmail`, `campaign`, `registeredOn`) VALUES
-(30, 'gbardis@tmw.co.uk', 'wire-game', '2013-06-19 23:06:47'),
-(31, 'tmw@tmw.co.uk', 'wire-game', '2013-06-20 00:44:55');
+INSERT INTO `tmw_wire_comp` (`playerId`, `playerEmail`, `campaign`, `registeredOn`, `RFHandleId`) VALUES
+(30, 'gbardis@tmw.co.uk', 'wire-game', '2013-06-19 23:06:47', NULL),
+(31, 'tmw@tmw.co.uk', 'wire-game', '2013-06-20 00:44:55', NULL),
+(32, 'test@test.com', 'wire-game', '2013-06-21 21:10:23', NULL),
+(33, 'tests@test.com', 'wire-game', '2013-06-21 21:12:46', NULL),
+(34, 'g@b.com', 'wire-game', '2013-06-22 18:41:10', NULL),
+(35, 'a@a.fr', 'wire-game', '2013-06-22 18:45:48', NULL);
 
 -- --------------------------------------------------------
 
@@ -169,14 +170,13 @@ INSERT INTO `tmw_wire_comp` (`playerId`, `playerEmail`, `campaign`, `registeredO
 -- Table structure for table `tmw_wire_comp_details`
 --
 
-DROP TABLE IF EXISTS `tmw_wire_comp_details`;
 CREATE TABLE IF NOT EXISTS `tmw_wire_comp_details` (
   `playerDetailsId` int(11) NOT NULL AUTO_INCREMENT,
   `playerId` int(11) NOT NULL,
   `detailsField` text NOT NULL,
   `detailsData` text NOT NULL,
   PRIMARY KEY (`playerDetailsId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=208 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=236 ;
 
 --
 -- Dumping data for table `tmw_wire_comp_details`
@@ -186,17 +186,45 @@ INSERT INTO `tmw_wire_comp_details` (`playerDetailsId`, `playerId`, `detailsFiel
 (200, 31, 'question', 'all'),
 (199, 30, 'playerProgress', '0'),
 (198, 30, 'playerScore', '0'),
-(197, 30, 'tweeter', 'bardius'),
+(197, 30, 'twitterhandle', 'bardius'),
 (196, 30, 'lastname', 'Bardis'),
 (195, 30, 'firstname', 'George'),
 (194, 30, 'question', 'male'),
 (201, 31, 'firstname', 'Tmw'),
 (202, 31, 'lastname', 'Agency'),
-(203, 31, 'tweeter', 'tmw'),
+(203, 31, 'twitterhandle', 'tmw'),
 (204, 31, 'playerScore', '98'),
 (205, 31, 'playerProgress', '0'),
 (206, 31, 'playerTime', '8'),
-(207, 30, 'playerTime', '10');
+(207, 30, 'playerTime', '10'),
+(208, 32, 'firstname', 'tester'),
+(209, 32, 'lastname', 'Testing'),
+(210, 32, 'twitterhandle', 'testerT'),
+(211, 32, 'question', 'all'),
+(212, 32, 'playerScore', '0'),
+(213, 32, 'playerProgress', '0'),
+(214, 32, 'playerTime', '0'),
+(215, 33, 'firstname', 'test2'),
+(216, 33, 'lastname', 'test last'),
+(217, 33, 'twitterhandle', 'testerT2'),
+(218, 33, 'question', 'female'),
+(219, 33, 'playerScore', '0'),
+(220, 33, 'playerProgress', '0'),
+(221, 33, 'playerTime', '0'),
+(222, 34, 'firstname', 'test3'),
+(223, 34, 'lastname', 'testerl'),
+(224, 34, 'twitterhandle', 'bbbb'),
+(225, 34, 'question', 'female'),
+(226, 34, 'playerScore', '0'),
+(227, 34, 'playerProgress', '0'),
+(228, 34, 'playerTime', '0'),
+(229, 35, 'firstname', 'fasfsd'),
+(230, 35, 'lastname', 'fsdfdsf'),
+(231, 35, 'twitterhandle', 'ssad'),
+(232, 35, 'question', 'female'),
+(233, 35, 'playerScore', '0'),
+(234, 35, 'playerProgress', '0'),
+(235, 35, 'playerTime', '0');
 
 -- --------------------------------------------------------
 
@@ -204,7 +232,6 @@ INSERT INTO `tmw_wire_comp_details` (`playerDetailsId`, `playerId`, `detailsFiel
 -- Table structure for table `tmw_wire_comp_names`
 --
 
-DROP TABLE IF EXISTS `tmw_wire_comp_names`;
 CREATE TABLE IF NOT EXISTS `tmw_wire_comp_names` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `compName` varchar(255) DEFAULT NULL COMMENT 'the name of the fb competition',

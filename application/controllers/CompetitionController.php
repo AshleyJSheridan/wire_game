@@ -252,6 +252,45 @@ class CompetitionController extends Zend_Controller_Action {
     }
 
     /**
+     * Like Gate page
+     */
+    private function photogalleryAction() {
+    	// view only
+    }
+
+    /**
+     * Load the twitter user details
+     */
+    private function gettwitterdetailsAction($twitterUsername) {
+        require_once APPLICATION_PATH . '/../library/TwitterAPIExchange.php';
+        
+        // Set up your settings with the keys you get from the dev site
+        $settings = array(
+            'oauth_access_token'        => "91971683-ybrsDIEGYHSjtl7akrMKV7ScKcznlVJIeiUkHyrvi",
+            'oauth_access_token_secret' => "YUIVnfJZZYdM6DGmxb9IhVTTS13vY87vfAU46r3rE",
+            'consumer_key'              => "4XUvM9jsTwfLehkY6NQ",
+            'consumer_secret'           => "LYxRZcO1Oao5fSDefhvkrZd41OcrML8we0AOkvCUDS0"
+        );
+        
+        $url                = 'https://api.twitter.com/1.1/users/show.json';        
+        $queryfields        = '?screen_name=' . $twitterUsername . '&skip_status=1';
+        $requestMethod      = 'GET';
+        
+        $twitter            = new TwitterAPIExchange($settings);
+        $twitterUserDetails = $twitter->setGetfield($queryfields)->buildOauth($url, $requestMethod)->performRequest();
+        $twitterUserDetails = Zend_Json::decode($twitterUserDetails);
+        
+        if(empty($twitterUserDetails) || !isset($twitterUserDetails)){
+            $largeImageUrl = '/assets/img/competition/logo.jpg';
+        }
+        else{
+            $largeImageUrl      = str_replace("normal", "bigger", $twitterUserDetails['profile_image_url']);            
+        }
+        
+        return $largeImageUrl;
+    }
+
+    /**
      * Get the player details json
      */
     public function getplayerAction() {
@@ -286,29 +325,36 @@ class CompetitionController extends Zend_Controller_Action {
     }
 
     /**
-     * Load the twitter user details
+     * Post twitter message
      */
-    private function gettwitterdetailsAction($twitterUsername) {
+    public function posttotwitterAction() {
         require_once APPLICATION_PATH . '/../library/TwitterAPIExchange.php';
         
         // Set up your settings with the keys you get from the dev site
         $settings = array(
-            'oauth_access_token'        => "91971683-8eDcHVseTeiXyyKATcITuG4Mxh3c6VzudAXSasrM",
-            'oauth_access_token_secret' => "axqS0xwSUZgKlbGdVF4pn8pM5OKQhGfOi1GCsiMXW4",
+            'oauth_access_token'        => "91971683-ybrsDIEGYHSjtl7akrMKV7ScKcznlVJIeiUkHyrvi",
+            'oauth_access_token_secret' => "YUIVnfJZZYdM6DGmxb9IhVTTS13vY87vfAU46r3rE",
             'consumer_key'              => "4XUvM9jsTwfLehkY6NQ",
             'consumer_secret'           => "LYxRZcO1Oao5fSDefhvkrZd41OcrML8we0AOkvCUDS0"
         );
         
-        $url                = 'https://api.twitter.com/1.1/users/show.json';        
-        $queryfields        = '?screen_name=' . $twitterUsername . '&skip_status=1';
-        $requestMethod      = 'GET';
+        $twitterMsg = urlencode('Test Msg');
+        $twitterImg = APPLICATION_PATH . '/../public_html/assets/img/competition/logo.jpg';
+                
+        $url                = 'https://api.twitter.com/1.1/statuses/update_with_media.json';
+        $requestMethod      = 'POST';
+        $queryfields = array(
+            'media[]'   => "@{$twitterImg}",
+            'status'    => $twitterMsg
+        );
         
         $twitter            = new TwitterAPIExchange($settings);
-        $twitterUserDetails = $twitter->setGetfield($queryfields)->buildOauth($url, $requestMethod)->performRequest();
-        $twitterUserDetails = Zend_Json::decode($twitterUserDetails);
+        $twitterPostStatus  = $twitter->buildOauth($url, $requestMethod)->setPostfields($queryfields)->performRequest();
         
-        $largeImageUrl      = str_replace("normal", "bigger", $twitterUserDetails['profile_image_url']);
-        
-        return $largeImageUrl;
+        $this->getResponse()
+                ->setHeader('Content-Type', 'text/html')
+                ->setBody($twitterPostStatus)
+                ->sendResponse();
+        exit;
     }
 }
