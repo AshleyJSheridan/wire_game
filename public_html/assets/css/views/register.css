@@ -279,10 +279,11 @@ a.button{
 /************************ ERRORS **********************/
 
 .errorHolder{
-    float:left;
-    width:410px;
+    float:right;
+    width:260px;
     clear:both;
-    padding:24px 180px 24px 30px;
+    padding:0 180px 0 30px;
+    margin-top:-68px;
 }
 
 .errorHolder p{
@@ -297,6 +298,34 @@ a.button{
     background-color: #fcdbdc!important;
 }
 
+/***************** REQUESTED FINAL CHANGES *************/
+#question-label{
+    display:none!important;
+}
+
+.selectionList{
+    float:left;
+    width:100%;
+    margin-bottom:24px;
+}
+
+.selectionList label{
+    margin:2px 0!important;    
+}
+
+.fullWidth{
+    margin-top:24px!important;   
+    margin-bottom:8px!important;   
+}
+
+#formFooter{
+    font-size: 16px;
+    line-height: 22px;
+    margin-bottom: 32px;
+    float:left;
+    width:100%;
+    margin-top:24px!important;  
+}
 /****************** THANK YOU PAGE **************/
 
 #fb_wrapper.submit {

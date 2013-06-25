@@ -75,6 +75,12 @@
                                         echo $this->form->getElement($formElement['elementName'])->render();
                                         echo  '</div>';
                                     }
+                                    else if($formElement['elementName'] == 'question')
+                                    {
+                                        echo  '<div class="selectionList">';
+                                        echo $this->form->getElement($formElement['elementName'])->render();
+                                        echo  '</div>';                                        
+                                    }
                                     else if($formElement['elementName'] == 'twitterhandle')
                                     {
                                         echo '<dd class="fullWidth">To fully experience the digital installation we’ve created for the evening we’d love you to give us your Twitter handle. Don’t worry, it’s for nothing embarrassing. And there’s a chance you could win a bottle of bubbly too.</dd>';
@@ -99,10 +105,10 @@
                     </form>
                 </div>
             </div>
-            <h2 id="fb_content_copy">If you’re coming. Yay! See you on the night. <br />
+            <p id="formFooter">If you’re coming. Yay! See you on the night. <br />
                 If you’re not. Boo hoo! Follow us on Twitter and watch the fun unfold. 
                 <a href="https://twitter.com/tmwagency" title="@tmwagency" target="_blank">[@tmwagency]</a>
-            </h2>  
+            </p>  
         </div>                
     </div>
 </div>

@@ -46,6 +46,17 @@
                     ?>
                 </ul>
             </div>
+            <div class="twiterFeed">
+                <h3>Loaded the tweets from the user timeline</h3>
+                <ul>
+                    
+                </ul>
+                <?php
+                    foreach ($this->twitterFeed as $tweet) {
+                        echo '<li>' . $tweet['text']. '</li>';
+                    }
+                ?>       
+            </div>
         </div>  
     </div>
 </div>

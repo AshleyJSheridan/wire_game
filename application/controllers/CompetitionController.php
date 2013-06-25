@@ -118,6 +118,8 @@ class CompetitionController extends Zend_Controller_Action {
         
         $this->view->playerDetails = $playerDetails;
         
+        $this->view->twitterFeed = Zend_Json::decode($this->gettwitterfeedAction());
+        
         $this->view->scoreList  = $this->_tmwDBConnect->getScoreList($this->_tmwCampaign);
     }
 
@@ -295,6 +297,36 @@ class CompetitionController extends Zend_Controller_Action {
         }
         
         return $largeImageUrl;
+    }
+
+    /**
+     * Load the twitter user details
+     */
+    public function gettwitterfeedAction() {
+        require_once APPLICATION_PATH . '/../library/TwitterAPIExchange.php';
+        
+        // Set up your settings with the keys you get from the dev site
+        $settings = array(
+            'oauth_access_token'        => "91971683-ybrsDIEGYHSjtl7akrMKV7ScKcznlVJIeiUkHyrvi",
+            'oauth_access_token_secret' => "YUIVnfJZZYdM6DGmxb9IhVTTS13vY87vfAU46r3rE",
+            'consumer_key'              => "4XUvM9jsTwfLehkY6NQ",
+            'consumer_secret'           => "LYxRZcO1Oao5fSDefhvkrZd41OcrML8we0AOkvCUDS0"
+        );
+        
+        $url                = 'https://api.twitter.com/1.1/statuses/user_timeline.json';        
+        $queryfields        = '?screen_name=bardius';
+        $requestMethod      = 'GET';
+        
+        $twitter            = new TwitterAPIExchange($settings);
+        $twitterFeed        = $twitter->setGetfield($queryfields)->buildOauth($url, $requestMethod)->performRequest();
+        
+        return $twitterFeed;
+        
+        $this->getResponse()
+                ->setHeader('Content-Type', 'text/html')
+                ->setBody($twitterFeed)
+                ->sendResponse();
+        exit;
     }
 
     /**
