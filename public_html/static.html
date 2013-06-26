@@ -8,16 +8,50 @@
 	<link href="/assets/css/views/normalize.css" rel="stylesheet">
 	<link href="/assets/css/views/competition.css" rel="stylesheet">
 
+	<script type="text/javascript" src="/assets/js/swfobject.js"></script>
+	<script type="text/javascript">
+	swfobject.registerObject("scrubber", "9.0.0", "expressInstall.swf");
+	</script>
+
 </head>
 
 <body id="wire-game">
 
 	<div class="leaderboard">
-
+		<ul>
+			<li>
+				<span class="username">@luke</span>
+				<span class="userscore">500</span>
+			</li>
+			<li>
+				<span class="username">@luke</span>
+				<span class="userscore">500</span>
+			</li>
+			<li>
+				<span class="username">@luke</span>
+				<span class="userscore">500</span>
+			</li>
+			<li>
+				<span class="username">@luke</span>
+				<span class="userscore">500</span>
+			</li>
+		</ul>
 	</div>
 
 	<div class="video-scrubber">
-
+		<object id="scrubber" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="500" height="301">
+			<param name="movie" value="videoTestV2.swf" />
+			<!--[if !IE]>-->
+			<object type="application/x-shockwave-flash" data="videoTestV2.swf" width="500" height="301" wmode="transparent">
+			<!--<![endif]-->
+			<div>
+				<h1>Alternative content</h1>
+				<p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+			</div>
+			<!--[if !IE]>-->
+			</object>
+			<!--<![endif]-->
+		</object>
 	</div>
 
 	<div class="live-feed">
@@ -33,7 +67,7 @@
 	</div>
 
 	<div class="score">
-
+		56%
 	</div>
 
 
@@ -43,6 +77,17 @@
 
 <script type="text/javascript" src="/assets/js/jquery-1.10.1.min.js"></script>
 <script type="text/javascript" src="/assets/js/script.js"></script>
+		<script>
+		function getFlashMovie(movieName) {
+			var isIE = navigator.appName.indexOf("Microsoft") != -1;
+			 return (isIE) ? window[movieName] : document[movieName];
+		}
+		function callToActionscript(str)
+		{
+			var flashObj = swfobject.getObjectById('scrubber');
+			flashObj.newPerc(str);
+		}
+		</script>
 
 
 </body></html>

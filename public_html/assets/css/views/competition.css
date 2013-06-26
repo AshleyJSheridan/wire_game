@@ -1,35 +1,91 @@
 body {
 	background: #000 url(/assets/img/competition/bg.jpg) center top no-repeat;
+	min-height: 800px;
+}
+
+.leaderboard,
+.video-scrubber,
+.live-feed,
+.tweets,
+.now-playing,
+.score {
+	position: absolute;
+	left: 50%;
+	/*background-color: #fff;*/
 }
 
 /* Leaderboard */
 .leaderboard {
+	width: 342px;
+	height: 251px;
+	top: 140px;
+	margin-left: -590px;
+	font-weight: bold;
+	color: #fff;
+}
 
+.leaderboard li {
+	overflow: hidden;
+	padding: 0 20px;
+	height: 50px;
+	line-height: 50px;
+	font-size: 20px;
+}
+
+.username {
+	float: left;
+}
+
+.userscore {
+	float: right;
+	width: 80px;
+	text-align: right;
 }
 
 /* Video Scrubber */
 .video-scrubber {
-
+	width: 500px;
+	height: 301px;
+	top: 136px;
+	margin-left: -208px;
 }
 
 /* Live feed */
 .live-feed {
-
+	width: 443px;
+	height: 272px;
+	top: 490px;
+	margin-left: 157px;
 }
 
 /* Latest tweets */
 .tweets {
+	width: 334px;
+	height: 208px;
+	top: 555px;
+	margin-left: -575px;
 
 }
 
 /* Now playing */
 .now-playing {
-
+	width: 276px;
+	height: 242px;
+	top: 46px;
+	margin-left: 319px;
 }
 
 /* Score */
 .score {
-
+	width: 106px;
+	height: 106px;
+	top: 347px;
+	margin-left: 397px;
+	line-height: 106px;
+	text-align: center;
+	color: #fff;
+	font-size: 40px;
+	font-weight: bold;
 }
 
 
@@ -56,12 +112,6 @@ body {
 .contentsHolderOuter{
     width:100%;
     float:left;
-}
-* {
-    margin: 0;
-    padding: 0;
-    outline: none!important;
-    box-sizing: border-box;
 }
 
 *:focus{
@@ -100,23 +150,11 @@ p {
     clear:both;
 }
 
-h1, h2, h3, h4, h5, h6, ul, li, em, strong, pre, code {
-    padding: 0;
-    margin: 0;
-    font-size:15px;
-    line-height:22px;
-    font-weight: normal;
-    font-style: normal;
-}
-
-table {
-    font-size: inherit;
-    margin-bottom:15px;
-    float:left;
-}
 
 ul {
     list-style: none;
+    margin-left: 0;
+    padding-left: 0;
 }
 
 img {
