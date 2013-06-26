@@ -341,14 +341,14 @@ class CompetitionController extends Zend_Controller_Action {
         );
         
         $url                = 'https://api.twitter.com/1.1/statuses/user_timeline.json';        
-        $queryfields        = '?screen_name=' . $this->_appSettings['twitter_user'] . '&count=5';
+        $queryfields        = '?screen_name=' . $this->_appSettings['twitter_user'] . '&count=3';
         $requestMethod      = 'GET';
         
         $twitter            = new TwitterAPIExchange($settings);
         $twitterFeed        = $twitter->setGetfield($queryfields)->buildOauth($url, $requestMethod)->performRequest();
         
         // Uncomment for the actual ajax responce so json will be available 
-        return $twitterFeed;
+        //return $twitterFeed;
         
         $this->getResponse()
                 ->setHeader('Content-Type', 'text/html')
@@ -496,6 +496,7 @@ class CompetitionController extends Zend_Controller_Action {
         }
         
         $playerDetails['playerTwitterImg'] = $playerTwitterImg;
+        $playerDetails['playerScore']      = '0';
         
         $gameStartData['playerDetails'] = $playerDetails;        
         // Getting the latest scoreboard
@@ -545,7 +546,7 @@ class CompetitionController extends Zend_Controller_Action {
         $playerDetails['playerTwitterImg'] = $playerTwitterImg;
         
         // Calculate score        
-        $playerDetails['playerScore'] = 100; //($playerDetails['playerProgress'] * $playerDetails['playerTime']) / 100;
+        $playerDetails['playerScore'] = ($playerDetails['playerProgress'] * $playerDetails['playerTime']) / 100;
         
         // Save playerscore
         $this->_tmwDBConnect->setPlayerScore($usedPlayerId['playerId'], $playerDetails['playerScore']);
@@ -563,6 +564,26 @@ class CompetitionController extends Zend_Controller_Action {
         $gameEndData['playerPhoto'] = $playerPhoto;
         
     	$jsonData = utf8_encode(Zend_Json::encode($gameEndData));
+        
+        $this->getResponse()
+                ->setHeader('Content-Type', 'text/html')
+                ->setBody($jsonData)
+                ->sendResponse();
+        exit;
+    }
+
+    /**
+     * The sample contents from the motion tracking url
+     */
+    public function getmotiondataAction() {
+        
+        $motiondata['RFHandleId']       = 'bardis';
+        $motiondata['game_status']      = 'on';
+        $motiondata['game_progress']    = 0;
+        $motiondata['game_time']        = 0;
+        
+        
+    	$jsonData = utf8_encode(Zend_Json::encode($motiondata));
         
         $this->getResponse()
                 ->setHeader('Content-Type', 'text/html')
