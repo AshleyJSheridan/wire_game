@@ -68,8 +68,9 @@ class TMW_Competition extends Zend_Db_Table
             // Sort the data with volume descending, edition ascending
             // Add $data as the last parameter, to sort by the common key
             array_multisort($scores, SORT_DESC, $scoreList);
+            $topTen = array_slice($scoreList, 0, 10);
             
-            return $scoreList;
+            return $topTen;
         }
         
     }
@@ -85,10 +86,21 @@ class TMW_Competition extends Zend_Db_Table
         }	
     }
     
+    // load the user list from the database
+    public function getPlayerIdfromRF($RFHandleId, $campaignName) {
+        $data = $this->getAdapter()->query("SELECT c.playerId FROM `tmw_wire_comp` as c WHERE c.campaign = '".$campaignName."' AND c.RFHandleId = '".$RFHandleId."';")->fetch();
+        
+        if(!$data) {
+            return null; //throw new Exception('Could not find user from database');
+        } else {
+            return $data;
+        }	
+    }
+    
     // load the player details from the database
     public function getPlayerDetails($playerId, $campaignName) {
         $data = $this->getAdapter()->query("SELECT c.playerId, group_concat( d.detailsData separator '|*|') as `playerData` , group_concat( d.detailsField separator '|*|') as `playerDataKeys` FROM `tmw_wire_comp` as c join `tmw_wire_comp_details` as d on c.playerId = d.playerId WHERE c.campaign = '".$campaignName."' AND c.playerId = '".$playerId."' GROUP BY c.playerId;")->fetchAll();
-        
+
         if(!$data) {
             throw new Exception('Could not load user details from database');
         } else {
@@ -125,4 +137,21 @@ class TMW_Competition extends Zend_Db_Table
             return $row;
         }	
     }
+
+    // set the Current Player score at game end
+    public function setPlayerScore($playerId, $playerScore) {
+        
+        $data = array(
+            'datailsData'   => $playerScore
+        );
+        
+        $where[] = $this->getAdapter()->quoteInto('playerId = ?', $playerId);
+        $where[] = $this->getAdapter()->quoteInto('detailsField = ?', 'playerScore');
+        var_dump($this->update($data, $where));
+        die;
+        
+        $this->update($data, $where);
+    }
+    
+    
 }

@@ -18,6 +18,9 @@ class CompetitionController extends Zend_Controller_Action {
         
     public function init() {
         $this->_tmwDBConnect            = new TMW_Competition();
+        $this->_tmwDBGameStatus         = new TMW_CurrentGameState();
+        $this->_gameStatus              = $this->_tmwDBGameStatus->getCurrentGameState();
+        
         $this->_appSettings             = $this->_tmwDBConnect->getAppSettings();
         $this->_appContents             = $this->_tmwDBConnect->getAppContents($this->_appSettings['campaignName']);
         $this->_appFormElements         = $this->_tmwDBConnect->getAppFormElements($this->_appSettings['campaignName']);
@@ -62,6 +65,7 @@ class CompetitionController extends Zend_Controller_Action {
         
         //set page form elements texts
         $this->view->formElements                       = $this->_appFormElements;
+        $this->registerRFHandleId                       = null;
 
         // set layout
         $this->_helper->layout->setLayout('competition');        
@@ -107,10 +111,18 @@ class CompetitionController extends Zend_Controller_Action {
         //$this->_tmwWebsocket    = new WebSocket_WebSocket('ws://' . $this->getRequest()->getHttpHost() .':80/competition/' . $this->_tmwCampaign);
         //var_dump($this->_tmwWebsocket);
         
-        $playerId = 30;
+        $playerId = $this->_gameStatus['playerId'];
         
         if(isset($playerId)){
             $playerDetails = $this->_tmwDBConnect->getPlayerDetails($playerId, $this->_tmwCampaign);
+        }
+        else{
+            $playerDetails['firstname']         = 'TMW';
+            $playerDetails['lastname']          = 'Agency';
+            $playerDetails['twitterhandle']     = 'tmwagency';
+            $playerDetails['playerScore']       = '0';
+            $playerDetails['playerProgress']    = '0';
+            $playerDetails['playerTime']        = '0';
         }
         
         if(isset($playerDetails['twitterhandle']) && !empty($playerDetails['twitterhandle'])){
@@ -148,6 +160,13 @@ class CompetitionController extends Zend_Controller_Action {
                 $formHasImageField = true;
             }
         }
+        
+        if ($this->getRequest()->getMethod() == 'GET') {
+            $this->view->registerRFHandleId = $this->_request->getQuery('RFHandleId');
+        }
+        else{
+            $this->view->registerRFHandleId = null;            
+        }
 
         // posting
         if ($this->_request->isPost()) {
@@ -175,7 +194,7 @@ class CompetitionController extends Zend_Controller_Action {
                     // split mandatory data into separate array
                     $mandatoryData = array(
                         'playerEmail'   => $formData['playerEmail'],
-                        'RFHandleId'    => null,
+                        'RFHandleId'    => $formData['RFHandleId'],
                         'campaign'      => $formData['campaignName']
                     );
 
@@ -432,6 +451,118 @@ class CompetitionController extends Zend_Controller_Action {
         $modalContents['img'] = 'winner image path';
         
     	$jsonData = utf8_encode(Zend_Json::encode($modalContents));
+        
+        $this->getResponse()
+                ->setHeader('Content-Type', 'text/html')
+                ->setBody($jsonData)
+                ->sendResponse();
+        exit;
+    }
+
+    /**
+     * Start a new Game AJAX callback
+     */
+    public function gamestartAction($usedRFHandleId = null) {
+        
+        $gameStatus     = 'on';
+        $gameProgress   = 0;
+        $playerPhoto    = null;
+        
+        // Getting player id from the RF handle
+        $usedRFHandleId     = 'bardis';        //REMOVE ONLY FOR TESTING
+        $usedPlayerId       = $this->_tmwDBConnect->getPlayerIdfromRF($usedRFHandleId, $this->_tmwCampaign);
+        
+        // Save the current user in the current game state
+        $this->_tmwDBGameStatus->setCurrentPlayer($usedPlayerId['playerId'], $gameStatus, $gameProgress, $playerPhoto);        
+        
+        if(isset($usedPlayerId['playerId'])){
+            $playerDetails = $this->_tmwDBConnect->getPlayerDetails($usedPlayerId['playerId'], $this->_tmwCampaign);
+        }
+        else{
+            $playerDetails['firstname']         = 'TMW';
+            $playerDetails['lastname']          = 'Agency';
+            $playerDetails['twitterhandle']     = 'tmwagency';
+            $playerDetails['playerScore']       = '0';
+            $playerDetails['playerProgress']    = '0';
+            $playerDetails['playerTime']        = '0';
+        }
+        
+        if(isset($playerDetails['twitterhandle']) && !empty($playerDetails['twitterhandle'])){
+            $playerTwitterImg = $this->gettwitterdetailsAction($playerDetails['twitterhandle']);            
+        }
+        else
+        {
+            $playerTwitterImg = '/assets/img/admin/logo.jpg';              
+        }
+        
+        $playerDetails['playerTwitterImg'] = $playerTwitterImg;
+        
+        $gameStartData['playerDetails'] = $playerDetails;        
+        // Getting the latest scoreboard
+        $gameStartData['scoreBoard']    = $this->_tmwDBConnect->getScoreList($this->_tmwCampaign);        
+        // Resetting the video progress
+        $gameStartData['videoProgress'] = 0;
+        
+    	$jsonData = utf8_encode(Zend_Json::encode($gameStartData));
+        
+        $this->getResponse()
+                ->setHeader('Content-Type', 'text/html')
+                ->setBody($jsonData)
+                ->sendResponse();
+        exit;
+    }
+    
+    /**
+     * Start a new Game AJAX callback
+     */
+    public function gameendAction($playerPhoto = '/assets/img/admin/logo.jpg') {
+        
+        $gameStatus     = 'off';        
+        
+        // Getting player id from the current game status table
+        $usedPlayerId   = $this->_tmwDBGameStatus->getCurrentPlayer();       
+        
+        if(isset($usedPlayerId['playerId'])){
+            $playerDetails = $this->_tmwDBConnect->getPlayerDetails($usedPlayerId['playerId'], $this->_tmwCampaign);
+        }
+        else{
+            $playerDetails['firstname']         = 'TMW';
+            $playerDetails['lastname']          = 'Agency';
+            $playerDetails['twitterhandle']     = 'tmwagency';
+            $playerDetails['playerScore']       = '0';
+            $playerDetails['playerProgress']    = '0';
+            $playerDetails['playerTime']        = '0';
+        }
+        
+        if(isset($playerDetails['twitterhandle']) && !empty($playerDetails['twitterhandle'])){
+            $playerTwitterImg = $this->gettwitterdetailsAction($playerDetails['twitterhandle']);            
+        }
+        else
+        {
+            $playerTwitterImg = '/assets/img/admin/logo.jpg';              
+        }
+        
+        $playerDetails['playerTwitterImg'] = $playerTwitterImg;
+        
+        // Calculate score        
+        $playerDetails['playerScore'] = 100; //($playerDetails['playerProgress'] * $playerDetails['playerTime']) / 100;
+        
+        // Save playerscore
+        $this->_tmwDBConnect->setPlayerScore($usedPlayerId['playerId'], $playerDetails['playerScore']);
+        
+        $gameEndData['playerDetails'] = $playerDetails;
+        
+        // Save the current user in the current game state
+        $this->_tmwDBGameStatus->setCurrentPlayer($usedPlayerId['playerId'], $gameStatus, $playerDetails['playerProgress'], $playerPhoto); 
+        
+        // Getting the latest scoreboard
+        $gameEndData['scoreBoard']    = $this->_tmwDBConnect->getScoreList($this->_tmwCampaign);        
+        // setting the video progress
+        $gameEndData['videoProgress'] = $playerDetails['playerProgress'];   
+        // setting the video progress
+        $gameEndData['playerPhoto'] = $playerPhoto;
+        
+    	$jsonData = utf8_encode(Zend_Json::encode($gameEndData));
         
         $this->getResponse()
                 ->setHeader('Content-Type', 'text/html')

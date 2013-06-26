@@ -97,8 +97,9 @@
                             }
                         ?>
                             <dd class="submitWrapper">
-                                <input type="hidden" name="campaignName" id="campaignName" value="<?php echo $this->facebookShare['campaignName']?>" />
-                                <input type="hidden" name="campaign" id="campaign" value="<?php echo $this->facebookShare['campaign']?>" />
+                                <input type="hidden" name="campaignName" id="campaignName" value="<?php echo $this->facebookShare['campaignName'] ?>" />
+                                <input type="hidden" name="campaign" id="campaign" value="<?php echo $this->facebookShare['campaign'] ?>" />
+                                <input type="hidden" name="RFHandleId" id="RFHandleId" value="<?php echo $this->registerRFHandleId ?>" />
                                 <?php echo $this->form->getElement('submitBtn')->setLabel('Submit')->render(); ?>
                             <dd>
                         </dl>
