@@ -138,7 +138,8 @@ class CompetitionController extends Zend_Controller_Action {
         $this->view->playerDetails = $playerDetails;
         
         // Uncomment to and remove from view the printing of those tweets as it is only for testing purposes         
-        $this->view->twitterFeed = Zend_Json::decode($this->gettwitterfeedAction());
+        //$this->view->twitterFeed = Zend_Json::decode($this->gettwitterfeedAction());
+        $this->view->twitterFeed = [];
         
         $this->view->scoreList  = $this->_tmwDBConnect->getScoreList($this->_tmwCampaign);
     }
@@ -462,15 +463,17 @@ class CompetitionController extends Zend_Controller_Action {
     /**
      * Start a new Game AJAX callback
      */
-    public function gamestartAction($usedRFHandleId = null) {
+    public function gamestartAction() {
+        
+        $playerRFHandleId = $this->getRequest()->getParam('playerRFHandleId');
+        //$playerRFHandleId = 'bardis';        //REMOVE ONLY FOR TESTING
         
         $gameStatus     = 'on';
         $gameProgress   = 0;
         $playerPhoto    = null;
         
         // Getting player id from the RF handle
-        $usedRFHandleId     = 'bardis';        //REMOVE ONLY FOR TESTING
-        $usedPlayerId       = $this->_tmwDBConnect->getPlayerIdfromRF($usedRFHandleId, $this->_tmwCampaign);
+        $usedPlayerId       = $this->_tmwDBConnect->getPlayerIdfromRF($playerRFHandleId, $this->_tmwCampaign);
         
         // Save the current user in the current game state
         $this->_tmwDBGameStatus->setCurrentPlayer($usedPlayerId['playerId'], $gameStatus, $gameProgress, $playerPhoto);        
