@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 25, 2013 at 05:09 PM
+-- Generation Time: Jun 26, 2013 at 10:12 PM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -158,24 +158,30 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_comp` (
   `playerEmail` varchar(255) NOT NULL,
   `campaign` varchar(64) NOT NULL,
   `registeredOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `RFHandleId` int(11) DEFAULT NULL,
+  `RFHandleId` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`playerId`),
   UNIQUE KEY `RFHandleId` (`RFHandleId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
 
 --
 -- Dumping data for table `tmw_wire_comp`
 --
 
 INSERT INTO `tmw_wire_comp` (`playerId`, `playerEmail`, `campaign`, `registeredOn`, `RFHandleId`) VALUES
-(30, 'gbardis@tmw.co.uk', 'wire-game', '2013-06-19 23:06:47', NULL),
+(30, 'gbardis@tmw.co.uk', 'wire-game', '2013-06-19 23:06:47', 'bardis'),
 (31, 'tmw@tmw.co.uk', 'wire-game', '2013-06-20 00:44:55', NULL),
 (32, 'test@test.com', 'wire-game', '2013-06-21 21:10:23', NULL),
 (33, 'tests@test.com', 'wire-game', '2013-06-21 21:12:46', NULL),
 (34, 'g@b.com', 'wire-game', '2013-06-22 18:41:10', NULL),
 (35, 'a@a.fr', 'wire-game', '2013-06-22 18:45:48', NULL),
 (36, 'aaa@aaa.gr', 'wire-game', '2013-06-25 12:32:19', NULL),
-(37, 'testdsd@gg.com', 'wire-game', '2013-06-25 16:17:21', NULL);
+(37, 'testdsd@gg.com', 'wire-game', '2013-06-25 16:17:21', NULL),
+(38, 'gggg@gg.com', 'wire-game', '2013-06-26 15:51:32', NULL),
+(39, 'sfsd@fsgs.gr', 'wire-game', '2013-06-26 15:56:11', NULL),
+(40, 'asssdf@sddf.fr', 'wire-game', '2013-06-26 15:57:59', NULL),
+(41, 'fsdgfd@sdsdff.gr', 'wire-game', '2013-06-26 16:03:42', '0'),
+(42, 'dfsadsa@ssf.gr', 'wire-game', '2013-06-26 16:07:07', 'skata'),
+(43, '5536@fsdggd.fr', 'wire-game', '2013-06-26 16:07:56', '');
 
 -- --------------------------------------------------------
 
@@ -190,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_comp_details` (
   `detailsField` text NOT NULL,
   `detailsData` text NOT NULL,
   PRIMARY KEY (`playerDetailsId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=250 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=295 ;
 
 --
 -- Dumping data for table `tmw_wire_comp_details`
@@ -199,14 +205,14 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_comp_details` (
 INSERT INTO `tmw_wire_comp_details` (`playerDetailsId`, `playerId`, `detailsField`, `detailsData`) VALUES
 (200, 31, 'question', 'all'),
 (199, 30, 'playerProgress', '0'),
-(198, 30, 'playerScore', '0'),
+(198, 30, 'playerScore', '100'),
 (197, 30, 'twitterhandle', 'bardius'),
 (196, 30, 'lastname', 'Bardis'),
 (195, 30, 'firstname', 'George'),
 (194, 30, 'question', 'male'),
 (201, 31, 'firstname', 'Tmw'),
 (202, 31, 'lastname', 'Agency'),
-(203, 31, 'twitterhandle', 'tmw'),
+(203, 31, 'twitterhandle', 'tmwagency'),
 (204, 31, 'playerScore', '98'),
 (205, 31, 'playerProgress', '0'),
 (206, 31, 'playerTime', '8'),
@@ -252,7 +258,52 @@ INSERT INTO `tmw_wire_comp_details` (`playerDetailsId`, `playerId`, `detailsFiel
 (246, 37, 'twitterhandle', ''),
 (247, 37, 'playerScore', '0'),
 (248, 37, 'playerProgress', '0'),
-(249, 37, 'playerTime', '0');
+(249, 37, 'playerTime', '0'),
+(250, 38, 'question', 'absolutely__wild_horses_wouldn___t_stop_me.'),
+(251, 38, 'firstname', 'register'),
+(252, 38, 'lastname', 'with handle'),
+(253, 38, 'twitterhandle', ''),
+(254, 38, 'playerScore', '0'),
+(255, 38, 'playerProgress', '0'),
+(256, 38, 'playerTime', '0'),
+(257, 39, 'question', 'absolutely__wild_horses_wouldn___t_stop_me.'),
+(258, 39, 'firstname', 'gdfgf'),
+(259, 39, 'lastname', 'fsggfg'),
+(260, 39, 'twitterhandle', ''),
+(261, 39, 'playerScore', '0'),
+(262, 39, 'playerProgress', '0'),
+(263, 39, 'playerTime', '0'),
+(264, 40, 'question', 'absolutely__wild_horses_wouldn___t_stop_me.'),
+(265, 40, 'firstname', 'dhdgh'),
+(266, 40, 'lastname', 'gdhgghd'),
+(267, 40, 'twitterhandle', ''),
+(268, 40, 'playerScore', '0'),
+(269, 40, 'playerProgress', '0'),
+(270, 40, 'playerTime', '0'),
+(271, 41, 'question', 'absolutely__wild_horses_wouldn___t_stop_me.'),
+(272, 41, 'firstname', 'dfdgg'),
+(273, 41, 'lastname', 'dfgfd'),
+(274, 41, 'twitterhandle', ''),
+(275, 41, 'RFHandleId', 'skata'),
+(276, 41, 'playerScore', '0'),
+(277, 41, 'playerProgress', '0'),
+(278, 41, 'playerTime', '0'),
+(279, 42, 'question', 'absolutely__wild_horses_wouldn___t_stop_me.'),
+(280, 42, 'firstname', 'dghdgf'),
+(281, 42, 'lastname', 'sggs'),
+(282, 42, 'twitterhandle', ''),
+(283, 42, 'RFHandleId', 'skata'),
+(284, 42, 'playerScore', '0'),
+(285, 42, 'playerProgress', '0'),
+(286, 42, 'playerTime', '0'),
+(287, 43, 'question', 'absolutely__wild_horses_wouldn___t_stop_me.'),
+(288, 43, 'firstname', 'fdfg'),
+(289, 43, 'lastname', 'dfgdg'),
+(290, 43, 'twitterhandle', ''),
+(291, 43, 'RFHandleId', ''),
+(292, 43, 'playerScore', '0'),
+(293, 43, 'playerProgress', '0'),
+(294, 43, 'playerTime', '0');
 
 -- --------------------------------------------------------
 
@@ -273,6 +324,30 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_comp_names` (
 
 INSERT INTO `tmw_wire_comp_names` (`id`, `compName`) VALUES
 (1, 'wire-game');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tmw_wire_current_state`
+--
+
+DROP TABLE IF EXISTS `tmw_wire_current_state`;
+CREATE TABLE IF NOT EXISTS `tmw_wire_current_state` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `playerId` varchar(255) DEFAULT NULL,
+  `game_status` varchar(255) DEFAULT NULL,
+  `game_progress` varchar(255) DEFAULT NULL,
+  `player_photo` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `tmw_wire_current_state`
+--
+
+INSERT INTO `tmw_wire_current_state` (`id`, `playerId`, `game_status`, `game_progress`, `player_photo`) VALUES
+(1, '30', 'on', '0', NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
