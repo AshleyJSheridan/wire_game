@@ -20,18 +20,41 @@ body {
 	height: 251px;
 	top: 140px;
 	margin-left: -590px;
+}
+
+.leaderboard ul,
+.tweets ul {
+	margin: 0 10px;
 	font-weight: bold;
 	color: #fff;
+	text-shadow: 0 -1px 0px #000;
 }
+
+.leaderboard li,
+.tweets li {
+	border-top: 1px solid rgba(0, 0, 0, 0.14);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.leaderboard li:first-child,
+.tweets li:first-child {
+	border-top: none;
+}
+
+.leaderboard li:last-child,
+.tweets li:last-child {
+	border-bottom: none;
+}
+
 
 .leaderboard li {
 	overflow: hidden;
-	padding: 0 20px;
-	height: 50px;
-	line-height: 50px;
-	font-size: 20px;
+	height: 48px;
+	line-height: 48px;
+	font-size: 24px;
 }
-
 .username {
 	float: left;
 }
@@ -48,6 +71,8 @@ body {
 	height: 301px;
 	top: 136px;
 	margin-left: -208px;
+	/*border-radius: 5px;
+	box-shadow: 20px 20px 27px rgba(0,0,0,0.2);*/
 }
 
 /* Live feed */
@@ -56,23 +81,46 @@ body {
 	height: 272px;
 	top: 490px;
 	margin-left: 157px;
+	/*border-radius: 5px;
+	box-shadow: 20px 20px 27px rgba(0,0,0,0.2);*/
 }
 
 /* Latest tweets */
 .tweets {
 	width: 334px;
 	height: 208px;
-	top: 555px;
+	top: 545px;
 	margin-left: -575px;
+}
 
+.tweets li {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.tweets a {
+	color: orange;
 }
 
 /* Now playing */
 .now-playing {
 	width: 276px;
 	height: 242px;
-	top: 46px;
+	top: 95px;
 	margin-left: 319px;
+	text-align: center;
+}
+
+.now-playing-img {
+	border-radius: 3px;
+}
+
+.now-playing-name {
+	font-size: 20px;
+	font-weight: bold;
+	color: #fff;
+	line-height: 2;
+	text-transform: uppercase;
 }
 
 /* Score */
@@ -84,8 +132,9 @@ body {
 	line-height: 106px;
 	text-align: center;
 	color: #fff;
-	font-size: 40px;
+	font-size: 35px;
 	font-weight: bold;
+	text-shadow: 0 -1px 2px #000;
 }
 
 
@@ -155,11 +204,6 @@ ul {
     list-style: none;
     margin-left: 0;
     padding-left: 0;
-}
-
-img {
-    border: 0;
-    float:left;
 }
 
 strong {
