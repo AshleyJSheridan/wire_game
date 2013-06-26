@@ -1,11 +1,67 @@
-/****************** EMBEDING NEEDED FONTS ***********************/
+body {
+	background: #000 url(/assets/img/competition/bg.jpg) center top no-repeat;
+}
+
+/* Leaderboard */
+.leaderboard {
+
+}
+
+/* Video Scrubber */
+.video-scrubber {
+
+}
+
+/* Live feed */
+.live-feed {
+
+}
+
+/* Latest tweets */
+.tweets {
+
+}
+
+/* Now playing */
+.now-playing {
+
+}
+
+/* Score */
+.score {
+
+}
 
 
-/********** GENERIC & RESET CSS ***********************************/
+#fb_wrapper {
+    width: 1280px;
+    padding: 0 14px;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.header{
+    float: left;
+    width: 100%;
+    padding: 30px 0 16px 0;
+    border-bottom: 1px dotted #e97810;
+}
+
+.contentsHolder{
+    float: left;
+    width: 100%;
+}
+
+.contentsHolderOuter{
+    width:100%;
+    float:left;
+}
 * {
     margin: 0;
     padding: 0;
     outline: none!important;
+    box-sizing: border-box;
 }
 
 *:focus{
@@ -88,53 +144,6 @@ iframe{
 }
 
 /****************** WRAPPER STYLES ******************/
-
-html {
-    width:100%;
-    height:auto;
-    font-family:"Helvetica", Arial, serif;
-    font-size:14px;
-    line-height: 18px;
-    color:#FFF;
-}
-
-body {
-    width:100%;
-    height:auto;
-    background-color:#000;
-    margin: 0;
-    padding: 0;
-    font-family:"Helvetica", Arial, serif;
-    font-size:14px;
-    line-height: 18px;
-    color:#FFF;
-}
-
-#fb_wrapper {
-    width: 620px;
-    padding: 0 14px;
-    position: relative;
-    margin: 0 auto;
-    overflow: hidden;
-}
-
-.header{
-    float: left;
-    width: 100%;
-    padding: 30px 0 16px 0;
-    border-bottom: 1px dotted #e97810;
-}
-
-.contentsHolder{
-    float: left;
-    width: 100%;
-}
-
-.contentsHolderOuter{
-    width:100%;
-    float:left;
-}
-
 .adImage{
     float:right;
     width:373px;
