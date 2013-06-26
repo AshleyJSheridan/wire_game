@@ -139,19 +139,8 @@ class TMW_Competition extends Zend_Db_Table
     }
 
     // set the Current Player score at game end
-    public function setPlayerScore($playerId, $playerScore) {
-        
-        $data = array(
-            'datailsData'   => $playerScore
-        );
-        
-        $where[] = $this->getAdapter()->quoteInto('playerId = ?', $playerId);
-        $where[] = $this->getAdapter()->quoteInto('detailsField = ?', 'playerScore');
-        
-        $this->update('tmw_wire_comp_details', $data, $where);
-        
-        //$this->getAdapter()->query('UPDATE tmw_wire_comp_details SET "" = "", "" = "" WHERE ("reported_by" = 'goofy') AND ("bug_status" = 'OPEN');');
-    }
-    
+    public function setPlayerScore($playerId, $playerScore) {        
+        $this->getAdapter()->query("UPDATE tmw_wire_comp_details SET detailsData = '$playerScore' WHERE playerId = '$playerId' AND detailsField = 'playerScore'");
+    }    
     
 }
