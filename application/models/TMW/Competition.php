@@ -147,10 +147,10 @@ class TMW_Competition extends Zend_Db_Table
         
         $where[] = $this->getAdapter()->quoteInto('playerId = ?', $playerId);
         $where[] = $this->getAdapter()->quoteInto('detailsField = ?', 'playerScore');
-        var_dump($this->update($data, $where));
-        die;
         
-        $this->update($data, $where);
+        $this->update('tmw_wire_comp_details', $data, $where);
+        
+        //$this->getAdapter()->query('UPDATE tmw_wire_comp_details SET "" = "", "" = "" WHERE ("reported_by" = 'goofy') AND ("bug_status" = 'OPEN');');
     }
     
     
