@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 26, 2013 at 10:12 PM
+-- Generation Time: Jun 27, 2013 at 09:24 AM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -55,7 +55,7 @@ INSERT INTO `tmw_wire_app_form_elements` (`id`, `campaignName`, `elementName`, `
 (6, 'wire-game', 'textquestion', 'Textarea', 'Praesent vehicula, sem nec euismod posuere, lectus tortor varius tellus, ut congue nunc est sit amet enim.', '', 'Please type your answer', 0, 5, '0', ''),
 (7, 'wire-game', 'lastname', 'Text', 'Last Name', 'Last Name', 'Please type your Last Name', 1, 3, '1', ''),
 (8, 'wire-game', 'twitterhandle', 'Text', 'My Twitter handle is ', '', 'Please type your Twitter Handle', 1, 5, '0', ''),
-(9, 'wire-game', 'address2', 'Text', 'Street Line 2', 'Street Line 2', 'Please type your address 2', 0, 7, '0', ''),
+(9, 'wire-game', 'charity', 'Text', 'My charity', '', 'Please enter a charity amount', 1, 6, '0', ''),
 (10, 'wire-game', 'city', 'Text', 'City', 'City', 'Please type your city', 0, 8, '0', ''),
 (11, 'wire-game', 'postalcode', 'Text', 'Postal Code', 'Postal Code', 'Please give your Postal Code', 0, 9, '0', ''),
 (12, 'wire-game', 'country', 'Text', 'Country', 'Country', 'Please type your Country', 0, 10, '0', ''),
@@ -161,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_comp` (
   `RFHandleId` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`playerId`),
   UNIQUE KEY `RFHandleId` (`RFHandleId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
 
 --
 -- Dumping data for table `tmw_wire_comp`
@@ -181,7 +181,8 @@ INSERT INTO `tmw_wire_comp` (`playerId`, `playerEmail`, `campaign`, `registeredO
 (40, 'asssdf@sddf.fr', 'wire-game', '2013-06-26 15:57:59', NULL),
 (41, 'fsdgfd@sdsdff.gr', 'wire-game', '2013-06-26 16:03:42', '0'),
 (42, 'dfsadsa@ssf.gr', 'wire-game', '2013-06-26 16:07:07', 'skata'),
-(43, '5536@fsdggd.fr', 'wire-game', '2013-06-26 16:07:56', '');
+(43, '5536@fsdggd.fr', 'wire-game', '2013-06-26 16:07:56', ''),
+(44, 'asssdf@sddddddf.fr', 'wire-game', '2013-06-27 09:21:20', NULL);
 
 -- --------------------------------------------------------
 
@@ -196,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_comp_details` (
   `detailsField` text NOT NULL,
   `detailsData` text NOT NULL,
   PRIMARY KEY (`playerDetailsId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=295 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=303 ;
 
 --
 -- Dumping data for table `tmw_wire_comp_details`
@@ -303,7 +304,15 @@ INSERT INTO `tmw_wire_comp_details` (`playerDetailsId`, `playerId`, `detailsFiel
 (291, 43, 'RFHandleId', ''),
 (292, 43, 'playerScore', '0'),
 (293, 43, 'playerProgress', '0'),
-(294, 43, 'playerTime', '0');
+(294, 43, 'playerTime', '0'),
+(295, 44, 'question', 'absolutely__wild_horses_wouldn___t_stop_me.'),
+(296, 44, 'firstname', 'fgffg'),
+(297, 44, 'lastname', 'dffd'),
+(298, 44, 'twitterhandle', 'sfsfdfd'),
+(299, 44, 'charity', '10'),
+(300, 44, 'playerScore', '0'),
+(301, 44, 'playerProgress', '0'),
+(302, 44, 'playerTime', '0');
 
 -- --------------------------------------------------------
 
