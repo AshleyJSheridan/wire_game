@@ -1,67 +1,45 @@
 <?php 
     $this->headScript()->offsetSetFile(1, $this->baseUrl().'/assets/js/script.js', 'text/javascript');
+    
+    $this->headLink()->appendStylesheet($this->baseUrl().'/assets/css/views/normalize.css');
+    $this->headLink()->appendStylesheet($this->baseUrl().'/assets/css/views/competition.css');
 ?>
 
-<div id="fb_wrapper" class="competition">
-    <div class="header">
-        <?php
-            if(!empty($this->contents['displayImage'])) {
-                echo '<img class="adImage" src="/assets/img/competition/wire-game/addImage.jpg" alt="'.$this->facebookShare['title'].'" />';
-                echo '<div class="sideHeaders">';
-            }
-            if(!empty($this->contents['headerText1'])) {
-                echo '<h1>'.$this->contents['headerText1'].'</h1>';
-            }
-            if(!empty($this->contents['headerText2'])) {
-                echo '<h2>'.$this->contents['headerText2'].'</h2>';
-            }
-            if(!empty($this->contents['displayImage'])) {
-                echo '</div>';
-            }
-        ?>
-    </div>
-    <div class="contentsHolderOuter">
-        <div class="contentsHolder">
-            <div id="fb_content_copy">
-                <?php
-                    if(!empty($this->contents['introText'])) {
-                        echo '<p>'.$this->contents['introText'].'</p>';
-                    }
-                ?>
-            </div> 
-            
-            <div class="videoContainer">
-                <h3>Controllable by js video</h3>
-               
-            </div>
-            <div class="playerDetails">
-                <h3>Loaded by the database user details</h3>
-                <?php
-                    if(isset($this->playerDetails['twitterhandle']) && !empty($this->playerDetails['twitterhandle'])){
-                        echo '<p><a href="https://twitter.com/' . $this->playerDetails['twitterhandle'] . '" title="' . $this->playerDetails['twitterhandle'] . '" target="_blank">' . $this->playerDetails['twitterhandle'] . '<img src="' . $this->playerDetails['playerTwitterImg'] . '" alt="' . $this->playerDetails['twitterhandle'] . '" /></a></p>';               
-                    }
-                    else{
-                        echo '<p><a href="https://twitter.com/tmwagency" title="' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '" target="_blank">' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '<img src="' . $this->playerDetails['playerTwitterImg'] . '" alt="' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '" /></a></p>';   
-                    }
-                ?>       
-            </div>
-            <div class="scoreList">
-                <h3>Loaded by the database user scores</h3>
+<div id="fb_wrapper" class="competition">         
+            <div class="leaderboard scoreList">
                 <ul>
                     <?php 
                         foreach($this->scoreList as $playerScore){
                             if(isset($playerScore['twitterhandle']) && !empty($playerScore['twitterhandle'])){
-                                echo '<li><a href="https://twitter.com/' . $playerScore['twitterhandle'] . '" title="' . $playerScore['twitterhandle'] . '" target="_blank">' . $playerScore['twitterhandle'] . '</a> scored ' . $playerScore['playerScore'] . ' (' . $playerScore['playerProgress'] . '%)</li>';
+                                echo '<li><a href="https://twitter.com/' . $playerScore['twitterhandle'] . '" title="' . $playerScore['twitterhandle'] . '" target="_blank" class="username">' . $playerScore['twitterhandle'] . '</a><span class="userscore">' . $playerScore['playerScore'] . '</span></li>';
                             }
                             else{
-                                echo '<li><a href="https://twitter.com/tmwagency" title="' . $playerScore['firstname'] . ' ' . $playerScore['lastname'][0] . '" target="_blank">' . $playerScore['firstname'] . ' ' . $playerScore['lastname'][0] . '</a> scored ' . $playerScore['playerScore'] . ' (' . $playerScore['playerProgress'] . '%)</li>';   
+                                echo '<li><a href="https://twitter.com/tmwagency" title="' . $playerScore['firstname'] . ' ' . $playerScore['lastname'][0] . '" target="_blank" class="username">' . $playerScore['firstname'] . ' ' . $playerScore['lastname'][0] . '</a><span class="userscore">' . $playerScore['playerScore'] . '</span></li>';   
                             }
                         }
                     ?>
                 </ul>
             </div>
-            <div class="twiterFeed">
-                <h3>Loaded the tweets from the user timeline</h3>
+            <div class="video-scrubber">
+                <object id="scrubber" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="500" height="301">
+                    <param name="movie" value="<?php echo $this->baseUrl(); ?>/videoTestV2.swf" />
+                    <!--[if !IE]>-->
+                    <object type="application/x-shockwave-flash" data="<?php echo $this->baseUrl(); ?>/videoTestV2.swf" width="500" height="301" wmode="transparent">
+                    <!--<![endif]-->
+                    <div>
+                        <h1>Alternative content</h1>
+                        <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+                    </div>
+                    <!--[if !IE]>-->
+                    </object>
+                    <!--<![endif]-->
+                </object>
+                <?php echo $this->playerDetails['playerProgress'] ?>
+            </div>
+            <div class="live-feed">
+
+            </div>
+            <div class="twiterFeed tweets">
                 <ul>
                     <?php
                         foreach ($this->twitterFeed as $tweet) {
@@ -70,6 +48,20 @@
                     ?>                      
                 </ul>     
             </div>
-        </div>  
-    </div>
+            <div class="now-playing playerDetails">
+                <?php
+                    if(isset($this->playerDetails['twitterhandle']) && !empty($this->playerDetails['twitterhandle'])){
+                        echo '<img src="' . $this->playerDetails['playerTwitterImg'] . '" alt="' . $this->playerDetails['twitterhandle'] . '" />';
+                        echo '<div class="now-playing-name"><a href="https://twitter.com/' . $this->playerDetails['twitterhandle'] . '" title="' . $this->playerDetails['twitterhandle'] . '" target="_blank">' . $this->playerDetails['twitterhandle'] . '</a></div>';               
+                    }
+                    else{
+                        echo '<img src="' . $this->playerDetails['playerTwitterImg'] . '" alt="' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '" />';
+                        echo '<div class="now-playing-name"><a href="https://twitter.com/tmwagency" title="' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '" target="_blank">' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '</a></div>';   
+                    }
+                ?>
+            </div>
+            <div class="score">
+                <?php echo $this->playerDetails['playerScore'] ?>
+            </div> 
+    <div class="clear"></div>
 </div>

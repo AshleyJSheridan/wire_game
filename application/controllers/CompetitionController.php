@@ -138,8 +138,7 @@ class CompetitionController extends Zend_Controller_Action {
         $this->view->playerDetails = $playerDetails;
         
         // Uncomment to and remove from view the printing of those tweets as it is only for testing purposes         
-        //$this->view->twitterFeed = Zend_Json::decode($this->gettwitterfeedAction());
-        $this->view->twitterFeed = [];
+        $this->view->twitterFeed = Zend_Json::decode($this->gettwitterfeedAction());
         
         $this->view->scoreList  = $this->_tmwDBConnect->getScoreList($this->_tmwCampaign);
     }
@@ -333,6 +332,8 @@ class CompetitionController extends Zend_Controller_Action {
     public function gettwitterfeedAction() {
         require_once APPLICATION_PATH . '/../library/TwitterAPIExchange.php';
         
+        $ajaxFeed = $this->getRequest()->getParam('ajaxFeed'); 
+        
         // Set up your settings with the keys you get from the dev site
         $settings = array(
             'oauth_access_token'        => $this->_appSettings['oauth_access_token'],
@@ -348,14 +349,16 @@ class CompetitionController extends Zend_Controller_Action {
         $twitter            = new TwitterAPIExchange($settings);
         $twitterFeed        = $twitter->setGetfield($queryfields)->buildOauth($url, $requestMethod)->performRequest();
         
-        // Uncomment for the actual ajax responce so json will be available 
-        //return $twitterFeed;
-        
-        $this->getResponse()
-                ->setHeader('Content-Type', 'text/html')
-                ->setBody($twitterFeed)
-                ->sendResponse();
-        exit;
+        if($ajaxFeed){
+            $this->getResponse()
+                    ->setHeader('Content-Type', 'text/html')
+                    ->setBody($twitterFeed)
+                    ->sendResponse();
+            exit;
+        }
+        else{
+            return $twitterFeed;
+        }
     }
 
     /**

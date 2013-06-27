@@ -3,6 +3,16 @@ body {
 	min-height: 800px;
 }
 
+
+#fb_wrapper {
+    width: 1280px;
+    padding: 0 14px;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+    min-height: 800px;
+}
+
 .leaderboard,
 .video-scrubber,
 .live-feed,
@@ -135,15 +145,6 @@ body {
 	font-size: 35px;
 	font-weight: bold;
 	text-shadow: 0 -1px 2px #000;
-}
-
-
-#fb_wrapper {
-    width: 1280px;
-    padding: 0 14px;
-    position: relative;
-    margin: 0 auto;
-    overflow: hidden;
 }
 
 .header{

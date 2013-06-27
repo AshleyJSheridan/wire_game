@@ -13,12 +13,11 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <?php
 	// setup stylesheets
-	$this->headLink()->prependStylesheet($this->baseUrl().'/assets/css/views/competition.css');
-	//$this->headLink()->prependStylesheet($this->baseUrl().'/assets/css/views/'.$this->pageStyles);
+	//$this->headLink()->prependStylesheet($this->baseUrl().'/assets/css/views/competition.css');
 	echo $this->headLink();
     ?>
     
-    <script src="/js/libs/modernizr.min.js"></script>
+    <script src="<?php echo $this->baseUrl(); ?>/assets/js/libs/modernizr.min.js"></script>
 </head>
     
 <body id="<?php echo $this->facebookShare['campaign']?>">
@@ -29,8 +28,7 @@
 
 <?php
     $this->headScript()
-            ->offsetSetFile(-1, $this->baseUrl().'/assets/js/jquery-1.10.1.min.js', 'text/javascript')
-            ->offsetSetFile(0, $this->baseUrl().'/assets/js/script.js', 'text/javascript');
+            ->offsetSetFile(-1, $this->baseUrl().'/assets/js/libs/jquery.min.js', 'text/javascript');
 ?>
     
 <?php echo $this->headScript(); ?>
