@@ -10,7 +10,7 @@ class TMW_Competition extends Zend_Db_Table
     // save the mandatory data in seperate table fields
     public function addMandatoryData($data) {
         if($data && is_array($data)) {
-            $insert_id = $this->insert($data);		
+            $insert_id = $this->insert($data);	
             return $insert_id;
         } else {
             throw new Exception('Could not insert mandatory data');

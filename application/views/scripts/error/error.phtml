@@ -30,12 +30,12 @@ if ($this->type == 500) {
     <?php 
     if (ini_get('display_errors')) {
         echo '<pre><h3>EXCEPTION</h3>';
-        var_dump($this->exception);
-        echo '<br /><h3>TRACE</h3>';
+        echo $this->exception;
+       /* echo '<br /><h3>TRACE</h3>';
         var_dump(debug_backtrace());
         echo '<br /><h3>REQUEST</h3>';
         var_dump($this->request);
-        echo '</pre>';
+        echo '</pre>';*/
     }
     ?>
 </body>

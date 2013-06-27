@@ -175,7 +175,6 @@ class CompetitionController extends Zend_Controller_Action {
             if(isset($formData['playerEmail'])) {
                 
                 if ($form->isValid($formData)) {
-                    
                     if ($formHasImageField)
                     {
                         // The file upload field handling start
@@ -192,6 +191,9 @@ class CompetitionController extends Zend_Controller_Action {
                     }
                     
                     // split mandatory data into separate array
+                    if(empty($formData['RFHandleId'])){
+                        $formData['RFHandleId'] = null;
+                    }
                     $mandatoryData = array(
                         'playerEmail'   => $formData['playerEmail'],
                         'RFHandleId'    => $formData['RFHandleId'],
@@ -204,7 +206,8 @@ class CompetitionController extends Zend_Controller_Action {
                         $formData['submitBtn'],
                         $formData['campaign'],
                         $formData['fbTermsConditions'],
-                        $formData['campaignName']
+                        $formData['campaignName'],
+                        $formData['RFHandleId']
                     );
                     
                     // Add the score and the progress percentance for the user to be used in the game
@@ -224,7 +227,7 @@ class CompetitionController extends Zend_Controller_Action {
                                 ->sendResponse();
                             exit;
                         } else {
-                            $this->_redirect('/competition/' . $this->_tmwCampaign . '/submit/');
+                            $this->_redirect('/submit');
                         }
                     }                                
             } else {

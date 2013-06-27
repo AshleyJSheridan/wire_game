@@ -9,7 +9,7 @@ function post(data, statusText, xhr, $form)  {
     
     if(data == '"submit"') {
         var redir = $('#campaign').val();
-        window.location = '/competition/'+redir+'/submit/';
+        window.location = '/submit';
     } else {    
         data = $.parseJSON(data)
         // remove  error msg first

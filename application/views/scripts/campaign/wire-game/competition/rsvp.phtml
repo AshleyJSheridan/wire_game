@@ -45,7 +45,7 @@
          <?php } ?>
             <div id="fb_form">
                 <div class="fieldsListing">                
-                    <form method="post" action="/competition/<?php echo $this->facebookShare['campaign']; ?>/register?ajax=true" id="fbForm" enctype="multipart/form-data" accept-charset="utf-8">
+                    <form method="post" action="/register?ajax=true" id="fbForm" enctype="multipart/form-data" accept-charset="utf-8">
                         <dl>
                         <?php   
                             $currentElement = 0;
@@ -83,7 +83,7 @@
                                     }
                                     else if($formElement['elementName'] == 'twitterhandle')
                                     {
-                                        echo '<dd class="fullWidth">To fully experience the digital installation we’ve created for the evening we’d love you to give us your Twitter handle. Don’t worry, it’s for nothing embarrassing. And there’s a chance you could win a bottle of bubbly too.</dd>';
+                                        echo '<dd class="fullWidth">To fully experience the digital installation we’ve created for the evening we’d love you to give us your Twitter handle. Don’t worry, it’s for nothing embarrassing. And you could win a £500 donation to the charity of your choice plus a bottle of bubbly!</dd>';
                                         echo $this->form->getElement($formElement['elementName'])->render();  
                                         echo '<dd class="fullWidth">Don’t have a Twitter account? <a href="https://twitter.com/signup" title="Sign up" target="_blank">Sign up</a> now and be part of the nation’s pulse.</dd>';
                                     }
