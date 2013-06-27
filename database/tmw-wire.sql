@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 27, 2013 at 09:24 AM
+-- Generation Time: Jun 27, 2013 at 02:33 PM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_app_form_elements` (
 
 INSERT INTO `tmw_wire_app_form_elements` (`id`, `campaignName`, `elementName`, `elementType`, `elementLabel`, `elementValue`, `elementError`, `elementVisibility`, `elementOrder`, `elementRequired`, `elementExtras`) VALUES
 (1, 'wire-game', 'question', 'Radio', '', '', 'Please select answer', 1, 1, '1', 'Absolutely, wild horses wouldnâ€™t stop me.|*|Waiting for my Green Card. Call me maybe.|*|Oh no, I canâ€™t make it this time. Take lots of photos!'),
-(2, 'wire-game', 'email', 'Email', 'Email', 'e-mail*', 'Please type a valid email', 1, 4, '1', ''),
+(2, 'wire-game', 'email', 'Email', 'Email', 'Email', 'Please type a valid email', 1, 4, '1', ''),
 (3, 'wire-game', 'photo', 'File', 'Send your photos after the competition', '', 'Please upload a file', 0, 0, '0', ''),
 (4, 'wire-game', 'firstname', 'Text', 'First Name', 'First Name', 'Please type your First Name', 1, 2, '1', ''),
 (5, 'wire-game', 'newsletter', 'Checkbox', 'You want newsletter?', 'yes', 'you want one?', 0, 14, '0', ''),
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_app_texts` (
 --
 
 INSERT INTO `tmw_wire_app_texts` (`id`, `campaignName`, `headerText1`, `headerText2`, `displayImage`, `introText`, `introVideo`, `thankText`, `tncText`, `policyText`, `twitter_post`) VALUES
-(1, 'wire-game', 'Party on the Roof', 'Our roof top bar is fabulously spacious, but to give us an idea of how many canapÃ©s to serve up and how many cocktails to shake out, weâ€™d love it if you could let us know if we can expect you on the 17th July.', 1, '', '', '<strong>Your name is down. Youâ€™re on the list!</strong><br/><br/>\r\nWe look forward to welcoming you to our new home of Intelligent Influence on 17th July from 6.30', 'http://www.tmw.co.uk/', 'http://www.tmw.co.uk/', 'The party goes on: ');
+(1, 'wire-game', 'Party on the Roof', 'Our rooftop bar is fabulously spacious, but to give us an idea of how many canapÃ©s to serve up and how many cocktails to shake out, weâ€™d love it if you could let us know if we can expect you on 17th July.', 1, '', '', '<strong>Your name is down. Youâ€™re on the list!</strong><br/><br/>\r\nWe look forward to welcoming you to our new home of Intelligent Influence on 17th July from 6.30.', 'http://www.tmw.co.uk/', 'http://www.tmw.co.uk/', 'The party goes on: ');
 
 -- --------------------------------------------------------
 
@@ -161,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_comp` (
   `RFHandleId` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`playerId`),
   UNIQUE KEY `RFHandleId` (`RFHandleId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
 
 --
 -- Dumping data for table `tmw_wire_comp`
@@ -182,7 +182,8 @@ INSERT INTO `tmw_wire_comp` (`playerId`, `playerEmail`, `campaign`, `registeredO
 (41, 'fsdgfd@sdsdff.gr', 'wire-game', '2013-06-26 16:03:42', '0'),
 (42, 'dfsadsa@ssf.gr', 'wire-game', '2013-06-26 16:07:07', 'skata'),
 (43, '5536@fsdggd.fr', 'wire-game', '2013-06-26 16:07:56', ''),
-(44, 'asssdf@sddddddf.fr', 'wire-game', '2013-06-27 09:21:20', NULL);
+(44, 'asssdf@sddddddf.fr', 'wire-game', '2013-06-27 09:21:20', NULL),
+(45, 'newtst@test.com', 'wire-game', '2013-06-27 13:10:07', NULL);
 
 -- --------------------------------------------------------
 
@@ -197,7 +198,7 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_comp_details` (
   `detailsField` text NOT NULL,
   `detailsData` text NOT NULL,
   PRIMARY KEY (`playerDetailsId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=303 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=311 ;
 
 --
 -- Dumping data for table `tmw_wire_comp_details`
@@ -205,8 +206,8 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_comp_details` (
 
 INSERT INTO `tmw_wire_comp_details` (`playerDetailsId`, `playerId`, `detailsField`, `detailsData`) VALUES
 (200, 31, 'question', 'all'),
-(199, 30, 'playerProgress', '0'),
-(198, 30, 'playerScore', '100'),
+(199, 30, 'playerProgress', '69'),
+(198, 30, 'playerScore', '180.78'),
 (197, 30, 'twitterhandle', 'bardius'),
 (196, 30, 'lastname', 'Bardis'),
 (195, 30, 'firstname', 'George'),
@@ -217,7 +218,7 @@ INSERT INTO `tmw_wire_comp_details` (`playerDetailsId`, `playerId`, `detailsFiel
 (204, 31, 'playerScore', '98'),
 (205, 31, 'playerProgress', '0'),
 (206, 31, 'playerTime', '8'),
-(207, 30, 'playerTime', '10'),
+(207, 30, 'playerTime', '262'),
 (208, 32, 'firstname', 'tester'),
 (209, 32, 'lastname', 'Testing'),
 (210, 32, 'twitterhandle', 'testerT'),
@@ -302,9 +303,9 @@ INSERT INTO `tmw_wire_comp_details` (`playerDetailsId`, `playerId`, `detailsFiel
 (289, 43, 'lastname', 'dfgdg'),
 (290, 43, 'twitterhandle', ''),
 (291, 43, 'RFHandleId', ''),
-(292, 43, 'playerScore', '0'),
-(293, 43, 'playerProgress', '0'),
-(294, 43, 'playerTime', '0'),
+(292, 43, 'playerScore', '158.7'),
+(293, 43, 'playerProgress', '69'),
+(294, 43, 'playerTime', '230'),
 (295, 44, 'question', 'absolutely__wild_horses_wouldn___t_stop_me.'),
 (296, 44, 'firstname', 'fgffg'),
 (297, 44, 'lastname', 'dffd'),
@@ -312,7 +313,15 @@ INSERT INTO `tmw_wire_comp_details` (`playerDetailsId`, `playerId`, `detailsFiel
 (299, 44, 'charity', '10'),
 (300, 44, 'playerScore', '0'),
 (301, 44, 'playerProgress', '0'),
-(302, 44, 'playerTime', '0');
+(302, 44, 'playerTime', '0'),
+(303, 45, 'question', 'absolutely__wild_horses_wouldn___t_stop_me.'),
+(304, 45, 'firstname', 'testin'),
+(305, 45, 'lastname', 'somemore'),
+(306, 45, 'twitterhandle', 'qwssx'),
+(307, 45, 'charity', 'me'),
+(308, 45, 'playerScore', '0'),
+(309, 45, 'playerProgress', '0'),
+(310, 45, 'playerTime', '0');
 
 -- --------------------------------------------------------
 
@@ -356,7 +365,7 @@ CREATE TABLE IF NOT EXISTS `tmw_wire_current_state` (
 --
 
 INSERT INTO `tmw_wire_current_state` (`id`, `playerId`, `game_status`, `game_progress`, `player_photo`) VALUES
-(1, '30', 'on', '0', NULL);
+(1, NULL, 'off', '0', NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

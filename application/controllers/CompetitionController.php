@@ -106,11 +106,8 @@ class CompetitionController extends Zend_Controller_Action {
      * Root / Index page Action
      */
     public function indexAction() {
-        //require_once APPLICATION_PATH . '/../library/WebSocket/WebSocket.php';
         
-        //$this->_tmwWebsocket    = new WebSocket_WebSocket('ws://' . $this->getRequest()->getHttpHost() .':80/competition/' . $this->_tmwCampaign);
-        //var_dump($this->_tmwWebsocket);
-        
+        $ajaxFeed = $this->getRequest()->getParam('ajaxFeed');        
         $playerId = $this->_gameStatus['playerId'];
         
         if(isset($playerId)){
@@ -137,10 +134,19 @@ class CompetitionController extends Zend_Controller_Action {
         
         $this->view->playerDetails = $playerDetails;
         
-        // Uncomment to and remove from view the printing of those tweets as it is only for testing purposes         
-        $this->view->twitterFeed = Zend_Json::decode($this->gettwitterfeedAction());
+        if(!$ajaxFeed){
+            $this->view->twitterFeed = Zend_Json::decode($this->gettwitterfeedAction());            
+        }     
+        else{
+            $this->view->twitterFeed = array();
+        }
         
-        $this->view->scoreList  = $this->_tmwDBConnect->getScoreList($this->_tmwCampaign);
+        if(!$ajaxFeed){        
+            $this->view->scoreList  = $this->_tmwDBConnect->getScoreList($this->_tmwCampaign);           
+        }     
+        else{
+            $this->view->scoreList = array();
+        }
     }
 
     /**
@@ -291,10 +297,10 @@ class CompetitionController extends Zend_Controller_Action {
     }
 
     /**
-     * Like Gate page
+     * The photogallery for the Online Game Feed page
      */
     private function photogalleryAction() {
-    	// view only
+    	
     }
 
     /**
@@ -401,7 +407,7 @@ class CompetitionController extends Zend_Controller_Action {
     /**
      * Post twitter message
      */
-    public function posttotwitterAction() {
+    private function posttotwitterAction($twitterUser, $twitterImg) {
         require_once APPLICATION_PATH . '/../library/TwitterAPIExchange.php';
         
         // Set up your settings with the keys you get from the dev site
@@ -412,7 +418,8 @@ class CompetitionController extends Zend_Controller_Action {
             'consumer_secret'           => $this->_appSettings['consumer_secret']
         );
         
-        $twitterMsg = $this->_appContents['twitter_post'];
+        $twitterMsg = '@' . $twitterUser . ' ' .$this->_appContents['twitter_post'] . ' #tmwired. See more on http://party.tmw.co.uk';
+        // To be removed this is only for testing 
         $twitterImg = APPLICATION_PATH . '/../public_html/assets/img/competition/logo.jpg';
                 
         $url                = 'https://api.twitter.com/1.1/statuses/update_with_media.json';
@@ -425,45 +432,12 @@ class CompetitionController extends Zend_Controller_Action {
         $twitter            = new TwitterAPIExchange($settings);
         $twitterPostStatus  = $twitter->buildOauth($url, $requestMethod)->setPostfields($queryfields)->performRequest();
         
-        $this->getResponse()
+        /*$this->getResponse()
                 ->setHeader('Content-Type', 'text/html')
                 ->setBody($twitterPostStatus)
                 ->sendResponse();
-        exit;
-    }
-
-    /**
-     * The contents of the fail modal
-     */
-    public function failAction() {
-        
-        $modalContents['text'] = 'Fail';
-        $modalContents['img'] = 'Fail image path';
-        
-    	$jsonData = utf8_encode(Zend_Json::encode($modalContents));
-        
-        $this->getResponse()
-                ->setHeader('Content-Type', 'text/html')
-                ->setBody($jsonData)
-                ->sendResponse();
-        exit;
-    }
-
-    /**
-     * The contents of the winner modal
-     */
-    public function winnerAction() {
-        
-        $modalContents['text'] = 'winner';
-        $modalContents['img'] = 'winner image path';
-        
-    	$jsonData = utf8_encode(Zend_Json::encode($modalContents));
-        
-        $this->getResponse()
-                ->setHeader('Content-Type', 'text/html')
-                ->setBody($jsonData)
-                ->sendResponse();
-        exit;
+        exit;*/
+        return;
     }
 
     /**
@@ -534,6 +508,10 @@ class CompetitionController extends Zend_Controller_Action {
         
         if(isset($usedPlayerId['playerId'])){
             $playerDetails = $this->_tmwDBConnect->getPlayerDetails($usedPlayerId['playerId'], $this->_tmwCampaign);
+            
+            // TO BE REMOVED ONLY FOR TESTING THOSE SHOULD COM FROM MOTION SERVICE
+            $playerDetails['playerProgress']    = '69';
+            $playerDetails['playerTime']        = rand(100,300);
         }
         else{
             $playerDetails['firstname']         = 'TMW';
@@ -557,8 +535,8 @@ class CompetitionController extends Zend_Controller_Action {
         // Calculate score        
         $playerDetails['playerScore'] = ($playerDetails['playerProgress'] * $playerDetails['playerTime']) / 100;
         
-        // Save playerscore
-        $this->_tmwDBConnect->setPlayerScore($usedPlayerId['playerId'], $playerDetails['playerScore']);
+        // Save playerscore, playertime and player progress
+        $this->_tmwDBConnect->setPlayerScoreTimeProgress($usedPlayerId['playerId'], $playerDetails['playerScore'], $playerDetails['playerTime'], $playerDetails['playerProgress']);
         
         $gameEndData['playerDetails'] = $playerDetails;
         
@@ -566,13 +544,50 @@ class CompetitionController extends Zend_Controller_Action {
         $this->_tmwDBGameStatus->setCurrentPlayer($usedPlayerId['playerId'], $gameStatus, $playerDetails['playerProgress'], $playerPhoto); 
         
         // Getting the latest scoreboard
-        $gameEndData['scoreBoard']    = $this->_tmwDBConnect->getScoreList($this->_tmwCampaign);        
+        $gameEndData['scoreBoard']      = $this->_tmwDBConnect->getScoreList($this->_tmwCampaign);        
         // setting the video progress
-        $gameEndData['videoProgress'] = $playerDetails['playerProgress'];   
+        $gameEndData['videoProgress']   = $playerDetails['playerProgress'];   
         // setting the video progress
-        $gameEndData['playerPhoto'] = $playerPhoto;
+        $gameEndData['playerPhoto']     = $playerPhoto;
+        
+        // Post messege to Twitter
+        $this->posttotwitterAction($playerDetails['twitterhandle'], $gameEndData['playerPhoto']);
         
     	$jsonData = utf8_encode(Zend_Json::encode($gameEndData));
+        
+        $this->getResponse()
+                ->setHeader('Content-Type', 'text/html')
+                ->setBody($jsonData)
+                ->sendResponse();
+        exit;
+    }
+    
+    public function resetuserdetailsAction(){
+        $gameStatus     = 'off';
+        
+        $playerDetails['firstname']         = 'TMW';
+        $playerDetails['lastname']          = 'Agency';
+        $playerDetails['twitterhandle']     = 'tmwagency';
+        $playerDetails['playerScore']       = '0';
+        $playerDetails['playerProgress']    = '0';
+        $playerDetails['playerTime']        = '0';
+        
+        if(isset($playerDetails['twitterhandle']) && !empty($playerDetails['twitterhandle'])){
+            $playerTwitterImg = $this->gettwitterdetailsAction($playerDetails['twitterhandle']);            
+        }
+        else
+        {
+            $playerTwitterImg = '/assets/img/admin/logo.jpg';              
+        }
+        
+        $playerDetails['playerTwitterImg']  = $playerTwitterImg;
+        
+        $resetGameData['playerDetails']     = $playerDetails;
+        
+        // Save the current user in the current game state
+        $this->_tmwDBGameStatus->setCurrentPlayer(null, $gameStatus, $playerDetails['playerProgress'], null);
+        
+        $jsonData = utf8_encode(Zend_Json::encode($resetGameData));
         
         $this->getResponse()
                 ->setHeader('Content-Type', 'text/html')
@@ -586,10 +601,20 @@ class CompetitionController extends Zend_Controller_Action {
      */
     public function getmotiondataAction() {
         
-        $motiondata['RFHandleId']       = 'bardis';
-        $motiondata['game_status']      = 'on';
-        $motiondata['game_progress']    = 0;
-        $motiondata['game_time']        = 0;
+        $state = false;
+        
+        if($state){
+            $motiondata['RFHandleId']       = 'bardis';
+            $motiondata['game_status']      = true;
+            $motiondata['game_progress']    = 0;
+            $motiondata['game_time']        = 0;
+        }
+        else{
+            $motiondata['RFHandleId']       = null;
+            $motiondata['game_status']      = false;
+            $motiondata['game_progress']    = 69;
+            $motiondata['game_time']        = rand(100,300);            
+        }
         
         
     	$jsonData = utf8_encode(Zend_Json::encode($motiondata));

@@ -1,5 +1,6 @@
 <?php 
-    $this->headScript()->offsetSetFile(1, $this->baseUrl().'/assets/js/script.js', 'text/javascript');
+    $this->headScript()->offsetSetFile(1, $this->baseUrl().'/assets/js/script.js', 'text/javascript'); 
+    $this->headScript()->offsetSetFile(1, $this->baseUrl().'/assets/js/libs/plugins/jquery.foundation.reveal.js', 'text/javascript');
     
     $this->headLink()->appendStylesheet($this->baseUrl().'/assets/css/views/normalize.css');
     $this->headLink()->appendStylesheet($this->baseUrl().'/assets/css/views/competition.css');
@@ -51,11 +52,11 @@
             <div class="now-playing playerDetails">
                 <?php
                     if(isset($this->playerDetails['twitterhandle']) && !empty($this->playerDetails['twitterhandle'])){
-                        echo '<img src="' . $this->playerDetails['playerTwitterImg'] . '" alt="' . $this->playerDetails['twitterhandle'] . '" />';
+                        echo '<img class="now-playing-img" src="' . $this->playerDetails['playerTwitterImg'] . '" alt="' . $this->playerDetails['twitterhandle'] . '" />';
                         echo '<div class="now-playing-name"><a href="https://twitter.com/' . $this->playerDetails['twitterhandle'] . '" title="' . $this->playerDetails['twitterhandle'] . '" target="_blank">' . $this->playerDetails['twitterhandle'] . '</a></div>';               
                     }
                     else{
-                        echo '<img src="' . $this->playerDetails['playerTwitterImg'] . '" alt="' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '" />';
+                        echo '<img class="now-playing-img" src="' . $this->playerDetails['playerTwitterImg'] . '" alt="' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '" />';
                         echo '<div class="now-playing-name"><a href="https://twitter.com/tmwagency" title="' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '" target="_blank">' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '</a></div>';   
                     }
                 ?>
@@ -64,4 +65,14 @@
                 <?php echo $this->playerDetails['playerScore'] ?>
             </div> 
     <div class="clear"></div>
+</div>
+
+<div class="reveal-modal" id="failModal">
+    <a class="close-reveal-modal">&#215;</a>
+    <h2>FAIL</h2>
+</div>
+
+<div class="reveal-modal" id="winnerModal">
+    <a class="close-reveal-modal">&#215;</a>
+    <h2>FAIL</h2>
 </div>

@@ -68,7 +68,7 @@ class TMW_Competition extends Zend_Db_Table
             // Sort the data with volume descending, edition ascending
             // Add $data as the last parameter, to sort by the common key
             array_multisort($scores, SORT_DESC, $scoreList);
-            $topTen = array_slice($scoreList, 0, 10);
+            $topTen = array_slice($scoreList, 0, 5);
             
             return $topTen;
         }
@@ -141,6 +141,13 @@ class TMW_Competition extends Zend_Db_Table
     // set the Current Player score at game end
     public function setPlayerScore($playerId, $playerScore) {        
         $this->getAdapter()->query("UPDATE tmw_wire_comp_details SET detailsData = '$playerScore' WHERE playerId = '$playerId' AND detailsField = 'playerScore'");
+    }  
+
+    // set the Current Player details at game end
+    public function setPlayerScoreTimeProgress($playerId, $playerScore, $playerTime, $playerProgress) {        
+        $this->getAdapter()->query("UPDATE tmw_wire_comp_details SET detailsData = '$playerScore' WHERE playerId = '$playerId' AND detailsField = 'playerScore'");
+        $this->getAdapter()->query("UPDATE tmw_wire_comp_details SET detailsData = '$playerTime' WHERE playerId = '$playerId' AND detailsField = 'playerTime'");
+        $this->getAdapter()->query("UPDATE tmw_wire_comp_details SET detailsData = '$playerProgress' WHERE playerId = '$playerId' AND detailsField = 'playerProgress'");
     }    
     
 }
