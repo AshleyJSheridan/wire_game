@@ -14,14 +14,12 @@ var TMW = window.TMW || {};
             TMW.SiteSetup.init();
 	});
 
-	/* optional triggers
-
 	// WINDOW.LOAD
 	$(window).load(function() {
-            swfobject.registerObject("scrubber", "9.0.0", "expressInstall.swf");
 
 	});
-
+        
+        /*
 	// WINDOW.RESIZE
 	$(window).resize(function() {
 
@@ -44,6 +42,8 @@ TMW.SiteSetup = {
         gameProgress            : 0,
         gameStartTime           : 0,
         gameEndTime             : 0,
+        gameTime                : 0,
+        gameScore               : 0,
 
 	init : function () {
             TMW.SiteSetup.getGameStatusData();
@@ -84,14 +84,27 @@ TMW.SiteSetup = {
                 url: TMW.SiteSetup.pollingURL,
                 
                 success: function(data){
-                    //TMW.SiteSetup.gameProgress = data.game_progress;
-                    // For Testing only must be removed
-                    TMW.SiteSetup.gameProgress = TMW.SiteSetup.gameProgress++;
-                    callToActionscript(TMW.SiteSetup.gameProgress);
-                    if(TMW.SiteSetup.gameProgress == 100){
+                    
+                    if(TMW.SiteSetup.gameProgress >= 100){
                         data.game_status = false;
+                        console.log('data.game_status: ' + data.game_status);
+                    } 
+                    
+                    if(data.game_status){                        
+                        // TESTING DATA START For Testing only must be removed
+                        TMW.SiteSetup.gameProgress  = TMW.SiteSetup.gameProgress + 1;
+                        TMW.SiteSetup.gameTime      = TMW.SiteSetup.gameTime + 3;
+                        // TESTING DATA ENDS 
+                        
+                        // UNCOMMENT FOR REAL DATA VERSION
+                        //TMW.SiteSetup.gameProgress = data.game_progress;
+                        //TMW.SiteSetup.gameTime = data.game_time - TMW.SiteSetup.gameStartTime;
+                        
+                        TMW.SiteSetup.setVideo(); 
+                        TMW.SiteSetup.showScore();
+                        $('.modalScore').html(TMW.SiteSetup.gameProgress);                     
                     }
-                    ///
+                    
                     TMW.SiteSetup.checkGameStatusChange(data.game_status, data.RFHandleId, data.game_time);
                 }, 
                 dataType: "json", complete: TMW.SiteSetup.getGameStatusData, timeout: 30000 }
@@ -107,7 +120,7 @@ TMW.SiteSetup = {
                 else if(gameStatus != TMW.SiteSetup.gameStatusFlag){
                     TMW.SiteSetup.gameStatusFlag = gameStatus;
                     TMW.SiteSetup.playerRFHandleId = playerRFHandleId; 
-                    console.log(gameStatus);
+                    console.log('game_status: ' + gameStatus);
                     if(gameStatus){
                         TMW.SiteSetup.gameStartTime = gameTime;
                         console.log(TMW.SiteSetup.gameStartTime);
@@ -129,7 +142,10 @@ TMW.SiteSetup = {
                 
                 success: function(data){
                     $('.reveal-modal').trigger('reveal:close');
-                    TMW.SiteSetup.setPlayerDetails(data.playerDetails);
+                    TMW.SiteSetup.setPlayerDetails(data.playerDetails);                    
+                    playerName = data.playerDetails.playerDisplayName;
+                    $('.modalName').html(playerName);
+                    $('.modalScore').html(0);
                 }, 
                 dataType: "json", timeout: 30000 }
             );
@@ -142,6 +158,8 @@ TMW.SiteSetup = {
                 data:   { },
                 
                 success: function(data){
+                    TMW.SiteSetup.calculateTotalTime();
+                    console.log(TMW.SiteSetup.gameTime);
                     TMW.SiteSetup.setPlayerDetails(data.playerDetails);
                     TMW.SiteSetup.setScoreBoard(data.scoreBoard);
                 }, 
@@ -152,11 +170,12 @@ TMW.SiteSetup = {
         setPlayerDetails : function(playerDetails){
             if(!playerDetails.twitterhandle){
                 playerDetails.twitterhandle = TMW.SiteSetup.defaultTwitterHandle;
-                playerName = playerDetails.firstname;
+                playerName = playerDetails.firstname + ' ' + playerDetails.lastname[0];
             }
             else{
                 playerName = playerDetails.twitterhandle;
             }
+            
             var playerDataHTML = '<img class="now-playing-img" alt="' + playerName + '" src="' + playerDetails.playerTwitterImg + '"><div class="now-playing-name"><a target="_blank" title="' + playerName +'" href="https://twitter.com/' + playerDetails.twitterhandle + '">' + playerName + '</a></div>'; 
             $('.playerDetails').html(playerDataHTML).show('slow');
         },
@@ -170,14 +189,22 @@ TMW.SiteSetup = {
                     scoreBoardHTML = scoreBoardHTML + '<li><a href="https://twitter.com/' + scoreBoard[score].twitterhandle + '" title="' + scoreBoard[score].twitterhandle + '" target="_blank" class="username">' + scoreBoard[score].twitterhandle + '</a><span class="userscore">' + scoreBoard[score].playerScore + '</span></li>';          
                 }
                 else{
-                    scoreBoardHTML = scoreBoardHTML + '<li><a href="https://twitter.com/tmwagency" title="' + scoreBoard[score].firstname + ' ' + scoreBoard[score].lastname.charAt(0) + '" target="_blank" class="username">' + scoreBoard[score].firstname + ' ' + scoreBoard[score].lastname.charAt(0) + '</a><span class="userscore">' + scoreBoard[score].playerScore + '</span></li>';  
+                    scoreBoardHTML = scoreBoardHTML + '<li><a href="https://twitter.com/tmwagency" title="' + scoreBoard[score].firstname + ' ' + scoreBoard[score].lastname[0] + '" target="_blank" class="username">' + scoreBoard[score].firstname + ' ' + scoreBoard[score].lastname[0] + '</a><span class="userscore">' + scoreBoard[score].playerScore + '</span></li>';  
                 }
             }
             $('.leaderboard ul').html(scoreBoardHTML).show('slow');
         },
                 
         setVideo : function(){
-            console.log('setVideo');     
+            console.log('setVideo'); 
+            callToActionscript(TMW.SiteSetup.gameProgress);
+        },
+                
+        showScore : function(){
+            console.log('showScore');
+            TMW.SiteSetup.gameScore = (TMW.SiteSetup.gameProgress * TMW.SiteSetup.gameTime) / 100;
+            
+            $('.score').html(TMW.SiteSetup.gameScore).show('slow');
         },
                 
         openGameEndModal : function(){
@@ -185,7 +212,7 @@ TMW.SiteSetup = {
             
             var modalBox = $('#failModal');
             
-            if(TMW.SiteSetup.gameProgress == 100){
+            if(TMW.SiteSetup.gameProgress >= 100){
                 modalBox = $('#winnerModal'); 
             }
             
@@ -196,7 +223,7 @@ TMW.SiteSetup = {
                 dismissmodalclass:      'close-reveal-modal',
                 close:                  TMW.SiteSetup.resetGame()                    
                 }
-            ); 
+            );
         },
                 
         resetGame : function(){
@@ -204,7 +231,9 @@ TMW.SiteSetup = {
             TMW.SiteSetup.playerRFHandleId  = null;  
             TMW.SiteSetup.gameStatusFlag    = false;  
             TMW.SiteSetup.gameProgress      = 0;  
-            TMW.SiteSetup.gameTime          = 0; 
+            TMW.SiteSetup.gameTime          = 0;  
+            TMW.SiteSetup.gameEndTime       = 0;  
+            TMW.SiteSetup.gameStartTime     = 0; 
             
             $.ajax({ 
                 url:    TMW.SiteSetup.resetGameURL, 
@@ -212,10 +241,19 @@ TMW.SiteSetup = {
                 
                 success: function(data){
                     TMW.SiteSetup.setPlayerDetails(data.playerDetails);
+                    TMW.SiteSetup.setVideo(); 
+                    TMW.SiteSetup.showScore();                    
+                    setTimeout(function(){                    
+                        $('.reveal-modal').trigger('reveal:close');
+                    }, 5000);
                 }, 
                 dataType: "json", timeout: 30000 }
             ); 
         },
+        
+        calculateTotalTime : function(){
+            TMW.SiteSetup.gameTime = TMW.SiteSetup.gameEndTime - TMW.SiteSetup.gameStartTime;
+        },     
         
         tweetify: {
             link: function(tweet) {

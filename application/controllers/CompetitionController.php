@@ -471,15 +471,18 @@ class CompetitionController extends Zend_Controller_Action {
         }
         
         if(isset($playerDetails['twitterhandle']) && !empty($playerDetails['twitterhandle'])){
-            $playerTwitterImg = $this->gettwitterdetailsAction($playerDetails['twitterhandle']);            
+            $playerTwitterImg   = $this->gettwitterdetailsAction($playerDetails['twitterhandle']);
+            $playerDisplayName  = $playerDetails['twitterhandle'];
         }
         else
         {
-            $playerTwitterImg = '/assets/img/admin/logo.jpg';              
+            $playerTwitterImg = '/assets/img/admin/logo.jpg'; 
+            $playerDisplayName  = $playerDetails['firstname'] . ' ' . $playerDetails['lastname'][0];             
         }
         
-        $playerDetails['playerTwitterImg'] = $playerTwitterImg;
-        $playerDetails['playerScore']      = '0';
+        $playerDetails['playerTwitterImg']  = $playerTwitterImg;
+        $playerDetails['playerDisplayName'] = $playerDisplayName;
+        $playerDetails['playerScore']       = '0';
         
         $gameStartData['playerDetails'] = $playerDetails;        
         // Getting the latest scoreboard
@@ -613,7 +616,7 @@ class CompetitionController extends Zend_Controller_Action {
             $motiondata['RFHandleId']       = null;
             $motiondata['game_status']      = false;
             $motiondata['game_progress']    = 69;
-            $motiondata['game_time']        = rand(100,300);            
+            $motiondata['game_time']        = rand(100, 300);            
         }
         
         

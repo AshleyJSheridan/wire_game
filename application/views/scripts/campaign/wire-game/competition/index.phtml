@@ -23,9 +23,9 @@
             </div>
             <div class="video-scrubber">
                 <object id="scrubber" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="500" height="301">
-                    <param name="movie" value="<?php echo $this->baseUrl(); ?>/videoTestV2.swf" />
+                    <param name="movie" value="<?php echo $this->baseUrl(); ?>/gamevideo.swf" />
                     <!--[if !IE]>-->
-                    <object type="application/x-shockwave-flash" data="<?php echo $this->baseUrl(); ?>/videoTestV2.swf" width="500" height="301" wmode="transparent">
+                    <object type="application/x-shockwave-flash" data="<?php echo $this->baseUrl(); ?>/gamevideo.swf" width="500" height="301" wmode="transparent">
                     <!--<![endif]-->
                     <div>
                         <h1>Alternative content</h1>
@@ -35,7 +35,6 @@
                     </object>
                     <!--<![endif]-->
                 </object>
-                <?php echo $this->playerDetails['playerProgress'] ?>
             </div>
             <div class="live-feed">
 
@@ -70,25 +69,39 @@
 <div class="reveal-modal large" id="failModal">
     <a class="close-reveal-modal">&#215;</a>
     <h2>FAIL</h2>
+    <?php
+        if(isset($this->playerDetails['twitterhandle']) && !empty($this->playerDetails['twitterhandle'])){
+            echo '<h3 class="now-playing-name"><span class="modalName">' . $this->playerDetails['twitterhandle'] . '</span> reached: <span class="modalScore">' . $this->playerDetails['playerProgress'] . '</span>%</h3>';               
+        }
+        else{
+            echo '<h3 class="now-playing-name"><span class="modalName">' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '</span> reached: <span class="modalScore">' . $this->playerDetails['playerProgress'] . '</span>%</h3>';  
+        }
+    ?>
+    <img src="<?php echo  $this->baseUrl(); ?>/assets/img/competition/failImg.jpg" alt="YOU WON!" />
 </div>
 
 <div class="reveal-modal large" id="winnerModal">
     <a class="close-reveal-modal">&#215;</a>
     <h2>WINNER</h2>
+    <?php
+        if(isset($this->playerDetails['twitterhandle']) && !empty($this->playerDetails['twitterhandle'])){
+            echo '<h3 class="now-playing-name"><span class="modalName">' . $this->playerDetails['twitterhandle'] . '</span> reached: <span class="modalScore">' . $this->playerDetails['playerProgress'] . '</span>%</h3>';               
+        }
+        else{
+            echo '<h3 class="now-playing-name"><span class="modalName">' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '</span> reached: <span class="modalScore">' . $this->playerDetails['playerProgress'] . '</span>%</h3>';  
+        }
+    ?>
+    <img src="<?php echo  $this->baseUrl(); ?>/assets/img/competition/winImg.jpg" alt="YOU WON!" />
 </div>
 
-<script type="text/javascript" src="/assets/js/swfobject.js"></script>
-<script type="text/javascript">    
-    swfobject.registerObject("scrubber", "9.0.0", "expressInstall.swf");
-    
+<script type="text/javascript">
     function getFlashMovie(movieName) {
         var isIE = navigator.appName.indexOf("Microsoft") != -1;
         return (isIE) ? window[movieName] : document[movieName];
     }
-    
-    function callToActionscript(str)
-    {
+            
+    function callToActionscript(str){
         var flashObj = swfobject.getObjectById('scrubber');
         flashObj.newPerc(str);
-    }
+    }    
 </script>

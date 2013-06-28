@@ -3,7 +3,6 @@ body {
 	min-height: 800px;
 }
 
-
 #fb_wrapper {
     width: 1280px;
     padding: 0 14px;
@@ -30,6 +29,7 @@ body {
 	height: 251px;
 	top: 140px;
 	margin-left: -590px;
+        overflow: hidden;
 }
 
 .leaderboard ul,
@@ -58,7 +58,6 @@ body {
 	border-bottom: none;
 }
 
-
 .leaderboard li {
 	overflow: hidden;
 	height: 48px;
@@ -81,6 +80,7 @@ body {
 	height: 301px;
 	top: 136px;
 	margin-left: -208px;
+        overflow: hidden;
 	/*border-radius: 5px;
 	box-shadow: 20px 20px 27px rgba(0,0,0,0.2);*/
 }
@@ -91,6 +91,7 @@ body {
 	height: 272px;
 	top: 490px;
 	margin-left: 157px;
+        overflow: hidden;
 	/*border-radius: 5px;
 	box-shadow: 20px 20px 27px rgba(0,0,0,0.2);*/
 }
@@ -101,6 +102,7 @@ body {
 	height: 208px;
 	top: 545px;
 	margin-left: -575px;
+        overflow: hidden;
 }
 
 .tweets li {
@@ -321,13 +323,30 @@ strong.required {
     left: 50%;
     margin-left: -300px;
     width: 520px;
-    background: #FFF;
+    min-height: 400px;
+    background: #000;
     position: absolute;
     z-index: 101;
     padding: 20px 18px;
     -moz-box-shadow: 0 0 10px rgba(0,0,0,.4);
     -webkit-box-shadow: 0 0 10px rgba(0,0,0,.4);
     -box-shadow: 0 0 10px rgba(0,0,0,.4);
+    text-align:center;
+}
+	
+.reveal-modal h2{
+    color:#E67207;
+    text-align:center;
+}
+	
+.reveal-modal h3{
+    color:#E67207;
+    text-align:center;
+}
+	
+.reveal-modal img{
+    display:block;
+    margin:0 auto;
 }
 		
 .reveal-modal.small{
@@ -356,7 +375,8 @@ strong.required {
     position: absolute;
     top: 8px;
     right: 11px;
-    color: #aaa;
+    color:#E67207;
+    text-decoration:none!important;
     text-shadow: 0 -1px 1px rbga(0,0,0,.6);
     font-weight: bold;
     cursor: pointer;

@@ -16,6 +16,11 @@
 	//$this->headLink()->prependStylesheet($this->baseUrl().'/assets/css/views/competition.css');
 	echo $this->headLink();
     ?>
+
+    <script type="text/javascript" src="/assets/js/swfobject.js"></script>
+    <script type="text/javascript">    
+        swfobject.registerObject("scrubber", "9.0.0", "expressInstall.swf");
+    </script>
     
     <script src="<?php echo $this->baseUrl(); ?>/assets/js/libs/modernizr.min.js"></script>
 </head>
