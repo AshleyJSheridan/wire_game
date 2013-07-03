@@ -65,8 +65,27 @@ You can see the app under the new domain working now. http://subdomain.domain.co
 
 Exporting Data
 ------------------------------------------------------
+
 Form within the CMS you can select the competition name that you wish to export the data for and then a csv file is created for download.
 Eazymode.
 
 
+VHOST Setup
+--------------------------------------------------------
 
+<VirtualHost *:80>
+    ServerName wire-game.dev
+    DocumentRoot "C:\wamp\www\wire_game\public_html"
+
+    <Directory "C:\wamp\www\wire_game\public_html">
+    	Options FollowSymLinks
+	AllowOverride All
+
+        Order allow,deny
+        Allow from all
+    </Directory>
+
+    ErrorLog "logs/wire_game-error.log"
+    CustomLog "logs/wire_game-access.log" common
+    DirectoryIndex index.html index.php
+</VirtualHost>
