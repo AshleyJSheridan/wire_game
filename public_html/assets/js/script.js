@@ -46,6 +46,17 @@ TMW.SiteSetup = {
         gameScore               : 0,
 
 	init : function () {
+            $.ajax({
+                url: TMW.SiteSetup.twittrFeedURL, 
+                data: { ajaxFeed: true }, 
+                    
+                success: function(data){
+                    TMW.SiteSetup.displayTwiterFeed(data);
+                    TMW.SiteSetup.getTwitterFeedData();
+                }, 
+                dataType: "json"}
+            );
+            
             TMW.SiteSetup.getGameStatusData();
             TMW.SiteSetup.getTwitterFeedData();
 	},
@@ -62,7 +73,7 @@ TMW.SiteSetup = {
                     }, 
                     dataType: "json"}
                     );
-                }, 300000);    
+                }, 30000);    
         },
         
         displayTwiterFeed : function(twitterFeed){           

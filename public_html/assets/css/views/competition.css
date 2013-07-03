@@ -3,6 +3,10 @@ body {
 	min-height: 800px;
 }
 
+a {
+    text-decoration:none!important;
+}
+
 #fb_wrapper {
     width: 1280px;
     padding: 0 14px;

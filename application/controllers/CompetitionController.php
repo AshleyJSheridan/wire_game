@@ -512,7 +512,7 @@ class CompetitionController extends Zend_Controller_Action {
         if(isset($usedPlayerId['playerId'])){
             $playerDetails = $this->_tmwDBConnect->getPlayerDetails($usedPlayerId['playerId'], $this->_tmwCampaign);
             
-            // TO BE REMOVED ONLY FOR TESTING THOSE SHOULD COM FROM MOTION SERVICE
+            // TO BE REMOVED ONLY FOR TESTING THOSE SHOULD COME FROM MOTION SERVICE
             $playerDetails['playerProgress']    = '69';
             $playerDetails['playerTime']        = rand(100,300);
         }
