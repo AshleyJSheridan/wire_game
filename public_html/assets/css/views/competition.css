@@ -13,6 +13,10 @@ body {
     font-family: 'robotoregular', Helvetica, Arial,sans-serif;
 	background: #343434 url(/assets/img/competition/bg.jpg) center top no-repeat;
 	min-height: 800px;
+    min-width: 1280px;
+    color:#FFF;
+    font-size:14px;
+    line-height:18px;
 }
 
 a {
@@ -180,7 +184,8 @@ a {
 }
 
 .now-playing-name a{
-	font-size: 21px;
+	font-size: 18px;
+	line-height: 24px;
 	font-weight: normal;
 	color: #fff!important;
 	text-transform: uppercase;
