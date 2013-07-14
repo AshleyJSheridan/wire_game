@@ -141,8 +141,9 @@ class CompetitionController extends Zend_Controller_Action {
             $this->view->twitterFeed = array();
         }
         
-        if(!$ajaxFeed){        
-            $this->view->scoreList  = $this->_tmwDBConnect->getScoreList($this->_tmwCampaign);           
+        if(!$ajaxFeed){ 
+            $scoreBoard             = $this->_tmwDBConnect->getScoreList($this->_tmwCampaign);
+            $this->view->scoreList  = $scoreBoard;       
         }     
         else{
             $this->view->scoreList = array();
@@ -513,8 +514,8 @@ class CompetitionController extends Zend_Controller_Action {
             $playerDetails = $this->_tmwDBConnect->getPlayerDetails($usedPlayerId['playerId'], $this->_tmwCampaign);
             
             // TO BE REMOVED ONLY FOR TESTING THOSE SHOULD COME FROM MOTION SERVICE
-            $playerDetails['playerProgress']    = '69';
-            $playerDetails['playerTime']        = rand(100,300);
+            //$playerDetails['playerProgress']    = '69';
+            //$playerDetails['playerTime']        = rand(100,300);
         }
         else{
             $playerDetails['firstname']         = 'TMW';
@@ -536,7 +537,7 @@ class CompetitionController extends Zend_Controller_Action {
         $playerDetails['playerTwitterImg'] = $playerTwitterImg;
         
         // Calculate score        
-        $playerDetails['playerScore'] = ($playerDetails['playerProgress'] * $playerDetails['playerTime']) / 100;
+        $playerDetails['playerScore'] = $playerDetails['playerProgress'] * 10000 + $playerDetails['playerTime'];
         
         // Save playerscore, playertime and player progress
         $this->_tmwDBConnect->setPlayerScoreTimeProgress($usedPlayerId['playerId'], $playerDetails['playerScore'], $playerDetails['playerTime'], $playerDetails['playerProgress']);
