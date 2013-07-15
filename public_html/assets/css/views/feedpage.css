@@ -1,0 +1,128 @@
+body {
+	background: #343434 url(/assets/img/competition/feedbg.jpg) center top no-repeat!important;
+	min-height: 800px;
+}
+
+.feedPage{
+    
+}
+
+.introCopy{
+	position: absolute;
+	left: 50%;    
+	margin-left: -394px;
+	width: 556px;
+	height: 160px;
+	top: 102px;
+    overflow: hidden;
+}
+
+.introCopy p{
+    font-size:16px;
+    margin-top:0;
+    margin-bottom:8px;
+    line-height: 20px;
+}
+
+.playerGallery{
+	position: absolute;
+	left: 50%;    
+	margin-left: -584px;
+	width: 580px;
+	height: 425px;
+	top: 336px;
+    overflow: hidden;
+}
+
+.playerGallery p{
+    font-size:14px;
+    margin-top:0;
+    margin-bottom:8px;
+    line-height: 16px;
+    text-align: center;
+    display:block;
+    float:left;
+    height: 32px;
+    overflow: hidden;
+    padding-left:14px;
+    width:500px;
+}
+
+.scroll-pane{
+	width: 580px;
+	height: 370px;
+    float:left;
+    clear:both;  
+    margin-top:4px;  
+}
+
+.now-playing {
+    top: 0;
+	position: relative;
+	left: 0;  
+    width: 147px; 
+    height: 174px;
+    margin: 6px 15px;
+    text-align: center; 
+    float:left;
+}
+
+/* Leaderboard */
+.leaderboard {
+	width: 343px;
+	height: 294px;
+	top: 85px;
+	margin-left: 210px;
+    overflow: hidden;
+}
+
+.leaderboard p{
+    font-size:14px;
+    margin-top:0;
+    margin-bottom:8px;
+    line-height: 16px;
+    text-align: center;
+    display:block;
+    float:left;
+    height: 32px;
+    overflow: hidden;
+}
+
+.leaderboard ul,
+.tweets ul {
+	margin: 0;
+    display:block;
+    float:left;
+    width:100%;
+    padding:0 10px;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;    
+}
+
+/* Latest tweets */
+.tweets {
+	width: 320px;
+	height: 288px;
+	top: 474px;
+	margin-left: 115px;
+    overflow: hidden;
+}
+
+.tweets p{
+    font-size:14px;
+    margin-top:0;
+    margin-bottom:0;
+    line-height: 16px;
+    text-align: center;
+    display:block;
+    float:left;
+    height: 32px;
+    overflow: hidden;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.14);
+    padding-bottom:14px;
+}
+
+.tweets ul {
+    border-top: 1px solid rgba(0, 0, 0, 0.42);
+    padding-top:16px;
+}

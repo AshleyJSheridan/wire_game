@@ -9,14 +9,16 @@
 <div id="fb_wrapper" class="competition">         
             <div class="leaderboard scoreList">
                 <ul>
-                    <?php 
+                    <?php
+                        $playerCount = 0;
                         foreach($this->scoreList as $playerScore){
                             if(isset($playerScore['twitterhandle']) && !empty($playerScore['twitterhandle'])){
-                                echo '<li><a href="https://twitter.com/' . $playerScore['twitterhandle'] . '" title="' . $playerScore['twitterhandle'] . '" target="_blank" class="username">' . $playerScore['twitterhandle'] . '</a><span class="userscore">' . $playerScore['playerScore'] . '</span></li>';
+                                echo '<li class="player' . $playerCount . '"><a href="https://twitter.com/' . $playerScore['twitterhandle'] . '" title="@' . $playerScore['twitterhandle'] . '" target="_blank" class="username">@' . $playerScore['twitterhandle'] . '</a><span class="userscore">' . $playerScore['playerProgress'] . '%</span><span class="usertime">(' . $playerScore['playerTime'] . ')</span></li>';
                             }
                             else{
-                                echo '<li><a href="https://twitter.com/tmwagency" title="' . $playerScore['firstname'] . ' ' . $playerScore['lastname'][0] . '" target="_blank" class="username">' . $playerScore['firstname'] . ' ' . $playerScore['lastname'][0] . '</a><span class="userscore">' . $playerScore['playerScore'] . '</span></li>';   
+                                echo '<li class="player' . $playerCount . '"><a href="https://twitter.com/tmwagency" title="' . $playerScore['firstname'] . ' ' . $playerScore['lastname'][0] . '" target="_blank" class="username">' . $playerScore['firstname'] . ' ' . $playerScore['lastname'][0] . '</a><span class="userscore">' . $playerScore['playerProgress'] . '%</span><span class="usertime">(' . $playerScore['playerTime'] . ')</span></li>';   
                             }
+                            $playerCount++;
                         }
                     ?>
                 </ul>
@@ -51,18 +53,19 @@
             <div class="now-playing playerDetails">
                 <?php
                     if(isset($this->playerDetails['twitterhandle']) && !empty($this->playerDetails['twitterhandle'])){
-                        echo '<img class="now-playing-img" src="' . $this->playerDetails['playerTwitterImg'] . '" alt="' . $this->playerDetails['twitterhandle'] . '" />';
-                        echo '<div class="now-playing-name"><a href="https://twitter.com/' . $this->playerDetails['twitterhandle'] . '" title="' . $this->playerDetails['twitterhandle'] . '" target="_blank">' . $this->playerDetails['twitterhandle'] . '</a></div>';               
+                        echo '<div class="now-playing-img"><img src="' . $this->playerDetails['playerTwitterImg'] . '" alt="@' . $this->playerDetails['twitterhandle'] . '" /><img src="' . $this->baseUrl(). '/assets/img/competition/skrews.png" class="skrews" /></div>';
+                        echo '<div class="now-playing-name"><a href="https://twitter.com/' . $this->playerDetails['twitterhandle'] . '" title="@' . $this->playerDetails['twitterhandle'] . '" target="_blank">@' . $this->playerDetails['twitterhandle'] . '</a></div>';               
                     }
                     else{
-                        echo '<img class="now-playing-img" src="' . $this->playerDetails['playerTwitterImg'] . '" alt="' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '" />';
+                        echo '<div class="now-playing-img"><img src="' . $this->playerDetails['playerTwitterImg'] . '" alt="' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '" /><img src="' . $this->baseUrl(). '/assets/img/competition/skrews.png" class="skrews" /></div>';
                         echo '<div class="now-playing-name"><a href="https://twitter.com/tmwagency" title="' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '" target="_blank">' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '</a></div>';   
                     }
                 ?>
             </div>
             <div class="score">
-                <?php echo $this->playerDetails['playerScore'] ?>
-            </div>
+                <?php echo $this->playerDetails['playerProgress'] ?>%
+            </div> 
+
     <div class="clear"></div>
 </div>
 
@@ -71,7 +74,7 @@
     <h2>FAIL</h2>
     <?php
         if(isset($this->playerDetails['twitterhandle']) && !empty($this->playerDetails['twitterhandle'])){
-            echo '<h3 class="now-playing-name"><span class="modalName">' . $this->playerDetails['twitterhandle'] . '</span> reached: <span class="modalScore">' . $this->playerDetails['playerProgress'] . '</span>%</h3>';               
+            echo '<h3 class="now-playing-name"><span class="modalName">@' . $this->playerDetails['twitterhandle'] . '</span> reached: <span class="modalScore">@' . $this->playerDetails['playerProgress'] . '</span>%</h3>';               
         }
         else{
             echo '<h3 class="now-playing-name"><span class="modalName">' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '</span> reached: <span class="modalScore">' . $this->playerDetails['playerProgress'] . '</span>%</h3>';  
@@ -85,7 +88,7 @@
     <h2>WINNER</h2>
     <?php
         if(isset($this->playerDetails['twitterhandle']) && !empty($this->playerDetails['twitterhandle'])){
-            echo '<h3 class="now-playing-name"><span class="modalName">' . $this->playerDetails['twitterhandle'] . '</span> reached: <span class="modalScore">' . $this->playerDetails['playerProgress'] . '</span>%</h3>';               
+            echo '<h3 class="now-playing-name"><span class="modalName">@' . $this->playerDetails['twitterhandle'] . '</span> reached: <span class="modalScore">@' . $this->playerDetails['playerProgress'] . '</span>%</h3>';               
         }
         else{
             echo '<h3 class="now-playing-name"><span class="modalName">' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '</span> reached: <span class="modalScore">' . $this->playerDetails['playerProgress'] . '</span>%</h3>';  

@@ -1,10 +1,27 @@
+@font-face {
+    font-family: 'robotoregular';
+    src: url('fonts/roboto-regular-webfont.eot');
+    src: url('fonts/roboto-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/roboto-regular-webfont.woff') format('woff'),
+         url('fonts/roboto-regular-webfont.ttf') format('truetype'),
+         url('fonts/roboto-regular-webfont.svg#robotoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
-	background: #000 url(/assets/img/competition/bg.jpg) center top no-repeat;
+    font-family: 'robotoregular', Helvetica, Arial,sans-serif;
+	background: #343434 url(/assets/img/competition/bg.jpg) center top no-repeat;
 	min-height: 800px;
+    min-width: 1280px;
+    color:#FFF;
+    font-size:14px;
+    line-height:18px;
 }
 
 a {
     text-decoration:none!important;
+	color: #f18131;
 }
 
 #fb_wrapper {
@@ -33,13 +50,12 @@ a {
 	height: 251px;
 	top: 140px;
 	margin-left: -590px;
-        overflow: hidden;
+    overflow: hidden;
 }
 
 .leaderboard ul,
 .tweets ul {
 	margin: 0 10px;
-	font-weight: bold;
 	color: #fff;
 	text-shadow: 0 -1px 0px #000;
 }
@@ -66,16 +82,33 @@ a {
 	overflow: hidden;
 	height: 48px;
 	line-height: 48px;
-	font-size: 24px;
+	font-size: 20px;
+    color:#b5a593;
 }
+
 .username {
 	float: left;
+    color:#b5a593;
 }
 
 .userscore {
 	float: right;
-	width: 80px;
 	text-align: right;
+    color:#b5a593;
+}
+
+.usertime {
+	float: right;
+	text-align: right;
+    color:#b5a593;
+    padding-right:20px;
+    font-size:18px;
+}
+
+.player0 .username,
+.player0 .userscore,
+.player0 .usertime {
+    color:#FFF;
 }
 
 /* Video Scrubber */
@@ -84,7 +117,7 @@ a {
 	height: 301px;
 	top: 136px;
 	margin-left: -208px;
-        overflow: hidden;
+    overflow: hidden;
 	/*border-radius: 5px;
 	box-shadow: 20px 20px 27px rgba(0,0,0,0.2);*/
 }
@@ -95,7 +128,7 @@ a {
 	height: 272px;
 	top: 490px;
 	margin-left: 157px;
-        overflow: hidden;
+    overflow: hidden;
 	/*border-radius: 5px;
 	box-shadow: 20px 20px 27px rgba(0,0,0,0.2);*/
 }
@@ -106,16 +139,17 @@ a {
 	height: 208px;
 	top: 545px;
 	margin-left: -575px;
-        overflow: hidden;
+    overflow: hidden;
 }
 
 .tweets li {
 	padding-top: 5px;
 	padding-bottom: 5px;
+    font-size:16px;
 }
 
 .tweets a {
-	color: orange;
+	color: #f18131;
 }
 
 /* Now playing */
@@ -128,14 +162,32 @@ a {
 }
 
 .now-playing-img {
-	border-radius: 3px;
+    width:146px;
+    height:146px;
+    position: relative;
+    display: inline-block;
 }
 
-.now-playing-name {
-	font-size: 20px;
-	font-weight: bold;
-	color: #fff;
-	line-height: 2;
+.now-playing-img img{
+    width:146px;
+    height:146px;
+    float: left;
+    display: block;
+}
+
+.now-playing-img .skrews{
+    float:none;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 98;
+}
+
+.now-playing-name a{
+	font-size: 18px;
+	line-height: 24px;
+	font-weight: normal;
+	color: #fff!important;
 	text-transform: uppercase;
 }
 
@@ -147,8 +199,8 @@ a {
 	margin-left: 397px;
 	line-height: 106px;
 	text-align: center;
-	color: #fff;
-	font-size: 35px;
+	color: #f18131;
+	font-size: 32px;
 	font-weight: bold;
 	text-shadow: 0 -1px 2px #000;
 }
@@ -175,13 +227,13 @@ a {
 }
 
 a {
-    color:#D4D69C;
+	color: #f18131;
     font-weight:normal;
     text-decoration:none;
 }
 
 a:hover {
-    color:#9fa617;
+    color:#FFF;
     text-decoration:none;
 }
 
