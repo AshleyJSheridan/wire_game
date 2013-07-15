@@ -511,7 +511,10 @@ class CompetitionController extends Zend_Controller_Action {
         $usedPlayerId   = $this->_tmwDBGameStatus->getCurrentPlayer();       
         
         if(isset($usedPlayerId['playerId'])){
-            $playerDetails = $this->_tmwDBConnect->getPlayerDetails($usedPlayerId['playerId'], $this->_tmwCampaign);
+            $playerDetails  = $this->_tmwDBConnect->getPlayerDetails($usedPlayerId['playerId'], $this->_tmwCampaign);
+            $playerPhoto    = $usedPlayerId['player_photo'];
+            
+            $this->_tmwDBConnect->setPlayerPhoto($playerPhoto, $usedPlayerId['playerId']);
             
             // TO BE REMOVED ONLY FOR TESTING THOSE SHOULD COME FROM MOTION SERVICE
             //$playerDetails['playerProgress']    = '69';
@@ -552,7 +555,7 @@ class CompetitionController extends Zend_Controller_Action {
         // setting the video progress
         $gameEndData['videoProgress']   = $playerDetails['playerProgress'];   
         // setting the video progress
-        $gameEndData['playerPhoto']     = $playerPhoto;
+        $gameEndData['playerPhoto']     = '/assets/img/competition/photos/' . $playerPhoto;
         
         // Post messege to Twitter
         $this->posttotwitterAction($playerDetails['twitterhandle'], $gameEndData['playerPhoto']);

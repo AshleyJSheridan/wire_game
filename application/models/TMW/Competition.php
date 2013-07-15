@@ -14,7 +14,7 @@ class TMW_Competition extends Zend_Db_Table
             return $insert_id;
         } else {
             throw new Exception('Could not insert mandatory data');
-	}	
+        }	
     }
     
     // save the extra data in the ref table
@@ -27,6 +27,14 @@ class TMW_Competition extends Zend_Db_Table
         } else {
             throw new Exception('Could not insert data');
         }	
+    }
+    
+    // save the game user photo data in the ref table
+    public function setPlayerPhoto($playerPhoto, $playerId) {
+        
+            $this->getAdapter()->query("INSERT INTO tmw_wire_comp_details(playerId,detailsField,detailsData) VALUES ('$playerId','wiredPhoto','$playerPhoto');");
+            return true;	
+            
     }
     
     // load the application settings from tha database
