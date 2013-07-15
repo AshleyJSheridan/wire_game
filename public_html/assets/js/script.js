@@ -31,7 +31,7 @@ var TMW = window.TMW || {};
 
 TMW.SiteSetup = {
     
-	pollingURL              : '/competition/wire-game/getmotiondata',
+		pollingURL              : '/json_feed.php',
         startGameURL            : '/competition/wire-game/gamestart',
         endGameURL              : '/competition/wire-game/gameend',
         twittrFeedURL           : '/competition/wire-game/gettwitterfeed',
@@ -95,21 +95,20 @@ TMW.SiteSetup = {
                 url: TMW.SiteSetup.pollingURL,
                 
                 success: function(data){
-                    
                     if(TMW.SiteSetup.gameProgress >= 100){
                         data.game_status = false;
                         console.log('data.game_status: ' + data.game_status);
                     } 
-                    
+
                     if(data.game_status){                        
                         // TESTING DATA START For Testing only must be removed
-                        TMW.SiteSetup.gameProgress  = TMW.SiteSetup.gameProgress + 1;
-                        TMW.SiteSetup.gameTime      = TMW.SiteSetup.gameTime + 3;
+                        //TMW.SiteSetup.gameProgress  = TMW.SiteSetup.gameProgress + 1;
+                        //TMW.SiteSetup.gameTime      = TMW.SiteSetup.gameTime + 3;
                         // TESTING DATA ENDS 
                         
                         // UNCOMMENT FOR REAL DATA VERSION
-                        //TMW.SiteSetup.gameProgress = data.game_progress;
-                        //TMW.SiteSetup.gameTime = data.game_time - TMW.SiteSetup.gameStartTime;
+                        TMW.SiteSetup.gameProgress = data.game_progress;
+                        TMW.SiteSetup.gameTime = data.game_time - TMW.SiteSetup.gameStartTime;
                         
                         TMW.SiteSetup.setVideo(); 
                         TMW.SiteSetup.showScore();
