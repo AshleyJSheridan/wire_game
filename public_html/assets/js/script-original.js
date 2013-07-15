@@ -31,7 +31,7 @@ var TMW = window.TMW || {};
 
 TMW.SiteSetup = {
     
-	pollingURL                  : '/competition/wire-game/getmotiondata',
+	pollingURL              : '/competition/wire-game/getmotiondata',
         startGameURL            : '/competition/wire-game/gamestart',
         endGameURL              : '/competition/wire-game/gameend',
         twittrFeedURL           : '/competition/wire-game/gettwitterfeed',
@@ -103,13 +103,13 @@ TMW.SiteSetup = {
                     
                     if(data.game_status){                        
                         // TESTING DATA START For Testing only must be removed
-                        //TMW.SiteSetup.gameProgress  = TMW.SiteSetup.gameProgress + 1;
-                        //TMW.SiteSetup.gameTime      = TMW.SiteSetup.gameTime + 3;
+                        TMW.SiteSetup.gameProgress  = TMW.SiteSetup.gameProgress + 1;
+                        TMW.SiteSetup.gameTime      = TMW.SiteSetup.gameTime + 3;
                         // TESTING DATA ENDS 
                         
                         // UNCOMMENT FOR REAL DATA VERSION
-                        TMW.SiteSetup.gameProgress = data.game_progress;
-                        TMW.SiteSetup.gameTime = data.game_time - TMW.SiteSetup.gameStartTime;
+                        //TMW.SiteSetup.gameProgress = data.game_progress;
+                        //TMW.SiteSetup.gameTime = data.game_time - TMW.SiteSetup.gameStartTime;
                         
                         TMW.SiteSetup.setVideo(); 
                         TMW.SiteSetup.showScore();
@@ -184,10 +184,10 @@ TMW.SiteSetup = {
                 playerName = playerDetails.firstname + ' ' + playerDetails.lastname[0];
             }
             else{
-                playerName = '@' + playerDetails.twitterhandle;
+                playerName = playerDetails.twitterhandle;
             }
             
-            var playerDataHTML = '<div class="now-playing-img"><img class="now-playing-img" alt="' + playerName + '" src="' + playerDetails.playerTwitterImg + '"><img src="/assets/img/competition/skrews.png" class="skrews" /></div><div class="now-playing-name"><a target="_blank" title="' + playerName +'" href="https://twitter.com/' + playerDetails.twitterhandle + '">' + playerName + '</a></div>'; 
+            var playerDataHTML = '<img class="now-playing-img" alt="' + playerName + '" src="' + playerDetails.playerTwitterImg + '"><div class="now-playing-name"><a target="_blank" title="' + playerName +'" href="https://twitter.com/' + playerDetails.twitterhandle + '">' + playerName + '</a></div>'; 
             $('.playerDetails').html(playerDataHTML).show('slow');
         },
                 
@@ -197,10 +197,10 @@ TMW.SiteSetup = {
             
             for (var score in scoreBoard) {
                 if(scoreBoard[score].twitterhandle){
-                    scoreBoardHTML = scoreBoardHTML + '<li><a href="https://twitter.com/' + scoreBoard[score].twitterhandle + '" title="' + scoreBoard[score].twitterhandle + '" target="_blank" class="username">' + scoreBoard[score].twitterhandle + '</a><span class="userscore">' + scoreBoard[score].playerProgress + '</span><span class="usertime">(' + scoreBoard[score].playerTime + ')</span></li>';          
+                    scoreBoardHTML = scoreBoardHTML + '<li><a href="https://twitter.com/' + scoreBoard[score].twitterhandle + '" title="' + scoreBoard[score].twitterhandle + '" target="_blank" class="username">' + scoreBoard[score].twitterhandle + '</a><span class="userscore">' + scoreBoard[score].playerScore + '</span></li>';          
                 }
                 else{
-                    scoreBoardHTML = scoreBoardHTML + '<li><a href="https://twitter.com/tmwagency" title="' + scoreBoard[score].firstname + ' ' + scoreBoard[score].lastname[0] + '" target="_blank" class="username">' + scoreBoard[score].firstname + ' ' + scoreBoard[score].lastname[0] + '</a><span class="userscore">' + scoreBoard[score].playerProgress + '</span><span class="usertime">(' + scoreBoard[score].playerTime + ')</span></li>';  
+                    scoreBoardHTML = scoreBoardHTML + '<li><a href="https://twitter.com/tmwagency" title="' + scoreBoard[score].firstname + ' ' + scoreBoard[score].lastname[0] + '" target="_blank" class="username">' + scoreBoard[score].firstname + ' ' + scoreBoard[score].lastname[0] + '</a><span class="userscore">' + scoreBoard[score].playerScore + '</span></li>';  
                 }
             }
             $('.leaderboard ul').html(scoreBoardHTML).show('slow');
@@ -213,7 +213,7 @@ TMW.SiteSetup = {
                 
         showScore : function(){
             console.log('showScore');
-            TMW.SiteSetup.gameScore = TMW.SiteSetup.gameProgress + '%';
+            TMW.SiteSetup.gameScore = (TMW.SiteSetup.gameProgress * TMW.SiteSetup.gameTime) / 100;
             
             $('.score').html(TMW.SiteSetup.gameScore).show('slow');
         },
