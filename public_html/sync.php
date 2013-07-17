@@ -2,7 +2,7 @@
 
 $pdo = new PDO("mysql:dbname=wire_game;host=localhost", 'root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'"));
 
-$image_dir = 'assets/img/competition/photos/temp';
+$image_dir = 'assets/img/competition/photos';
 
 if(!empty($_FILES))
 {
