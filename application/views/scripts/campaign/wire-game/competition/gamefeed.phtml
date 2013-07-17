@@ -48,17 +48,17 @@
                 <p>Photos of contestants captured and posted on their Twitter feed the moment they touched the wire.</p>
                 <div class="scroll-pane">
                 <?php
-                    for ($i = 1; $i <= 10; $i++) {
-                        if(isset($this->playerDetails['twitterhandle']) && !empty($this->playerDetails['twitterhandle'])){
+					foreach($this->galleryList as $galleryItem) {
+                        if(isset($galleryItem['twitterhandle']) && !empty($galleryItem['twitterhandle'])){
                             echo '<div class="now-playing playerDetails">';
-                            echo '<div class="now-playing-img"><img src="' . $this->playerDetails['playerTwitterImg'] . '" alt="@' . $this->playerDetails['twitterhandle'] . '" /><img src="' . $this->baseUrl(). '/assets/img/competition/skrews.png" class="skrews" /></div>';
-                            echo '<div class="now-playing-name"><a href="https://twitter.com/' . $this->playerDetails['twitterhandle'] . '" title="@' . $this->playerDetails['twitterhandle'] . '" target="_blank">@' . $this->playerDetails['twitterhandle'] . '</a></div>';               
+                            echo '<div class="now-playing-img"><img src="' . $galleryItem['wiredPhoto'] . '" alt="@' . $galleryItem['twitterhandle'] . '" /><img src="' . $this->baseUrl(). '/assets/img/competition/skrews.png" class="skrews" /></div>';
+                            echo '<div class="now-playing-name"><a href="https://twitter.com/' . $galleryItem['twitterhandle'] . '" title="@' . $galleryItem['twitterhandle'] . '" target="_blank">@' . $galleryItem['twitterhandle'] . '</a></div>';               
                             echo '</div>';                        
                         }
                         else{
                             echo '<div class="now-playing playerDetails">';
-                            echo '<div class="now-playing-img"><img src="' . $this->playerDetails['playerTwitterImg'] . '" alt="' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '" /><img src="' . $this->baseUrl(). '/assets/img/competition/skrews.png" class="skrews" /></div>';
-                            echo '<div class="now-playing-name"><a href="https://twitter.com/tmwagency" title="' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '" target="_blank">' . $this->playerDetails['firstname'] . ' ' . $this->playerDetails['lastname'][0] . '</a></div>';   
+                            echo '<div class="now-playing-img"><img src="' . $galleryItem['wiredPhoto'] . '" alt="' . $galleryItem['firstname'] . ' ' . $galleryItem['lastname'][0] . '" /><img src="' . $this->baseUrl(). '/assets/img/competition/skrews.png" class="skrews" /></div>';
+                            echo '<div class="now-playing-name"><a href="https://twitter.com/tmwagency" title="' . $galleryItem['firstname'] . ' ' . $galleryItem['lastname'][0] . '" target="_blank">' . $galleryItem['firstname'] . ' ' . $galleryItem['lastname'][0] . '</a></div>';   
                             echo '</div>';                        
                         }
                     }

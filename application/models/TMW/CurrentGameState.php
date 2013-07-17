@@ -48,21 +48,33 @@ class TMW_CurrentGameState extends Zend_Db_Table
         }	
     }
     
+    // get the Current Player
+    public function getCurrentPlayerPhoto() {
+       
+        $row = $this->getAdapter()->query("SELECT player_photo FROM tmw_wire_current_state WHERE id = 1;")->fetch();
+        
+        if(!$row) {
+            throw new Exception('Could not load Current Player from database');
+        } else {
+            return $row;
+        }	
+    }
+    
     // set the Current Player
     public function setCurrentPlayer($currentPlayerId, $gameStatus, $gameProgress, $playerPhoto) {
         
         $data = array(
             'playerId'      => $currentPlayerId,
             'game_status'   => $gameStatus,
-            'game_progress' => $gameProgress,
-            'player_photo'  => $playerPhoto
+            'game_progress' => $gameProgress
         );
         
         $where = array(
             'id = ?' => 1 
         );
+        $this->getAdapter()->query("UPDATE tmw_wire_current_state SET playerId = '$currentPlayerId', game_status = '$gameStatus', game_progress = '$gameProgress' WHERE id = 1");
         
-        $this->update($data, $where);
+        //$this->update($data, $where);
     }
     
     // get the Current Progress

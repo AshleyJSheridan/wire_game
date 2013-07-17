@@ -43,7 +43,7 @@ TMW.SiteSetup = {
         gameStartTime           : 0,
         gameEndTime             : 0,
         gameTime                : 0,
-        gameScore               : 0,
+        gameScore               : '0%',
 
 	init : function () {
             $.ajax({
@@ -97,6 +97,7 @@ TMW.SiteSetup = {
                 success: function(data){
                     if(TMW.SiteSetup.gameProgress >= 100){
                         data.game_status = false;
+						TMW.SiteSetup.gameProgress = 100;
                         console.log('data.game_status: ' + data.game_status);
                     } 
 
@@ -151,11 +152,10 @@ TMW.SiteSetup = {
                 data:   { playerRFHandleId: TMW.SiteSetup.playerRFHandleId },
                 
                 success: function(data){
-                    $('.reveal-modal').trigger('reveal:close');
-                    TMW.SiteSetup.setPlayerDetails(data.playerDetails);                    
-                    playerName = data.playerDetails.playerDisplayName;
-                    $('.modalName').html(playerName);
-                    $('.modalScore').html(0);
+					//$('.reveal-modal').trigger('reveal:close');
+					$('.modalName').html(data.playerDetails.playerDisplayName);
+					$('.modalScore').html(0);
+                    TMW.SiteSetup.setPlayerDetails(data.playerDetails); 
                 }, 
                 dataType: "json", timeout: 30000 }
             );
@@ -163,13 +163,15 @@ TMW.SiteSetup = {
         
         endGame : function(){
             console.log('endGame');
+			TMW.SiteSetup.calculateTotalTime();
             $.ajax({ 
                 url:    TMW.SiteSetup.endGameURL, 
-                data:   { },
+                data:   { 
+					playerProgress 		: TMW.SiteSetup.gameProgress,
+				   playerTime 			: TMW.SiteSetup.gameTime
+				},
                 
                 success: function(data){
-                    TMW.SiteSetup.calculateTotalTime();
-                    console.log(TMW.SiteSetup.gameTime);
                     TMW.SiteSetup.setPlayerDetails(data.playerDetails);
                     TMW.SiteSetup.setScoreBoard(data.scoreBoard);
                 }, 
@@ -178,15 +180,17 @@ TMW.SiteSetup = {
         },
                 
         setPlayerDetails : function(playerDetails){
-            if(!playerDetails.twitterhandle){
-                playerDetails.twitterhandle = TMW.SiteSetup.defaultTwitterHandle;
-                playerName = playerDetails.firstname + ' ' + playerDetails.lastname[0];
+            if(playerDetails.twitterhandle){
+				playerName = '@' + playerDetails.twitterhandle;
             }
             else{
-                playerName = '@' + playerDetails.twitterhandle;
-            }
+				playerDetails.twitterhandle = TMW.SiteSetup.defaultTwitterHandle;
+				playerName = playerDetails.firstname + ' ' + playerDetails.lastname[0];
+			}                   
+			//alert(playerDetails.playerDisplayName);
+			//alert(playerName);
             
-            var playerDataHTML = '<div class="now-playing-img"><img class="now-playing-img" alt="' + playerName + '" src="' + playerDetails.playerTwitterImg + '"><img src="/assets/img/competition/skrews.png" class="skrews" /></div><div class="now-playing-name"><a target="_blank" title="' + playerName +'" href="https://twitter.com/' + playerDetails.twitterhandle + '">' + playerName + '</a></div>'; 
+			var playerDataHTML = '<div class="now-playing-img"><img class="now-playing-img" alt="' + playerName + '" src="' + playerDetails.playerTwitterImg + '"><img src="/assets/img/competition/skrews.png" class="skrews" /></div><div class="now-playing-name"><a target="_blank" title="' + playerName +'" href="https://twitter.com/' + playerDetails.twitterhandle + '">' + playerName + '</a></div>'; 
             $('.playerDetails').html(playerDataHTML).show('slow');
         },
                 
@@ -211,7 +215,7 @@ TMW.SiteSetup = {
         },
                 
         showScore : function(){
-            console.log('showScore');
+            console.log('showProgress');
             TMW.SiteSetup.gameScore = TMW.SiteSetup.gameProgress + '%';
             
             $('.score').html(TMW.SiteSetup.gameScore).show('slow');
@@ -222,7 +226,8 @@ TMW.SiteSetup = {
             
             var modalBox = $('#failModal');
             
-            if(TMW.SiteSetup.gameProgress >= 100){
+            if(TMW.SiteSetup.gameProgress >= 100){				
+				$('.modalScore').html(100); 
                 modalBox = $('#winnerModal'); 
             }
             

@@ -29,6 +29,18 @@ class TMW_Competition extends Zend_Db_Table
         }	
     }
     
+    // save the extra data in the ref table
+    public function addDbData($data,$parent) {
+        if($data && is_array($data) && $parent) {
+            foreach($data as $fbKey => $fbVal) {
+                $this->getAdapter()->query("INSERT INTO tmw_wire_comp_details(playerId,detailsField,detailsData) VALUES ('$parent','$fbKey','$fbVal');");
+            }
+            return true;
+        } else {
+            throw new Exception('Could not insert data');
+        }	
+    }
+    
     // load the application settings from tha database
     public function getAppSettings() {
         $row = $this->getAdapter()->query("SELECT * FROM tmw_wire_app_settings;")->fetch();
@@ -62,7 +74,9 @@ class TMW_Competition extends Zend_Db_Table
             
             // Obtain a list of user scores
             foreach ($scoreList as $key => $row) {
-                $scores[$key]  = $row['playerScore'];
+				if(isset($row['playerScore'])){
+					$scores[$key]  = $row['playerScore'];
+				}
             }
 
             // Sort the data with volume descending, edition ascending
@@ -118,6 +132,54 @@ class TMW_Competition extends Zend_Db_Table
         }	
     }
     
+    // load the player details from the database
+    public function getAllPlayerDetails($campaignName) {
+        $data = $this->getAdapter()->query("SELECT c.playerId, group_concat( d.detailsData separator '|*|') as `playerData` , group_concat( d.detailsField separator '|*|') as `playerDataKeys` FROM `tmw_wire_comp` as c join `tmw_wire_comp_details` as d on c.playerId = d.playerId WHERE c.campaign = '".$campaignName."' GROUP BY c.playerId;")->fetchAll();
+
+        if(!$data) {
+            throw new Exception('Could not load user details from database');
+        } else {
+            $normalizedPlayerDetails    = array();
+            
+            foreach($data as $playerDetails) {
+                
+                $playerDataKeysArray            = explode('|*|', $playerDetails['playerDataKeys']);
+                $playerDataArray                = explode('|*|', $playerDetails['playerData']);
+                $normalizedPlayerDetails[]        = array_combine($playerDataKeysArray, $playerDataArray);                
+                //$normalizedPlayerDetails[]['id']  = $playerDetails['playerId'];
+            }
+            
+            return $normalizedPlayerDetails;
+        }	
+    }
+    
+    // load the player gallery from the database
+    public function getGalleryList($campaignName) {
+        $data = $this->getAdapter()->query("SELECT c.playerId, group_concat( d.detailsData separator '|*|') as `playerData` , group_concat( d.detailsField separator '|*|') as `playerDataKeys` FROM `tmw_wire_comp` as c join `tmw_wire_comp_details` as d on c.playerId = d.playerId WHERE c.campaign = '".$campaignName."' GROUP BY c.playerId;")->fetchAll();
+
+        if(!$data) {
+            throw new Exception('Could not load user details from database');
+        } else {
+            $normalizedPlayerDetails    = array();
+            
+            foreach($data as $playerDetails) {
+                
+                $playerDataKeysArray            = explode('|*|', $playerDetails['playerDataKeys']);
+                $playerDataArray                = explode('|*|', $playerDetails['playerData']);
+                $normalizedPlayerDetails[]        = array_combine($playerDataKeysArray, $playerDataArray);                
+                //$normalizedPlayerDetails[]['id']  = $playerDetails['playerId'];
+            }
+            
+            foreach($normalizedPlayerDetails as $detailsKey => &$normPlayerDetails){
+				if(!isset($normPlayerDetails['wiredPhoto'])){
+					unset($normalizedPlayerDetails[$detailsKey]);
+				}
+            }
+            
+            return $normalizedPlayerDetails;
+        }	
+    }
+    
     // load the application texts from tha database
     public function getAppContents($campaignName) {
         $row = $this->getAdapter()->query("SELECT * FROM tmw_wire_app_texts WHERE campaignName = '".$campaignName."';")->fetch();
@@ -149,5 +211,18 @@ class TMW_Competition extends Zend_Db_Table
         $this->getAdapter()->query("UPDATE tmw_wire_comp_details SET detailsData = '$playerTime' WHERE playerId = '$playerId' AND detailsField = 'playerTime'");
         $this->getAdapter()->query("UPDATE tmw_wire_comp_details SET detailsData = '$playerProgress' WHERE playerId = '$playerId' AND detailsField = 'playerProgress'");
     }    
+    
+    // save the game user photo data in the ref table
+    public function setPlayerPhoto($playerPhoto, $playerId) {
+		$data = $this->getAdapter()->query("SELECT detailsData FROM tmw_wire_comp_details WHERE playerId = '$playerId' AND detailsField = 'wiredPhoto'")->fetchAll();
+		//var_dump($data);
+        if(!$data) {
+			$this->getAdapter()->query("INSERT INTO tmw_wire_comp_details(playerId,detailsField,detailsData) VALUES ('$playerId','wiredPhoto','$playerPhoto');");
+            return true; 
+        } else {
+			$this->getAdapter()->query("UPDATE tmw_wire_comp_details SET detailsData = '$playerPhoto' WHERE playerId = '$playerId' AND detailsField = 'wiredPhoto'");
+		}   
+            
+    } 
     
 }
