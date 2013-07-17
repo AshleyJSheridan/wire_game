@@ -454,10 +454,10 @@ class CompetitionController extends Zend_Controller_Action {
         );
         
         if($winner){
-			$twitterMsg = '@' . $twitterUser . ' Has just beaten the #TMWIRED Game. http://party.tmw.co.uk - ';  
+			$twitterMsg = '@' . $twitterUser . ' Has just beaten the #TMWIRED Game. ';  
         }
         else{
-			$twitterMsg = '@' . $twitterUser . ' Was beaten by the #TMWIRED Game. http://party.tmw.co.uk - ';     
+			$twitterMsg = '@' . $twitterUser . ' Was beaten by the #TMWIRED Game. ';     
         }
         
         //$twitterMsg = '@' . $twitterUser . ' ' .$this->_appContents['twitter_post'] . ' #tmwired. See more on http://party.tmw.co.uk';
