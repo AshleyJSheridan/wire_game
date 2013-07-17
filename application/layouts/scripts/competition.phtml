@@ -9,7 +9,7 @@
     <title><?php echo $this->pageTitle ?></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
-    
+
     <link rel="shortcut icon" href="/favicon.ico" />
     <?php
 	// setup stylesheets
@@ -18,13 +18,15 @@
     ?>
 
     <script type="text/javascript" src="/assets/js/swfobject.js"></script>
-    <script type="text/javascript">    
+    <script type="text/javascript">
         swfobject.registerObject("scrubber", "9.0.0", "expressInstall.swf");
     </script>
-    
+    <script type="text/javascript" src="//use.typekit.net/fjn7lkv.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
     <script src="<?php echo $this->baseUrl(); ?>/assets/js/libs/modernizr.min.js"></script>
 </head>
-    
+
 <body id="<?php echo $this->facebookShare['campaign']?>">
 
 <?php echo $this->layout()->content; ?>
@@ -35,10 +37,10 @@
     $this->headScript()
             ->offsetSetFile(-1, $this->baseUrl().'/assets/js/libs/jquery.min.js', 'text/javascript');
 ?>
-    
+
 <?php echo $this->headScript(); ?>
 
-<?php if(!empty($this->pageGA)) { ?> 
+<?php if(!empty($this->pageGA)) { ?>
 <script type="text/javascript">
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
     document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));

@@ -1,36 +1,25 @@
-@font-face {
-    font-family: 'robotoregular';
-    src: url('fonts/roboto-regular-webfont.eot');
-    src: url('fonts/roboto-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/roboto-regular-webfont.woff') format('woff'),
-         url('fonts/roboto-regular-webfont.ttf') format('truetype'),
-         url('fonts/roboto-regular-webfont.svg#robotoregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
 body {
-    font-family: 'robotoregular', Helvetica, Arial,sans-serif;
+	font-family: "futura-pt-condensed", Helvetica, Arial, sans-serif;
 	background: #343434 url(/assets/img/competition/bg.jpg) center top no-repeat;
-	min-height: 800px;
-    min-width: 1280px;
-    color:#FFF;
-    font-size:14px;
-    line-height:18px;
+	min-height: 720px;
+	min-width: 1280px;
+	color:#FFF;
+	font-size:14px;
+	line-height:18px;
 }
 
 a {
-    text-decoration:none!important;
+	text-decoration:none !important;
 	color: #f18131;
 }
 
 #fb_wrapper {
-    width: 1280px;
-    padding: 0 14px;
-    position: relative;
-    margin: 0 auto;
-    overflow: hidden;
-    min-height: 800px;
+	width: 1280px;
+	padding: 0 14px;
+	position: relative;
+	margin: 0 auto;
+	overflow: hidden;
+	min-height: 720px;
 }
 
 .leaderboard,
@@ -48,9 +37,9 @@ a {
 .leaderboard {
 	width: 342px;
 	height: 251px;
-	top: 140px;
+	top: 120px;
 	margin-left: -590px;
-    overflow: hidden;
+	overflow: hidden;
 }
 
 .leaderboard ul,
@@ -83,32 +72,32 @@ a {
 	height: 48px;
 	line-height: 48px;
 	font-size: 20px;
-    color:#b5a593;
+	color:#b5a593;
 }
 
 .username {
 	float: left;
-    color:#b5a593;
+	color:#b5a593;
 }
 
 .userscore {
 	float: right;
 	text-align: right;
-    color:#b5a593;
+	color:#b5a593;
 }
 
 .usertime {
 	float: right;
 	text-align: right;
-    color:#b5a593;
-    padding-right:20px;
-    font-size:18px;
+	color:#b5a593;
+	padding-right:20px;
+	font-size:18px;
 }
 
 .player0 .username,
 .player0 .userscore,
 .player0 .usertime {
-    color:#FFF;
+	color:#FFF;
 }
 
 /* Video Scrubber */
@@ -117,18 +106,18 @@ a {
 	height: 301px;
 	top: 136px;
 	margin-left: -208px;
-    overflow: hidden;
+	overflow: hidden;
 	/*border-radius: 5px;
 	box-shadow: 20px 20px 27px rgba(0,0,0,0.2);*/
 }
 
 /* Live feed */
 .live-feed {
-	width: 443px;
-	height: 272px;
-	top: 490px;
-	margin-left: 157px;
-    overflow: hidden;
+	width: 430px;
+	height: 260px;
+	top: 445px;
+	margin-left: 163px;
+	overflow: hidden;
 	/*border-radius: 5px;
 	box-shadow: 20px 20px 27px rgba(0,0,0,0.2);*/
 }
@@ -137,15 +126,15 @@ a {
 .tweets {
 	width: 334px;
 	height: 208px;
-	top: 545px;
+	top: 447px;
 	margin-left: -575px;
-    overflow: hidden;
+	overflow: hidden;
 }
 
 .tweets li {
 	padding-top: 5px;
 	padding-bottom: 5px;
-    font-size:16px;
+	font-size:16px;
 }
 
 .tweets a {
@@ -156,31 +145,31 @@ a {
 .now-playing {
 	width: 276px;
 	height: 242px;
-	top: 95px;
+	top: 85px;
 	margin-left: 319px;
 	text-align: center;
 }
 
 .now-playing-img {
-    width:146px;
-    height:146px;
-    position: relative;
-    display: inline-block;
+	width:146px;
+	height:146px;
+	position: relative;
+	display: inline-block;
 }
 
 .now-playing-img img{
-    width:146px;
-    height:146px;
-    float: left;
-    display: block;
+	width:146px;
+	height:146px;
+	float: left;
+	display: block;
 }
 
 .now-playing-img .skrews{
-    float:none;
-    position: absolute;
-    top:0;
-    left:0;
-    z-index: 98;
+	float:none;
+	position: absolute;
+	top:0;
+	left:0;
+	z-index: 98;
 }
 
 .now-playing-name a{
@@ -195,7 +184,7 @@ a {
 .score {
 	width: 106px;
 	height: 106px;
-	top: 347px;
+	top: 317px;
 	margin-left: 397px;
 	line-height: 106px;
 	text-align: center;
@@ -206,234 +195,234 @@ a {
 }
 
 .header{
-    float: left;
-    width: 100%;
-    padding: 30px 0 16px 0;
-    border-bottom: 1px dotted #e97810;
+	float: left;
+	width: 100%;
+	padding: 30px 0 16px 0;
+	border-bottom: 1px dotted #e97810;
 }
 
 .contentsHolder{
-    float: left;
-    width: 100%;
+	float: left;
+	width: 100%;
 }
 
 .contentsHolderOuter{
-    width:100%;
-    float:left;
+	width:100%;
+	float:left;
 }
 
 *:focus{
-    outline: none!important;
+	outline: none!important;
 }
 
 a {
 	color: #f18131;
-    font-weight:normal;
-    text-decoration:none;
+	font-weight:normal;
+	text-decoration:none;
 }
 
 a:hover {
-    color:#FFF;
-    text-decoration:none;
+	color:#FFF;
+	text-decoration:none;
 }
 
 p {
-    text-align:left;
-    margin-bottom:0;
+	text-align:left;
+	margin-bottom:0;
 }
 
 .inv {
-    position:absolute;
-    font-size:9px;
-    left:-9999px;
+	position:absolute;
+	font-size:9px;
+	left:-9999px;
 }
 
 .hidden{
-    display:none;
+	display:none;
 }
 
 .clr {
-    margin:0;
-    padding:0;
-    clear:both;
+	margin:0;
+	padding:0;
+	clear:both;
 }
 
 
 ul {
-    list-style: none;
-    margin-left: 0;
-    padding-left: 0;
+	list-style: none;
+	margin-left: 0;
+	padding-left: 0;
 }
 
 strong {
-    font-weight:bold;
-    font-size: inherit;
-    line-height:inherit;
+	font-weight:bold;
+	font-size: inherit;
+	line-height:inherit;
 }
 
 td {
-    padding:5px 10px;
-    text-align:center;
+	padding:5px 10px;
+	text-align:center;
 }
 
 .bold {
-    font-weight:bold;
+	font-weight:bold;
 }
 
 iframe{
-    left:0;
+	left:0;
 }
 
 /****************** WRAPPER STYLES ******************/
 .adImage{
-    float:right;
-    width:373px;
-    height:361px;
-    display:block;
+	float:right;
+	width:373px;
+	height:361px;
+	display:block;
 }
 
 .competition .sideHeaders{
-    float:left;
-    width:247px;
+	float:left;
+	width:247px;
 }
 
 /****************** Specific styles for competition app ****************/
 
 #fb_content_copy{
-    float: left;
-    width: 100%;
+	float: left;
+	width: 100%;
 }
 
 /***************** COMPETITION TYPOGRAPHY *******************/
 
 h1{
-    font-size:34px;
-    line-height:40px;
-    margin-top:58px;
-    margin-bottom:32px;
-    text-transform:capitalize;
+	font-size:34px;
+	line-height:40px;
+	margin-top:58px;
+	margin-bottom:32px;
+	text-transform:capitalize;
 }
 
 h2{
-    font-size:16px;
-    line-height:22px;
-    margin-bottom:32px;
+	font-size:16px;
+	line-height:22px;
+	margin-bottom:32px;
 }
 
 h3{
-    font-size:22px;
-    line-height:26px;
-    color:#e67207;
-    margin-bottom:14px
+	font-size:22px;
+	line-height:26px;
+	color:#e67207;
+	margin-bottom:14px
 }
 
 h4{
-    font-size:18px;
-    line-height:24px;
-    color:#e67207;
-    margin-bottom:14px
+	font-size:18px;
+	line-height:24px;
+	color:#e67207;
+	margin-bottom:14px
 }
 
 p{
-    margin-bottom:14px
+	margin-bottom:14px
 }
 
 a{
-    color:#e67207;
-    text-decoration: underline;
+	color:#e67207;
+	text-decoration: underline;
 }
 
 a:hover{
-    color:#FFF;
-    text-decoration: none;
+	color:#FFF;
+	text-decoration: none;
 }
 
 p strong{
-    font-weight:bold;
+	font-weight:bold;
 }
 
 strong.required {
-    color:#e67207;
-    font-weight:normal;
+	color:#e67207;
+	font-weight:normal;
 }
 
 /*--------------------------------------------------
 	Reveal Modals
 -------------------------------------------------- */
 
-.reveal-modal-bg { 
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    background: #000;
-    background: rgba(0,0,0,.8);
-    z-index: 100;
-    display: none;
-    top: 0;
-    left: 0; 
-}
-	
-.reveal-modal {
-    visibility: hidden;
-    top: 100px; 
-    left: 50%;
-    margin-left: -300px;
-    width: 520px;
-    min-height: 400px;
-    background: #000;
-    position: absolute;
-    z-index: 101;
-    padding: 20px 18px;
-    -moz-box-shadow: 0 0 10px rgba(0,0,0,.4);
-    -webkit-box-shadow: 0 0 10px rgba(0,0,0,.4);
-    -box-shadow: 0 0 10px rgba(0,0,0,.4);
-    text-align:center;
-}
-	
-.reveal-modal h2{
-    color:#E67207;
-    text-align:center;
-}
-	
-.reveal-modal h3{
-    color:#E67207;
-    text-align:center;
-}
-	
-.reveal-modal img{
-    display:block;
-    margin:0 auto;
-}
-		
-.reveal-modal.small{
-    width: 200px; 
-    margin-left: -140px;
+.reveal-modal-bg {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background: #000;
+	background: rgba(0,0,0,.8);
+	z-index: 100;
+	display: none;
+	top: 0;
+	left: 0;
 }
 
-.reveal-modal.medium{ 
-    width: 400px; 
-    margin-left: -240px;
+.reveal-modal {
+	visibility: hidden;
+	top: 100px;
+	left: 50%;
+	margin-left: -300px;
+	width: 520px;
+	min-height: 400px;
+	background: #000;
+	position: absolute;
+	z-index: 101;
+	padding: 20px 18px;
+	-moz-box-shadow: 0 0 10px rgba(0,0,0,.4);
+	-webkit-box-shadow: 0 0 10px rgba(0,0,0,.4);
+	-box-shadow: 0 0 10px rgba(0,0,0,.4);
+	text-align:center;
+}
+
+.reveal-modal h2{
+	color:#E67207;
+	text-align:center;
+}
+
+.reveal-modal h3{
+	color:#E67207;
+	text-align:center;
+}
+
+.reveal-modal img{
+	display:block;
+	margin:0 auto;
+}
+
+.reveal-modal.small{
+	width: 200px;
+	margin-left: -140px;
+}
+
+.reveal-modal.medium{
+	width: 400px;
+	margin-left: -240px;
 }
 
 .reveal-modal.large{
-    width: 600px; 
-    margin-left: -340px;
+	width: 600px;
+	margin-left: -340px;
 }
 
-.reveal-modal.xlarge { 
-    width: 800px; 
-    margin-left: -440px;
+.reveal-modal.xlarge {
+	width: 800px;
+	margin-left: -440px;
 }
 
 .reveal-modal .close-reveal-modal {
-    font-size: 22px;
-    line-height: .5;
-    position: absolute;
-    top: 8px;
-    right: 11px;
-    color:#E67207;
-    text-decoration:none!important;
-    text-shadow: 0 -1px 1px rbga(0,0,0,.6);
-    font-weight: bold;
-    cursor: pointer;
-} 
+	font-size: 22px;
+	line-height: .5;
+	position: absolute;
+	top: 8px;
+	right: 11px;
+	color:#E67207;
+	text-decoration:none!important;
+	text-shadow: 0 -1px 1px rbga(0,0,0,.6);
+	font-weight: bold;
+	cursor: pointer;
+}
