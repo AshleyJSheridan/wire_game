@@ -39,7 +39,9 @@
                 <ul>
                     <?php
                         foreach ($this->twitterFeed as $tweet) {
-                            echo '<li>' . $tweet['text']. '</li>';
+                            if(isset($tweet['text']) && !empty($tweet['text'])){
+                                echo '<li>' . $tweet['text'] . '</li>';                                
+                            }
                         }
                     ?>                      
                 </ul>     
@@ -48,7 +50,7 @@
                 <p>Photos of contestants captured and posted on their Twitter feed the moment they touched the wire.</p>
                 <div class="scroll-pane">
                 <?php
-					foreach($this->galleryList as $galleryItem) {
+                    foreach($this->galleryList as $galleryItem) {
                         if(isset($galleryItem['twitterhandle']) && !empty($galleryItem['twitterhandle'])){
                             echo '<div class="now-playing playerDetails">';
                             echo '<div class="now-playing-img"><img src="' . $galleryItem['wiredPhoto'] . '" alt="@' . $galleryItem['twitterhandle'] . '" /><img src="' . $this->baseUrl(). '/assets/img/competition/skrews.png" class="skrews" /></div>';

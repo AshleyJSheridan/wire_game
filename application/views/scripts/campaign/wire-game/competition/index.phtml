@@ -45,7 +45,9 @@
                 <ul>
                     <?php
                         foreach ($this->twitterFeed as $tweet) {
-                            echo '<li>' . $tweet['text']. '</li>';
+                            if(isset($tweet['text']) && !empty($tweet['text'])){
+                                echo '<li>' . $tweet['text'] . '</li>';                                
+                            }
                         }
                     ?>                      
                 </ul>     
