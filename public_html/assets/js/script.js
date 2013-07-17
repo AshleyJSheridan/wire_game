@@ -44,6 +44,7 @@ TMW.SiteSetup = {
         gameEndTime             : 0,
         gameTime                : 0,
         gameScore               : '0%',
+        gameTimeString          : '00:00',        
 
 	init : function () {
             $.ajax({
@@ -167,9 +168,9 @@ TMW.SiteSetup = {
             $.ajax({ 
                 url:    TMW.SiteSetup.endGameURL, 
                 data:   { 
-					playerProgress 		: TMW.SiteSetup.gameProgress,
-				   playerTime 			: TMW.SiteSetup.gameTime
-				},
+                            playerProgress 		: TMW.SiteSetup.gameProgress,
+                            playerTime 			: TMW.SiteSetup.gameTime
+			},
                 
                 success: function(data){
                     TMW.SiteSetup.setPlayerDetails(data.playerDetails);
@@ -246,7 +247,8 @@ TMW.SiteSetup = {
             TMW.SiteSetup.playerRFHandleId  = null;  
             TMW.SiteSetup.gameStatusFlag    = false;  
             TMW.SiteSetup.gameProgress      = 0;  
-            TMW.SiteSetup.gameTime          = 0;  
+            TMW.SiteSetup.gameTime          = 0;
+            TMW.SiteSetup.gameTimeString    = '00:00';
             TMW.SiteSetup.gameEndTime       = 0;  
             TMW.SiteSetup.gameStartTime     = 0; 
             
@@ -268,9 +270,25 @@ TMW.SiteSetup = {
         
         calculateTotalTime : function(){
             TMW.SiteSetup.gameTime = TMW.SiteSetup.gameEndTime - TMW.SiteSetup.gameStartTime;
-        },     
+            TMW.SiteSetup.toMMSS();
+        },
         
-        tweetify: {
+        toMMSS : function () {
+            var sec_num = parseInt(TMW.SiteSetup.gameTime, 10); // don't forget the second parm
+            //var hours   = Math.floor(sec_num / 3600);
+            //var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+            //var seconds = sec_num - (hours * 3600) - (minutes * 60);
+            var minutes = Math.floor(sec_num / 60);
+            var seconds = sec_num - (minutes * 60);
+
+            //if (hours   < 10) {hours   = "0"+hours;}
+            if (minutes < 10) {minutes = "0" + minutes;}
+            if (seconds < 10) {seconds = "0" + seconds;}
+            //var time    = hours+':'+minutes+':'+seconds;
+            TMW.SiteSetup.gameTimeString = minutes + ':' + seconds;
+        },
+        
+        tweetify : {
             link: function(tweet) {
                 return tweet.replace(/\b(((https*\:\/\/)|www\.)[^\"\']+?)(([!?,.\)]+)?(\s|$))/g, function(link, m1, m2, m3, m4) {
                     var http = m2.match(/w/) ? 'http://' : '';
@@ -278,12 +296,12 @@ TMW.SiteSetup = {
                 });
             },
             at: function(tweet) {
-                return tweet.replace(/\B[@＠]([a-zA-Z0-9_]{1,20})/g, function(m, username) {
+                return tweet.replace(/\B[@ï¼ ]([a-zA-Z0-9_]{1,20})/g, function(m, username) {
                     return '<a target="_blank" class="twtr-atreply" href="http://twitter.com/intent/user?screen_name=' + username + '">@' + username + '</a>';
                 });
             },
             list: function(tweet) {
-                return tweet.replace(/\B[@＠]([a-zA-Z0-9_]{1,20}\/\w+)/g, function(m, userlist) {
+                return tweet.replace(/\B[@ï¼ ]([a-zA-Z0-9_]{1,20}\/\w+)/g, function(m, userlist) {
                     return '<a target="_blank" class="twtr-atreply" href="http://twitter.com/' + userlist + '">@' + userlist + '</a>';
                 });
             },
