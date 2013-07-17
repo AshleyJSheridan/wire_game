@@ -145,6 +145,11 @@ class CompetitionController extends Zend_Controller_Action {
         
         if(!$ajaxFeed){ 
             $scoreBoard             = $this->_tmwDBConnect->getScoreList($this->_tmwCampaign);
+        
+            foreach($scoreBoard as $scoreKey => $score){
+                $scoreBoard[$scoreKey]['playerTime'] = $this->alterTimeStringAction($score['playerTime']); 
+            } 
+        
             $this->view->scoreList  = $scoreBoard;
             
             $galleryList            = $this->_tmwDBConnect->getGalleryList($this->_tmwCampaign);
@@ -402,12 +407,36 @@ class CompetitionController extends Zend_Controller_Action {
     public function getscoresAction() {
         $scores  = $this->_tmwDBConnect->getScoreList($this->_tmwCampaign);
         
+        foreach($scores as $scoreKey => $score){
+            $scores[$scoreKey]['playerTime'] = $this->alterTimeStringAction($score['playerTime']);           
+        }   
+        
         $jsonData = utf8_encode(Zend_Json::encode($scores));
         $this->getResponse()
                 ->setHeader('Content-Type', 'text/html')
                 ->setBody($jsonData)
                 ->sendResponse();
         exit;
+    }
+
+    /**
+     * Get the scoreboard details json
+     */
+    public function alterTimeStringAction($rawTime) {
+        $sec_num = intval($rawTime, 10);
+        
+        $minutes = floor($sec_num / 60);
+        $seconds = $sec_num - ($minutes * 60);
+        if($minutes < 1){
+            $minutes = 0;
+        }
+        
+        if ($minutes < 10) {$minutes = "0" . $minutes;}
+        if ($seconds < 10) {$seconds = "0" . $seconds;}
+        
+        $timeString = $minutes . ':' . $seconds;
+        
+        return $timeString;
     }
 
     /**
@@ -500,7 +529,12 @@ class CompetitionController extends Zend_Controller_Action {
         
         $gameStartData['playerDetails'] = $playerDetails;        
         // Getting the latest scoreboard
-        $gameStartData['scoreBoard']    = $this->_tmwDBConnect->getScoreList($this->_tmwCampaign);        
+        $gameStartData['scoreBoard']    = $this->_tmwDBConnect->getScoreList($this->_tmwCampaign);
+        
+        foreach($gameStartData['scoreBoard'] as $scoreKey => $score){
+            $gameStartData['scoreBoard'][$scoreKey]['playerTime'] = $this->alterTimeStringAction($score['playerTime']); 
+        } 
+        
         // Resetting the video progress
         $gameStartData['videoProgress'] = 0;
         
@@ -574,6 +608,10 @@ class CompetitionController extends Zend_Controller_Action {
         //var_dump($gameEndData);
         // Getting the latest scoreboard
         $gameEndData['scoreBoard'] = $this->_tmwDBConnect->getScoreList($this->_tmwCampaign);
+        
+        foreach($gameEndData['scoreBoard'] as $scoreKey => $score){
+            $gameEndData['scoreBoard'][$scoreKey]['playerTime'] = $this->alterTimeStringAction($score['playerTime']);           
+        } 
         // setting the video progress
         $gameEndData['videoProgress'] = $playerDetails['playerProgress'];
         // setting the video progress
