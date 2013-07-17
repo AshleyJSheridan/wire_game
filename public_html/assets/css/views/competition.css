@@ -17,6 +17,7 @@ body {
     color:#FFF;
     font-size:14px;
     line-height:18px;
+     min-height: 720px;
 }
 
 a {
@@ -30,6 +31,7 @@ a {
     position: relative;
     margin: 0 auto;
     overflow: hidden;
+    min-height: 720px;
 }
 
 .leaderboard,
