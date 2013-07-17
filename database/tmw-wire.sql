@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.8.1
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 17, 2013 at 12:41 PM
--- Server version: 5.5.23
--- PHP Version: 5.4.16
+-- Generation Time: Jul 17, 2013 at 01:54 PM
+-- Server version: 5.5.24-log
+-- PHP Version: 5.4.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `wire_game`
+-- Database: `www`
 --
 
 -- --------------------------------------------------------
@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `config`
 --
 
+DROP TABLE IF EXISTS `config`;
 CREATE TABLE IF NOT EXISTS `config` (
   `key` varchar(20) NOT NULL,
   `value` varchar(50) NOT NULL,
@@ -48,6 +49,7 @@ INSERT INTO `config` (`key`, `value`) VALUES
 -- Table structure for table `player_progress`
 --
 
+DROP TABLE IF EXISTS `player_progress`;
 CREATE TABLE IF NOT EXISTS `player_progress` (
   `player_guid` varchar(50) NOT NULL,
   `x` smallint(6) NOT NULL,
@@ -18057,6 +18059,7 @@ INSERT INTO `player_progress` (`player_guid`, `x`, `y`, `time`, `image`, `percen
 -- Table structure for table `tmw_wire_app_form_elements`
 --
 
+DROP TABLE IF EXISTS `tmw_wire_app_form_elements`;
 CREATE TABLE IF NOT EXISTS `tmw_wire_app_form_elements` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `campaignName` varchar(255) NOT NULL DEFAULT 'tmw-app' COMMENT 'the name of the facebook competition this field belongs to',
@@ -18100,6 +18103,7 @@ INSERT INTO `tmw_wire_app_form_elements` (`id`, `campaignName`, `elementName`, `
 -- Table structure for table `tmw_wire_app_settings`
 --
 
+DROP TABLE IF EXISTS `tmw_wire_app_settings`;
 CREATE TABLE IF NOT EXISTS `tmw_wire_app_settings` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `campaignName` varchar(25) NOT NULL DEFAULT 'tmw-app' COMMENT 'the competition name to distinguish saved user data',
@@ -18130,6 +18134,7 @@ INSERT INTO `tmw_wire_app_settings` (`id`, `campaignName`, `title`, `facebookApp
 -- Table structure for table `tmw_wire_app_texts`
 --
 
+DROP TABLE IF EXISTS `tmw_wire_app_texts`;
 CREATE TABLE IF NOT EXISTS `tmw_wire_app_texts` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `campaignName` varchar(255) NOT NULL DEFAULT 'tmw-app' COMMENT 'the name of the currentfacebook competition',
@@ -18158,6 +18163,7 @@ INSERT INTO `tmw_wire_app_texts` (`id`, `campaignName`, `headerText1`, `headerTe
 -- Table structure for table `tmw_wire_app_users`
 --
 
+DROP TABLE IF EXISTS `tmw_wire_app_users`;
 CREATE TABLE IF NOT EXISTS `tmw_wire_app_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
@@ -18179,6 +18185,7 @@ INSERT INTO `tmw_wire_app_users` (`id`, `username`, `password`, `email`) VALUES
 -- Table structure for table `tmw_wire_comp`
 --
 
+DROP TABLE IF EXISTS `tmw_wire_comp`;
 CREATE TABLE IF NOT EXISTS `tmw_wire_comp` (
   `playerId` int(11) NOT NULL AUTO_INCREMENT,
   `playerEmail` varchar(255) NOT NULL,
@@ -18352,6 +18359,7 @@ INSERT INTO `tmw_wire_comp` (`playerId`, `playerEmail`, `campaign`, `registeredO
 -- Table structure for table `tmw_wire_comp_details`
 --
 
+DROP TABLE IF EXISTS `tmw_wire_comp_details`;
 CREATE TABLE IF NOT EXISTS `tmw_wire_comp_details` (
   `playerDetailsId` int(11) NOT NULL AUTO_INCREMENT,
   `playerId` int(11) NOT NULL,
@@ -18487,9 +18495,9 @@ INSERT INTO `tmw_wire_comp_details` (`playerDetailsId`, `playerId`, `detailsFiel
 (313, 46, 'lastname', 'Bardis'),
 (314, 46, 'twitterhandle', 'bardius'),
 (315, 46, 'charity', 'give it to me'),
-(316, 46, 'playerScore', '70030'),
-(317, 46, 'playerProgress', '7'),
-(318, 46, 'playerTime', '30'),
+(316, 46, 'playerScore', '0'),
+(317, 46, 'playerProgress', '0'),
+(318, 46, 'playerTime', '0'),
 (319, 47, 'question', 'absolutely_\r\n_wild_horses_wouldn___t_stop_me.'),
 (320, 47, 'firstname', 'marc'),
 (321, 47, 'lastname', 'curtis'),
@@ -19666,12 +19674,12 @@ INSERT INTO `tmw_wire_comp_details` (`playerDetailsId`, `playerId`, `detailsFiel
 (1565, 197, 'playerScore', '0'),
 (1564, 197, 'charity', ''),
 (1551, 194, 'RFHandleId', '0'),
-(1557, 196, 'playerScore', '210030'),
+(1557, 196, 'playerScore', '0'),
 (1550, 134, 'RFHandleId', '0'),
 (1560, 197, 'question', 'absolutely__wild_horses_wouldn___t_stop_me.'),
 (1549, 48, 'RFHandleId', '0'),
-(1558, 196, 'playerProgress', '21'),
-(1559, 196, 'playerTime', '30'),
+(1558, 196, 'playerProgress', '0'),
+(1559, 196, 'playerTime', '0'),
 (1548, 194, 'wiredPhoto', ''),
 (1563, 197, 'twitterhandle', ''),
 (1555, 196, 'twitterhandle', 'ashleyjsheridan'),
@@ -19679,7 +19687,7 @@ INSERT INTO `tmw_wire_comp_details` (`playerDetailsId`, `playerId`, `detailsFiel
 (1556, 196, 'charity', ''),
 (1547, 48, 'wiredPhoto', ''),
 (1562, 197, 'lastname', 'Hassell'),
-(1543, 46, 'wiredPhoto', '/assets/img/competition/photos/32-20130717130841-02.jpg'),
+(1543, 46, 'wiredPhoto', ''),
 (1554, 196, 'lastname', 'Sheridan'),
 (1544, 47, 'wiredPhoto', ''),
 (1552, 196, 'question', 'absolutely__wild_horses_wouldn___t_stop_me.'),
@@ -19724,9 +19732,9 @@ INSERT INTO `tmw_wire_comp_details` (`playerDetailsId`, `playerId`, `detailsFiel
 (1611, 203, 'twitterhandle', 'lucytesseras'),
 (1612, 203, 'charity', ''),
 (1613, 203, 'playerScore', '0'),
-(1614, 203, 'playerProgress', '0');
+(1614, 203, 'playerProgress', '0'),
+(1615, 203, 'playerTime', '0');
 INSERT INTO `tmw_wire_comp_details` (`playerDetailsId`, `playerId`, `detailsField`, `detailsData`) VALUES
-(1615, 203, 'playerTime', '0'),
 (1616, 204, 'question', 'absolutely__wild_horses_wouldn___t_stop_me.'),
 (1617, 204, 'firstname', 'Polly'),
 (1618, 204, 'lastname', 'MacLehose'),
@@ -19864,7 +19872,7 @@ INSERT INTO `tmw_wire_comp_details` (`playerDetailsId`, `playerId`, `detailsFiel
 (1752, 221, 'playerProgress', '0'),
 (1753, 221, 'playerTime', '0'),
 (1754, 196, 'RFHandleId', '22616646206164'),
-(1755, 196, 'wiredPhoto', '/assets/img/competition/photos/32-20130717130605-03.jpg'),
+(1755, 196, 'wiredPhoto', ''),
 (1756, 46, 'RFHandleId', '6620941206116');
 
 -- --------------------------------------------------------
@@ -19873,6 +19881,7 @@ INSERT INTO `tmw_wire_comp_details` (`playerDetailsId`, `playerId`, `detailsFiel
 -- Table structure for table `tmw_wire_comp_names`
 --
 
+DROP TABLE IF EXISTS `tmw_wire_comp_names`;
 CREATE TABLE IF NOT EXISTS `tmw_wire_comp_names` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `compName` varchar(255) DEFAULT NULL COMMENT 'the name of the fb competition',
@@ -19892,6 +19901,7 @@ INSERT INTO `tmw_wire_comp_names` (`id`, `compName`) VALUES
 -- Table structure for table `tmw_wire_current_state`
 --
 
+DROP TABLE IF EXISTS `tmw_wire_current_state`;
 CREATE TABLE IF NOT EXISTS `tmw_wire_current_state` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `playerId` varchar(255) DEFAULT NULL,

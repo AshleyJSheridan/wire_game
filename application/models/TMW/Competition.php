@@ -171,9 +171,9 @@ class TMW_Competition extends Zend_Db_Table
             }
             
             foreach($normalizedPlayerDetails as $detailsKey => &$normPlayerDetails){
-				if(!isset($normPlayerDetails['wiredPhoto'])){
-					unset($normalizedPlayerDetails[$detailsKey]);
-				}
+                if(!isset($normPlayerDetails['wiredPhoto']) || empty($normPlayerDetails['wiredPhoto'])){
+                    unset($normalizedPlayerDetails[$detailsKey]);
+		}
             }
             
             return $normalizedPlayerDetails;
